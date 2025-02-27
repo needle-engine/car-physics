@@ -23,6 +23,15 @@ MonoBehaviour:
   - Path: Assets/Scenes/MenuScene.unity
     Projects: []
     BuilderScene: 
+  - Path: Assets/Scenes/Free Driving.unity
+    Projects: []
+    BuilderScene: 
+  - Path: Assets/Scenes/Crazy Hills.unity
+    Projects: []
+    BuilderScene: 
+  - Path: Assets/Scenes/Jumps.unity
+    Projects: []
+    BuilderScene: 
   Projects:
   - ProjectPath: Library/Needle/Sample
   - ProjectPath: ../web

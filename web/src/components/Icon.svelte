@@ -4,6 +4,7 @@
 
 <style>
     .material-symbols-outlined {
+        font-size: inherit;
         font-variation-settings:
             "FILL" 0,
             "wght" 400,

@@ -2,7 +2,7 @@
     import { carOptions, selectedCar } from "$lib";
 </script>
 
-{#if $selectedCar || $carOptions.length > 0}
+{#if $carOptions.length > 1}
     <div class="selection">
         <!-- <select bind:value={$selectedCar}>
             {#each $carOptions as car}
@@ -29,19 +29,20 @@
 {/if}
 
 <style>
-    .selection {
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-        flex-wrap: wrap;
-    }
+    
     label {
         font-weight: bold;
     }
 
     .list {
         display: flex;
-        gap: 1rem;
+        flex-wrap: wrap;
+        align-self: center;
+        justify-content: center;
+
+        padding-bottom: 1rem;
+        
+        gap: .3rem;
 
         & button.car {
             position: relative;
@@ -58,7 +59,6 @@
 
             gap: 0.5rem;
             font-size: 1.3rem;
-            padding-bottom: 0.4rem;
 
             &:hover {
                 & img {
@@ -67,11 +67,16 @@
             }
 
             & .name {
+                position: absolute;
+                bottom: 1rem;
                 text-transform: capitalize;
                 backdrop-filter: blur(50px);
                 width: fit-content;
                 border-radius: 1rem;
                 padding: 0 0.3em;
+                font-size: 14px;
+                opacity: .7;
+                text-shadow: 0 0  5px rgba(255, 255, 255, 1);
             }
 
             & .thumbnail {
@@ -91,9 +96,10 @@
             }
 
             &.active {
-                /* & .name {
-                    text-decoration: underline;
-                } */
+                & .name {
+                    font-weight: bold;
+                    opacity: 1;
+                }
 
                 & .thumbnail {
                     /* outline: 2px solid black; */

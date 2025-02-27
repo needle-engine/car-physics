@@ -89,18 +89,20 @@
             &.open {
                 backdrop-filter: blur(5px);
                 pointer-events: all;
+                background: rgba(20, 0, 50, .12);;
             }
 
             & .options {
                 font-size: 1.5rem;
 
-                padding: 1rem;
-                max-width: min(400px, 90%);
+                width: min(360px, 90%);
                 display: flex;
                 flex-direction: column;
-                gap: 1rem;
+                gap: .2rem;
 
                 & button {
+                    padding: .6rem .2rem;
+
                     &:hover {
                         background-color: black;
                         color: white;
