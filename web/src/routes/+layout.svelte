@@ -1,14 +1,10 @@
 <script lang="ts">
     import "../global.css";
-    import { base } from "$app/paths";
+    import Menubar from "../components/Menubar.svelte";
 </script>
 
 <div class="app">
-    <header>
-        <a href="{base}/">Home</a>
-        <a href="https://needle.tools">Needle</a>
-        <a href="https://github.com/needle-engine/sveltekit-sample">Github</a>
-    </header>
+    <Menubar />
     <main>
         <slot />
     </main>
@@ -20,27 +16,6 @@
         display: flex;
         flex-flow: column;
         height: 100%;
-    }
-
-    header {
-        position: sticky;
-        z-index: 999;
-
-        max-width: fit-content;
-        margin: 0 auto;
-
-        display: flex;
-        background: #eee;
-        border: 1px solid #ccc;
-        border-radius: 50px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        
-        padding: 1rem;
-        margin-top: 1em;
-    }
-    header a {
-        margin: 0 1rem;
-        font-weight: bold;
     }
 
     main {

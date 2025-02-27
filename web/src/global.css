@@ -70,3 +70,13 @@ h3 {
         font-size: 12px;
     }
 }
+
+
+select {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 14px;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: d82bfca4c22ee6c428ae47160f8712e0
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White
+    second: {fileID: 2100000, guid: 399280431ba1558438959b0be1cf4e1f, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -56,11 +61,11 @@ ScriptedImporter:
 '
   optimizeGameObjects: 0
   materials:
-  - {instanceID: 0}
-  - {instanceID: 0}
-  - {instanceID: 0}
-  - {instanceID: 0}
-  - {instanceID: 0}
+  - {fileID: -7541176948156012307, guid: d82bfca4c22ee6c428ae47160f8712e0, type: 3}
+  - {fileID: -1391134871863005975, guid: d82bfca4c22ee6c428ae47160f8712e0, type: 3}
+  - {fileID: 1788269377728665300, guid: d82bfca4c22ee6c428ae47160f8712e0, type: 3}
+  - {fileID: -8848810374240701247, guid: d82bfca4c22ee6c428ae47160f8712e0, type: 3}
+  - {fileID: 8556262120643298411, guid: d82bfca4c22ee6c428ae47160f8712e0, type: 3}
   textures: []
   hasSceneData: 1
   hasAnimationData: 1
