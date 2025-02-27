@@ -213,9 +213,9 @@ MonoBehaviour:
   useSwipe: 0
   useSceneLighting: 1
   useSceneBackground: 1
-  preloadNext: 1
+  preloadNext: 10
   preloadPrevious: 1
-  preloadConcurrent: 2
+  preloadConcurrent: 1
   sceneLoaded:
     m_PersistentCalls:
       m_Calls: []
