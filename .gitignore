@@ -1,0 +1,13 @@
+﻿.idea
+unity/UserSettings
+unity/Library
+unity/Temp
+unity/*.csproj
+unity/*.sln
+**/.vs
+**/.vsconfig
+unity/obj
+unity/Logs
+node_modules
+.DS_Store
+playwright-report.

@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "name": "Needle",
+      "path": "./node_modules/@needle-tools"
+    }
+  ],
+  "settings": {
+    "window.title": "Needle Engine Car Physics",
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/*.meta": true
+    },
+  }
+}

@@ -1,0 +1,142 @@
+fileFormatVersion: 2
+guid: a6afd02996085a14086aa2ddc1ef5e7b
+importerOverride: UnityGLTFEditor:UnityGLTF:GLTFImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 804e1ce4c496647cfa3f1a1134187c71, type: 3}
+  _removeEmptyRootObjects: 1
+  _scaleFactor: 0.025
+  _deduplicateResources: 0
+  _maximumLod: 300
+  _readWriteEnabled: 1
+  _generateColliders: 0
+  _swapUvs: 0
+  _generateLightmapUVs: 0
+  _importBlendShapeNames: 1
+  _blendShapeFrameWeight:
+    _option: 0
+    _multiplier: 1
+  _importNormals: 0
+  _importTangents: 0
+  _importCamera: 2
+  _importAnimations: 2
+  _mecanimHumanoidFlip: 0
+  _addAnimatorComponent: 0
+  _animationLoopTime: 1
+  _animationLoopPose: 0
+  _importMaterials: 1
+  _enableGpuInstancing: 0
+  _texturesReadWriteEnabled: 1
+  _generateMipMaps: 1
+  _useSceneNameIdentifier: 1
+  _textureCompression: -50
+  _gltfAsset: '<b>Generator: </b>Sketchfab-12.68.0
+
+    <b>Version: </b>2.0
+
+    
+
+    <b>Extras:
+    </b>
+
+    "author": "Daniel Zhabotinsky (https://sketchfab.com/DanielZhabotinsky)"
+
+    "license":
+    "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+
+    "source": "https://sketchfab.com/3d-models/90-light-commercial-truck-low-poly-model-663a0953c038434a918cb85725c88ffa"
+
+    "title":
+    "''90 Light Commercial Truck - Low poly model"
+
+'
+  optimizeGameObjects: 0
+  materials:
+  - {fileID: 1759546565761751750, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 315204489114089936, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 4904519165401747007, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 722677156104510485, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -4169589783705820784, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -2138458836487206524, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -5439065039896173016, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 3769549453492244125, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 3158855178507565262, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  textures:
+  - {fileID: 6983701643236107813, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 8022499087761476943, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 5230624929818990856, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -2834534249764746836, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -409340629399409755, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -6477806308458343453, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 6960455510609624210, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 150502026991701941, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 2933329333178083999, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -22660439024615302, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -809988167731686972, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 5743815331122784290, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 7193558952320421103, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -2275718726046256121, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: 3560622977116409970, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  - {fileID: -1462800502094218808, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+  hasSceneData: 1
+  hasAnimationData: 0
+  hasMaterialData: 1
+  hasTextureData: 1
+  animations: []
+  _extensions: []
+  _textures:
+  - texture: {fileID: 6983701643236107813, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 8022499087761476943, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 5230624929818990856, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 0
+  - texture: {fileID: -2834534249764746836, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 1
+  - texture: {fileID: -409340629399409755, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: -6477806308458343453, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 0
+  - texture: {fileID: 6960455510609624210, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 1
+  - texture: {fileID: 150502026991701941, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 2933329333178083999, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 1
+  - texture: {fileID: -22660439024615302, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: -809988167731686972, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 5743815331122784290, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 0
+  - texture: {fileID: 7193558952320421103, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: -2275718726046256121, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 0
+  - texture: {fileID: 3560622977116409970, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 1
+  - texture: {fileID: -1462800502094218808, guid: a6afd02996085a14086aa2ddc1ef5e7b, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  _mainAssetIdentifier: scenes/Sketchfab_Scene
+  _importPlugins: []

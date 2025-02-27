@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "window.title": "web",
+    "compile-hero.disable-compile-files-on-did-save-code": true,
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/*.meta": true
+    }
+  }
+}

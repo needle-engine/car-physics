@@ -1,0 +1,16 @@
+node_modules/
+dist/
+stats.html
+include/draco/
+include/ktx2/
+include/three/
+include/console/
+include/three-mesh-ui-assets/
+include/fonts/
+build.log
+/.svelte-kit
+/build
+.DS_Store
+
+# we exclude the 3D assets from the web project for this repository for now
+static/assets 
