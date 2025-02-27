@@ -1,9 +1,8 @@
 <script>
-    import NeedleEngine from "../components/NeedleEngine.svelte";
+    import MainMenu from "../components/MainMenu.svelte";
 </script>
 
 <div class="cols">
-    <NeedleEngine />
 </div>
 
 <style>

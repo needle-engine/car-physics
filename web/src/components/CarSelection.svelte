@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { carOptions, selectedCar } from "$lib/cars.js";
+    import { carOptions, selectedCar } from "$lib";
 </script>
 
 {#if $selectedCar || $carOptions.length > 0}

@@ -1,5 +1,12 @@
-import { TetrahedralUpscaler } from "postprocessing";
 import { writable } from "svelte/store";
+
+declare type SceneInfo = {
+    name: string,
+    index: number,
+    load: () => Promise<any>,
+}
+
+export const scenes = writable<Array<SceneInfo>>([]);
 
 declare type CarInfo = {
     name: string,
@@ -30,6 +37,23 @@ if (typeof window !== "undefined") {
 
         // listen to the needle engine start
         ne.onStart(async context => {
+
+            const sceneSwitcher = ne.findObjectOfType(ne.SceneSwitcher);
+            if (sceneSwitcher) {
+                scenes.set(sceneSwitcher.scenes.map((scene, index) => {
+                    const name = scene.url.split("/").pop()?.split(".")?.[0] || "";
+                    return {
+                        name: name,
+                        index: index,
+                        load: async () => {
+                            return sceneSwitcher.select(index);
+                        },
+                    };
+                }));
+                sceneSwitcher.sceneLoaded.addEventListener(() => {
+                });
+            }
+
             const controllers = ne.findObjectsOfType(carphysics.CarController);
             const options = controllers.map((car) => {
                 return {
@@ -39,12 +63,12 @@ if (typeof window !== "undefined") {
                 };
             });
             carOptions.set(options);
-            
+
             // assign the currently active selection
             const selection = ne.findObjectOfType(carphysics.CarController);
-            if(selection) {
+            if (selection) {
                 const value = options.find(o => o.instance === selection);
-                if(value) selectedCar.set(value);
+                if (value) selectedCar.set(value);
             }
         });
     });

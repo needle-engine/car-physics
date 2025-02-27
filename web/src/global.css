@@ -72,9 +72,18 @@ h3 {
 }
 
 
+button {
+    font-size: inherit;
+    padding: 5px 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
 select {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 14px;
+    font-size: inherit;
     padding: 5px;
     margin: 5px;
     border: 1px solid #ccc;
