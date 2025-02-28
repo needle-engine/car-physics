@@ -49,7 +49,8 @@ export class RacingGame extends Behaviour {
 
         if (!this.car) return;
 
-        if (this.context.input.isKeyDown("r")) {
+        const yButtonIndex = 3;
+        if (this.context.input.isKeyDown("r") || navigator.getGamepads().some(gp => gp?.buttons[yButtonIndex].pressed)) {
             this.reset();
         }
 
