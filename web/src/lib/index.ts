@@ -1,4 +1,5 @@
 import { writable } from "svelte/store";
+import { Object3D } from "three";
 
 declare type SceneInfo = {
     name: string,
@@ -12,7 +13,7 @@ export const activeScene = writable<SceneInfo | null>(null);
 declare type CarInfo = {
     name: string,
     thumbnail: string | null,
-    instance: any,
+    instance: Object3D,
 }
 
 export const carOptions = writable<Array<CarInfo>>([]);
@@ -31,7 +32,8 @@ if (typeof window !== "undefined") {
             if (value) {
                 const selection = ne.findObjectOfType(carphysics.CarSelection);
                 if (selection) {
-                    selection.selectCar(value.instance);
+                    const controller = value.instance.getComponent(carphysics.CarController);
+                    if(controller) selection.selectCar(controller);
                 }
             }
         });
@@ -63,23 +65,26 @@ if (typeof window !== "undefined") {
                 });
             }
 
-            function onLoadedSceneChanged() {
-                const controllers = ne.findObjectsOfType(carphysics.CarController);
-                const options = controllers.map((car) => {
-                    return {
-                        name: car.name,
-                        thumbnail: `/imgs/${car.name.toLowerCase()}.jpg`,
-                        instance: car,
-                    };
-                });
-                carOptions.set(options);
-
+            carOptions.subscribe((options) => {
                 // assign the currently active selection
                 const selection = ne.findObjectOfType(carphysics.CarController);
                 if (selection) {
                     const value = options.find(o => o.instance === selection);
                     if (value) selectedCar.set(value);
                 }
+            });
+
+            function onLoadedSceneChanged() {
+                // const controllers = ne.findObjectsOfType(carphysics.CarController);
+                // const options = controllers.map((car) => {
+                //     return {
+                //         name: car.name,
+                //         thumbnail: `/imgs/${car.name.toLowerCase()}.jpg`,
+                //         instance: car,
+                //     };
+                // });
+                // carOptions.set(options);
+
             }
 
         });

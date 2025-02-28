@@ -5,8 +5,11 @@
 
 namespace Needle.Typescript.GeneratedComponents
 {
-	public partial class MenuSceneMarker : UnityEngine.MonoBehaviour
+	public partial class SelectableCar : UnityEngine.MonoBehaviour
 	{
+		public Needle.Engine.FileReference @thumbnail;
+		public void OnEnable(){}
+		public void OnDisable(){}
 	}
 }
 

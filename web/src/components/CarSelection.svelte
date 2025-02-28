@@ -29,10 +29,6 @@
 {/if}
 
 <style>
-    
-    label {
-        font-weight: bold;
-    }
 
     .list {
         display: flex;
@@ -41,8 +37,8 @@
         justify-content: center;
 
         padding-bottom: 1rem;
-        
-        gap: .3rem;
+
+        gap: 0.3rem;
 
         & button.car {
             position: relative;
@@ -59,6 +55,7 @@
 
             gap: 0.5rem;
             font-size: 1.3rem;
+            pointer-events: all;
 
             &:hover {
                 & img {
@@ -75,8 +72,8 @@
                 border-radius: 1rem;
                 padding: 0 0.3em;
                 font-size: 14px;
-                opacity: .7;
-                text-shadow: 0 0  5px rgba(255, 255, 255, 1);
+                opacity: 0.7;
+                text-shadow: 0 0 5px rgba(255, 255, 255, 1);
             }
 
             & .thumbnail {
@@ -103,7 +100,7 @@
 
                 & .thumbnail {
                     /* outline: 2px solid black; */
-                    outline: 4px solid rgba(255, 255, 255, .9);
+                    outline: 4px solid rgba(255, 255, 255, 0.9);
                 }
             }
         }

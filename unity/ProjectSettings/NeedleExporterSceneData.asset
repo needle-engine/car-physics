@@ -35,6 +35,9 @@ MonoBehaviour:
   - Path: Assets/Scenes/Main Menu.unity
     Projects: []
     BuilderScene: 
+  - Path: Assets/Scenes/Race Track.unity
+    Projects: []
+    BuilderScene: 
   Projects:
   - ProjectPath: Library/Needle/Sample
   - ProjectPath: ../web

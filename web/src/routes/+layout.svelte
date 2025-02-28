@@ -16,29 +16,24 @@
     />
 </svelte:head>
 
-<div class="app">
-    <MainMenu bind:loading={loading_promise} />
-    <main>
-        <NeedleEngine />
-        <!-- <Menubar /> -->
-        <slot></slot>
+<div class="engine">
+    <NeedleEngine />
+</div>
+<div class="layout">
+    <div class="top">
+        <MainMenu bind:loading={loading_promise} />
+    </div>
+    <slot></slot>
+    <div class="bottom">
         <CarSelection />
-    </main>
+    </div>
 </div>
 
 <LoadingScreen loading={loading_promise} />
 
 <style>
-    .app {
-        position: relative;
-        display: flex;
-        flex-flow: column;
-        height: 100%;
-    }
-
-    main {
+    .engine {
         position: absolute;
-        z-index: 1;
 
         --padding: 0rem;
         left: var(--padding);
@@ -49,5 +44,19 @@
         flex: 1 1 auto;
         flex-flow: column;
         display: flex;
+    }
+
+    .layout {
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        height: 100%;
+        pointer-events: none; /** this overlays the 3D canvas and we don't want to block all pointer events by default */
+    }
+
+    .bottom {
+        bottom: 0;
+        justify-self: flex-end;
     }
 </style>

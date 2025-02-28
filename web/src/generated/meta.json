@@ -10,7 +10,7 @@
   "needleEditor": null,
   "sceneName": "Car Physics",
   "meta": null,
-  "absolutePath": null,
+  "absolutePath": "https://localhost:3000",
   "deployOnly": false,
   "facebookInstantGames": null
 }
