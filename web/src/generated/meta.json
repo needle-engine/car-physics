@@ -1,7 +1,7 @@
 {
   "useRapier": true,
   "developmentBuild": false,
-  "generator": "Unity 2022.3.52f1, Needle Engine Integration @4.2.5",
+  "generator": "Unity 2022.3.52f1, Needle Engine Integration @4.3.0-alpha",
   "gzip": true,
   "allowHotReload": true,
   "license": {

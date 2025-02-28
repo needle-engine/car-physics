@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8765570543675687500
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771091787928289351, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_Name
+      value: SoapCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771091787928289351, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8771091787928289351, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5019606542888387497}
+    - targetCorrespondingSourceObject: {fileID: 8771091787928289351, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3158168543058362624}
+    - targetCorrespondingSourceObject: {fileID: 8771091787928289351, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2965542834135841912}
+  m_SourcePrefab: {fileID: -4161369568681901532, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+--- !u!1 &8059923458228747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8771091787928289351, guid: 5186d37489e8b1941a99a957b6d35f26, type: 3}
+  m_PrefabInstance: {fileID: 8765570543675687500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5019606542888387497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059923458228747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1527aaafd9a97b991c0126f72b8a0a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarPhysics, Needle.Engine-Samples.Runtime
+  carDrive: 0
+  mass: 150
+  maxSteer: 50
+  steerSmoothingFactor: 0.3
+  accelerationForce: 5
+  breakForce: 5
+  topSpeed: 15
+  wheels: []
+--- !u!114 &3158168543058362624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059923458228747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf9fba2132396f9d119649126ffe624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarController, Needle.Engine-Samples.Runtime
+  carPhysics: {fileID: 0}
+--- !u!114 &2965542834135841912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059923458228747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87566da3637b71aea683553b78d58d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thumbnail:
+    Mode: 0
+    File: {fileID: 2800000, guid: a0cda3d5370487a4cb2a2cff7d427268, type: 3}
+    String: 

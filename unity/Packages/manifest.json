@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.needle.engine-exporter": "file:C:/git/needle-engine-dev/modules/needle-engine/package",
+    "com.needle.engine-exporter": "4.3.0-alpha",
     "com.unity.ide.rider": "3.0.34",
     "com.unity.render-pipelines.universal": "14.0.11",
     "com.unity.modules.ai": "1.0.0",

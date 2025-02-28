@@ -1,23 +1,6 @@
-import { writable } from "svelte/store";
-import { Object3D } from "three";
+export * from "./stores.js";
 
-declare type SceneInfo = {
-    name: string,
-    index: number,
-    load: () => Promise<any>,
-}
-
-export const scenes = writable<Array<SceneInfo>>([]);
-export const activeScene = writable<SceneInfo | null>(null);
-
-declare type CarInfo = {
-    name: string,
-    thumbnail: string | null,
-    instance: Object3D,
-}
-
-export const carOptions = writable<Array<CarInfo>>([]);
-export const selectedCar = writable<CarInfo | null>(null);
+import { activeScene, carOptions, scenes, selectedCar } from "./stores.js";
 
 if (typeof window !== "undefined") {
 
@@ -34,6 +17,10 @@ if (typeof window !== "undefined") {
                 if (selection) {
                     const controller = value.instance.getComponent(carphysics.CarController);
                     if(controller) selection.selectCar(controller);
+                    else console.warn("CarController component not found in the selected car");
+                }
+                else {
+                    console.warn("CarSelection component not found in the scene");
                 }
             }
         });
@@ -43,6 +30,18 @@ if (typeof window !== "undefined") {
 
             context.menu.setVisible(false);
 
+            carOptions.subscribe((options) => {
+                // assign the currently active selection
+                const selection = ne.findObjectOfType(carphysics.CarController);
+                if (selection) {
+                    const value = options.find(o => o.instance === selection.gameObject);
+                    if (value) selectedCar.set(value);
+                    else selectedCar.set(null);
+                }
+                else {
+                    console.debug("No CarController found in the scene");
+                }
+            });
 
             const sceneSwitcher = ne.findObjectOfType(ne.SceneSwitcher);
             if (sceneSwitcher) {
@@ -64,15 +63,6 @@ if (typeof window !== "undefined") {
                     onLoadedSceneChanged();
                 });
             }
-
-            carOptions.subscribe((options) => {
-                // assign the currently active selection
-                const selection = ne.findObjectOfType(carphysics.CarController);
-                if (selection) {
-                    const value = options.find(o => o.instance === selection);
-                    if (value) selectedCar.set(value);
-                }
-            });
 
             function onLoadedSceneChanged() {
                 // const controllers = ne.findObjectsOfType(carphysics.CarController);

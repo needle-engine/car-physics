@@ -1,10 +1,18 @@
 <script lang="ts">
-    import { scenes } from "$lib";
+    import { activeScene, scenes } from "$lib";
     import { onMount } from "svelte";
     import Icon from "./Icon.svelte";
+    import { derived, get } from "svelte/store";
 
     export let open = true;
     export let loading: Promise<any> | null = null;
+
+    // assumign the first scene is the main menu - we then want to open the menu always
+    const isMenuScene = derived(activeScene, ($activeScene) => $activeScene?.index === 0);
+
+    activeScene.subscribe(() => {
+        open = false;
+    });
 
     onMount(() => {
         window.addEventListener("keydown", (e) => {
@@ -16,9 +24,10 @@
 </script>
 
 <div class="wrapper">
-    <div class="menu" class:open>
+    <div class="menu" class:open={open || $isMenuScene}>
         <button
             class="toggle_open"
+            class:hidden={$isMenuScene}
             on:click={(_) => {
                 open = !open;
             }}
@@ -30,12 +39,13 @@
             {/if}
         </button>
 
-        {#if open}
+        {#if open || $isMenuScene}
             <div class="options">
-                {#each $scenes as scene}
+                {#each $scenes as scene, index}
                     <button
+                        disabled={index === $activeScene?.index}
                         on:click={() => {
-                            open = !open;
+                            open = false;
                             loading = scene.load();
                         }}
                     >
@@ -66,6 +76,10 @@
             pointer-events: all;
         }
 
+        & .hidden {
+            display: none;
+        }
+
         & .toggle_open {
             position: absolute;
             top: 1rem;
@@ -89,7 +103,7 @@
             &.open {
                 backdrop-filter: blur(5px);
                 pointer-events: all;
-                background: rgba(20, 0, 50, .12);;
+                background: rgba(20, 0, 50, 0.12);
             }
 
             & .options {
@@ -98,14 +112,21 @@
                 width: min(360px, 90%);
                 display: flex;
                 flex-direction: column;
-                gap: .2rem;
+                gap: 0.2rem;
 
                 & button {
-                    padding: .6rem .2rem;
+                    padding: 0.6rem 0.2rem;
 
                     &:hover {
                         background-color: black;
                         color: white;
+                    }
+                    
+                    &:disabled {
+                        /* background: grey; */
+                        color: grey;
+                        cursor: not-allowed;
+                        pointer-events: none !important;
                     }
                 }
             }

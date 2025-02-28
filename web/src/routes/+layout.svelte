@@ -5,6 +5,7 @@
     import MainMenu from "../components/MainMenu.svelte";
     import LoadingScreen from "../components/LoadingScreen.svelte";
     import CarSelection from "../components/CarSelection.svelte";
+    import RacingGame from "../components/RacingGame.svelte";
 
     let loading_promise: Promise<any> | null = null;
 </script>

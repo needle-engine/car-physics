@@ -1,4 +1,4 @@
-import { Application, Behaviour, Collision, getTempQuaternion, getTempVector, Mathf, OrbitControls, serializable } from "@needle-tools/engine";
+import { Behaviour, getTempQuaternion, getTempVector, Mathf, OrbitControls, serializable } from "@needle-tools/engine";
 import { CarPhysics } from "./CarPhysics";
 import { Vector3, Quaternion } from "three";
 
@@ -6,6 +6,12 @@ export class CarController extends Behaviour {
 
     @serializable(CarPhysics)
     carPhysics?: CarPhysics | null;
+
+    @serializable()
+    autoReset: boolean = true;
+
+    @serializable()
+    manualReset: boolean = true;
 
     /**
      * Resets the car to the starting position and orientation
@@ -38,12 +44,15 @@ export class CarController extends Behaviour {
     }
 
     onBeforeRender() {
-        if (this.context.input.isKeyDown("r")) {
+        this.handleInput();
+
+        if (this.manualReset && this.context.input.isKeyDown("r")) {
             this.reset();
         }
-        this.handleInput();
-        this.resetWhenRolledOver();
-        this.resetWhenFallingoff();
+        if (this.autoReset) {
+            this.resetWhenRolledOver();
+            this.resetWhenFallingoff();
+        }
     }
 
     private onBlur = (_se: FocusEvent) => {
@@ -61,9 +70,15 @@ export class CarController extends Behaviour {
         }
     }
 
+    private _lastResetTime: number = -1;
     private resetWhenFallingoff() {
-        if (this.carPhysics && this.carPhysics.airtime > 5) {
-            this.reset();
+        const minAirTime = 5;
+        if (this.carPhysics && this.carPhysics.airtime > minAirTime) {
+            const timeSinceLastReset = this.context.time.realtimeSinceStartup - this._lastResetTime;
+            if (timeSinceLastReset > minAirTime) {
+                this._lastResetTime = this.context.time.realtimeSinceStartup;
+                this.reset();
+            }
         }
     }
 
@@ -147,7 +162,7 @@ export class CarController extends Behaviour {
 
             if (Math.abs(sideAxis) > .01) {  // make sure the tiny deadzone is not used
                 const negative = sideAxis < 0 ? -1 : 1;
-                steer += Math.pow(sideAxis, 4) * negative;
+                steer += Math.pow(sideAxis, 2) * negative;
             }
             if (Math.abs(forwardAxis) > .01) { // make sure the tiny deadzone is not used
                 accel -= forwardAxis;
