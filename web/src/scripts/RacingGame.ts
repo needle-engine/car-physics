@@ -32,8 +32,10 @@ export class RacingGame extends Behaviour {
         this._nextCheckpointIndex = 0;
         this._lastCheckpoint = null;
         this._lapStartTime = 0;
-
         laptime.set(0);
+
+        this._bestLapTime = parseFloat(localStorage.getItem("bestlap") || "0");
+        bestlap.set(this._bestLapTime);
 
         for (const check of this.checkpoints) {
             check?.setHighlight(false);
@@ -77,6 +79,7 @@ export class RacingGame extends Behaviour {
                     if (currentLaptime < this._bestLapTime || this._bestLapTime === 0) {
                         this._bestLapTime = currentLaptime;
                         bestlap.set(this._bestLapTime);
+                        localStorage.setItem("bestlap", this._bestLapTime.toString());
                     }
                     this._lastLapTime = currentLaptime;
                     lastlap.set(this._lastLapTime);
