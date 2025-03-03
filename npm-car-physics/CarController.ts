@@ -120,6 +120,8 @@ export class CarController extends Behaviour {
 
     private _lastVehicleVelocity: number = 0;
     private _lastHeroRumbleTime: number = -1;
+    private _currentSteer = 0;
+    private _currentSteerAccum = 0;
 
     private handleInput() {
         if (!this.carPhysics?.vehicle) return;
@@ -241,8 +243,17 @@ export class CarController extends Behaviour {
             }
         }
 
-        this.carPhysics.steerInput(steer);
+        if (Math.abs(steer) > .1) {
+            this._currentSteerAccum += steer * this.context.time.deltaTime / .3;
+        }
+        else {
+            this._currentSteerAccum = Mathf.lerp(this._currentSteerAccum, 0, this.context.time.deltaTime / .1);
+        }
+
+        this._currentSteer = Mathf.lerp(this._currentSteer, this._currentSteerAccum, this.context.time.deltaTime / .1);
+        this.carPhysics.steerInput(this._currentSteer);
         this.carPhysics.accelerationInput(accel);
+
     }
 
 }

@@ -26,10 +26,10 @@ export class CarPhysics extends Behaviour {
 
     /**
      * The steering smoothing factor. The higher the value, the slower the steering response (the more smoothing will be applied)
-     * @default .2
+     * @default .1
      */
     @serializable()
-    steerSmoothingFactor: number = .2;
+    steerSmoothingFactor: number = .1;
 
     /**
      * The acceleration force in Newtons
@@ -112,11 +112,28 @@ export class CarPhysics extends Behaviour {
         return this._vehicle.currentVehicleSpeed();
     }
 
+    /**
+     * Current vehicle speed in km/h
+     */
+    get currentSpeedInKmh() {
+        return this.currentSpeed * 3.6;
+    }
+
+    /**
+     * Current vehicle speed normalized between 0 and 1 where 1 is the top speed
+     */
+    get currentSpeed01() {
+        return this._vehicle.currentVehicleSpeed() / this.topSpeed;
+    }
+
     /** 
      * The airtime of the car in seconds
      */
     get airtime() {
         return this._airtime;
+    }
+    set airtime(val: number) {
+        this._airtime = val;
     }
 
     private _vehicle!: DynamicRayCastVehicleController;
@@ -158,8 +175,9 @@ export class CarPhysics extends Behaviour {
             // }
 
             collider.center.y += collider.size.y * .1;
-            collider.size.y *= .9;
-            collider.size.multiplyScalar(.95);
+            collider.size.x *= .85;
+            collider.size.y *= .7;
+            collider.size.z *= .85;
             collider.updateProperties();
         }
     }
@@ -242,13 +260,12 @@ export class CarPhysics extends Behaviour {
         if (!this._vehicle) return;
 
         if (this.steerSmoothingFactor > 0) {
-            const isSteering = this._steerInput !== 0;
-            let t = this.context.time.deltaTime / this.steerSmoothingFactor;
-            if(!isSteering) t *= 2;
-            this.currentSteer = Mathf.lerp(this.currentSteer, this._steerInput, Mathf.clamp01(t));
+            const t01 = this.context.time.deltaTime / this.steerSmoothingFactor;
+            this.currentSteer = Mathf.lerp(this.currentSteer, this._steerInput, Mathf.clamp01(t01));
         }
-        else
+        else {
             this.currentSteer = this._steerInput;
+        }
         this.applyPhysics();
         this._steerInput = 0;
         this.currAcc = 0;
@@ -320,12 +337,12 @@ export class CarPhysics extends Behaviour {
         const vel = this._vehicle.currentVehicleSpeed();
         const reachedTopSpeed = vel > this.topSpeed;
 
-        const pullForce = this.context.time.deltaTime * 9.81 * vel;
+        const pullForce = this.context.time.deltaTime * this.mass * this.currentSpeed01 * 9.81 * Mathf.clamp01(1 - Math.pow(this._airtime, 2));
         this._rigidbody.applyImpulse(getTempVector(0, -pullForce, 0))
 
         // breaking
         // apply break if we're receiving negative input and are moving forward
-        const isBreaking = this.currAcc < 0 && vel > 0.05 && velDir.dot(this.gameObject.worldForward) > 0; 777
+        const isBreaking = this.currAcc < 0 && vel > 0.05 && velDir.dot(this.gameObject.worldForward) > 0;
         if (isBreaking) {
             breakForce = this.breakForce * -this.currAcc;
         }
@@ -337,7 +354,8 @@ export class CarPhysics extends Behaviour {
         }
 
         // steer
-        const steer = this.currentSteer * this.maxSteer * Mathf.Deg2Rad;
+        const maxAngle = Mathf.lerp(this.maxSteer, this.maxSteer * .5, this.currentSpeed01);
+        const steer = this.currentSteer * maxAngle * Mathf.Deg2Rad;
 
         // updateWheels
         this.wheels.forEach((wheel) => {
@@ -428,7 +446,6 @@ function trySetupWheelsAutomatically(car: CarPhysics): CarWheel[] {
                     const wheel = ch.addComponent(CarWheel, {
                         axle: front ? CarAxle.front : CarAxle.rear,
                     });
-                    wheel.suspensionStiff += car.mass * .7;
                     wheels.push(wheel);
                 }
             }
