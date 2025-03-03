@@ -8,9 +8,9 @@
     "team": "jg3twr0f7zgf"
   },
   "needleEditor": null,
-  "sceneName": "Race Track",
+  "sceneName": "Car Physics",
   "meta": null,
-  "absolutePath": "https://localhost:3000",
+  "absolutePath": null,
   "deployOnly": false,
   "facebookInstantGames": null
 }

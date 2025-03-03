@@ -15,10 +15,10 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.7008722, g: 0.7450676, b: 0.8490566, a: 1}
+  m_FogColor: {r: 0.5707547, g: 0.69501007, b: 1, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
-  m_LinearFogStart: 100
+  m_LinearFogStart: 40
   m_LinearFogEnd: 400
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
@@ -4240,7 +4240,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.1340564, y: -0.8595035, z: 0.40079275, w: 0.28748542}
   m_LocalPosition: {x: 8.98, y: 27.53, z: 8.22}
-  m_LocalScale: {x: 1.0002499, y: 1, z: 1.000184}
+  m_LocalScale: {x: 1.0002537, y: 1, z: 1.0001869}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
