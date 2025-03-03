@@ -37,32 +37,45 @@ export class CarWheel extends Behaviour {
     @serializable()
     maxSuspensionTravel: number = -1;
     /**
-     * The compression of the suspension.
+     * The suspension’s damping when the wheel is being compressed.
      * @default 2
      */
     @serializable()
     suspensionCompression: number = 2;
     /**
-     * The relaxation of the suspension.
+     * The relaxation of the suspension. Increase this value if the suspension appears to overshoot.
      * @default 3
      */
     @serializable()
     suspensionRelax: number = 3;
     /** 
-     * The stiffness of the suspension.
-     * @default 50
+     * The stiffness of the suspension. Increase this value if the suspension appears to not push the vehicle strong enough.
+     * @default 15
      */
     @serializable()
-    suspensionStiff: number = 50;
+    suspensionStiff: number = 15;
+    /**
+     * The maximum force the suspension can exert.
+     * @default 3_000
+     */
     @serializable()
-    maxSuspensionForce: number = 1000;
+    maxSuspensionForce: number = 3_000;
 
-    // --- Friction ---
+    /**
+     * The multiplier of friction between a tire and the collider it’s on top of.  
+        The larger the value, the stronger side friction will be.
+     */
     @serializable()
     sideFrictionStiffness: number = 0.5;
 
+    /**
+     * The friction of the wheel based on the grip amount.  
+     * X: min friction used when the calculated wheel grip is low. Y: max friction used when the calculated wheel grip is high.  
+     * Lower values generally make the car more slippery while higher values make it more grippy. This is particular noticeable when steering.
+     * @default { x: 5, y: 50 }
+     */
     @serializable(Vector2)
-    frictionSlip: Vector2 = new Vector2(2, 50);
+    frictionSlip: Vector2 = new Vector2(5, 50);
 
     // --- Visuals ---
     @serializable(ParticleSystem)
@@ -83,7 +96,7 @@ export class CarWheel extends Behaviour {
     private car!: CarPhysics;
     private vehicle!: DynamicRayCastVehicleController;
     private _wheelIndex: number = -1;
-    private _activeRadius : number = -1;
+    private _activeRadius: number = -1;
     private _initialQuaternion!: Quaternion;
 
     async initialize(car: CarPhysics, vehicle: DynamicRayCastVehicleController, i: number) {
@@ -118,7 +131,7 @@ export class CarWheel extends Behaviour {
         this.wheelModel?.quaternion.identity();
         this.gameObject?.quaternion.identity();
 
-        
+
         // Figure out which axis the wheel should rotate around
         // Get the rotation in car space
         // TODO: This is a bit hacky, but it works for now
@@ -155,17 +168,17 @@ export class CarWheel extends Behaviour {
         }
 
         let suspensionTravel = this.maxSuspensionTravel;
-        if (suspensionTravel <= 0) {
+        if (!suspensionTravel || suspensionTravel <= 0) {
             suspensionTravel = radius * .5;
         }
 
         if (debugWheel) console.debug(this.name, { suspensionTravel, restLength, radius: this._activeRadius }, this);
-        
+
         this.vehicle.addWheel(lPos, suspensionDirection, axleDirection, restLength, this._activeRadius);
         this.vehicle.setWheelSuspensionStiffness(i, this.suspensionStiff);
         this.vehicle.setWheelSuspensionCompression(i, this.suspensionCompression);
-        this.vehicle.setWheelSuspensionRelaxation(i, this.suspensionRelax);
         this.vehicle.setWheelMaxSuspensionForce(i, this.maxSuspensionForce);
+        this.vehicle.setWheelSuspensionRelaxation(i, this.suspensionRelax);
         this.vehicle.setWheelMaxSuspensionTravel(i, suspensionTravel);
         this.vehicle.setWheelSideFrictionStiffness(i, this.sideFrictionStiffness);
         this.vehicle.setWheelFrictionSlip(i, this.frictionSlip.y);

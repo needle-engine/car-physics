@@ -1,6 +1,6 @@
 import { DynamicRayCastVehicleController, World, RigidBody as RapierRigidbody, Collider as RapierCollider } from "@dimforge/rapier3d-compat";
 
-import { Behaviour, Gizmos, Mathf, Rigidbody, getParam, getTempVector, serializable, FrameEvent, delayForFrames, Collider, BoxCollider, getBoundingBox } from "@needle-tools/engine";
+import { Behaviour, Gizmos, Mathf, Rigidbody, getParam, getTempVector, serializable, FrameEvent, delayForFrames, Collider, BoxCollider, getBoundingBox, OneEuroFilter } from "@needle-tools/engine";
 
 import { Vector3, Quaternion, Object3D } from "three";
 import { CarAxle, CarDrive } from "./constants.js";
@@ -26,10 +26,10 @@ export class CarPhysics extends Behaviour {
 
     /**
      * The steering smoothing factor. The higher the value, the slower the steering response (the more smoothing will be applied)
-     * @default .3
+     * @default .2
      */
     @serializable()
-    steerSmoothingFactor: number = .3;
+    steerSmoothingFactor: number = .2;
 
     /**
      * The acceleration force in Newtons
@@ -40,17 +40,17 @@ export class CarPhysics extends Behaviour {
 
     /**
      * The breaking force in Newtons
-     * @default 5
+     * @default 7
      */
     @serializable()
-    breakForce: number = 5;
+    breakForce: number = 7;
 
     /**
      * The top speed of the car in m/s
-     * @default 15
+     * @default 25
      */
     @serializable()
-    topSpeed: number = 15;
+    topSpeed: number = 25;
 
     /**
      * The wheels of the car. If none are provided, the script will try to find them in the child hierarchy based on their name.   
@@ -73,7 +73,10 @@ export class CarPhysics extends Behaviour {
      * @param steerAmount -1 to 1
      */
     steerInput(steerAmount: number) {
-        this.currSteer = Mathf.clamp(this.currSteer + steerAmount, -1, 1);
+        // steering smoothing
+        // const t = Mathf.clamp01(this.context.time.deltaTime / Math.max(.05, this.steerSmoothingFactor));
+        this._steerInput += steerAmount;
+        this._steerInput = Mathf.clamp(this._steerInput, -1, 1);
     }
 
     /**
@@ -119,9 +122,10 @@ export class CarPhysics extends Behaviour {
     private _vehicle!: DynamicRayCastVehicleController;
     private _rigidbody!: Rigidbody;
 
-    private currSteerSmooth: number = 0;
-    private currSteer: number = 0;
+    private currentSteer: number = 0;
     private currAcc: number = 0;
+
+    private _steerInput: number = 0;
     private _airtime: number = 0;
 
 
@@ -175,7 +179,7 @@ export class CarPhysics extends Behaviour {
         await this.context.physics.engine?.initialize().then(() => delayForFrames(1));
         if (!this.activeAndEnabled) return;
 
-        const world = this.context.physics.engine?.world as World;
+        const world = this.context.physics.engine?.world as unknown as World;
         if (!world) {
             console.error("[CarPhysics] Physics world not found");
             return;
@@ -223,7 +227,7 @@ export class CarPhysics extends Behaviour {
     }
     /** @internal */
     onDisable(): void {
-        this.context.physics.engine?.world.removeVehicleController(this._vehicle);
+        if (this._vehicle) this.context.physics.engine?.world?.removeVehicleController(this._vehicle);
         this._vehicle?.free();
         this._vehicle = null!;
         if (this._physicsRoutine) {
@@ -232,15 +236,37 @@ export class CarPhysics extends Behaviour {
     }
     onDestroy(): void {
     }
+
     /** @internal */
     onBeforeRender() {
         if (!this._vehicle) return;
 
-        // steering smoothing
-        this.currSteerSmooth = Mathf.lerp(this.currSteerSmooth, this.currSteer, Mathf.clamp01(this.context.time.deltaTime / Math.max(.0001, this.steerSmoothingFactor)));
-
+        if (this.steerSmoothingFactor > 0) {
+            const isSteering = this._steerInput !== 0;
+            let t = this.context.time.deltaTime / this.steerSmoothingFactor;
+            if(!isSteering) t *= 2;
+            this.currentSteer = Mathf.lerp(this.currentSteer, this._steerInput, Mathf.clamp01(t));
+        }
+        else
+            this.currentSteer = this._steerInput;
         this.applyPhysics();
+        this._steerInput = 0;
+        this.currAcc = 0;
 
+        // update wheels
+        let anyWheelHasGroundContact = false;
+        this.wheels.forEach((wheel) => {
+            wheel.updateVisuals();
+            if (!anyWheelHasGroundContact) {
+                anyWheelHasGroundContact ||= this._vehicle.wheelIsInContact(wheel.index);
+            }
+        });
+        if (!anyWheelHasGroundContact) {
+            this._airtime += this.context.time.deltaTime;
+        }
+        else this._airtime = 0;
+
+        // render debug
         if (debugCar) {
             const chassis = this._vehicle.chassis();
             const wp = chassis.translation();
@@ -256,22 +282,6 @@ export class CarPhysics extends Behaviour {
                 }
             });
         }
-
-        // update visuals
-        let anyWheelHasGroundContact = false;
-        this.wheels.forEach((wheel) => {
-            wheel.updateVisuals();
-            if (!anyWheelHasGroundContact) {
-                anyWheelHasGroundContact ||= this._vehicle.wheelIsInContact(wheel.index);
-            }
-        });
-        if (!anyWheelHasGroundContact) {
-            this._airtime += this.context.time.deltaTime;
-        }
-        else this._airtime = 0;
-
-        this.currSteer = 0;
-        this.currAcc = 0;
     }
 
 
@@ -303,18 +313,19 @@ export class CarPhysics extends Behaviour {
     }
 
     private applyPhysics() {
-        let breakForce = this.currAcc === 0 ? .05 : 0;
+        let breakForce = this.currAcc === 0 ? .2 : 0;
         let accelForce = 0;
 
         const velDir = this._rigidbody.getVelocity();
-        const vel = velDir.length();
+        const vel = this._vehicle.currentVehicleSpeed();
         const reachedTopSpeed = vel > this.topSpeed;
 
-        this._rigidbody.applyImpulse(getTempVector(0, -this.context.time.deltaTime * 9.81 * vel, 0))
+        const pullForce = this.context.time.deltaTime * 9.81 * vel;
+        this._rigidbody.applyImpulse(getTempVector(0, -pullForce, 0))
 
         // breaking
         // apply break if we're receiving negative input and are moving forward
-        const isBreaking = this.currAcc < 0 && vel > 0.05 && velDir.dot(this.gameObject.worldForward) > 0;777
+        const isBreaking = this.currAcc < 0 && vel > 0.05 && velDir.dot(this.gameObject.worldForward) > 0; 777
         if (isBreaking) {
             breakForce = this.breakForce * -this.currAcc;
         }
@@ -326,7 +337,7 @@ export class CarPhysics extends Behaviour {
         }
 
         // steer
-        const steer = this.currSteerSmooth * this.maxSteer * Mathf.Deg2Rad;
+        const steer = this.currentSteer * this.maxSteer * Mathf.Deg2Rad;
 
         // updateWheels
         this.wheels.forEach((wheel) => {
@@ -410,14 +421,14 @@ function trySetupWheelsAutomatically(car: CarPhysics): CarWheel[] {
 
         for (const ch of obj.children) {
             const name = ch.name.toLowerCase();
-            if (name.startsWith("wheel")) {
+            if (name.includes("wheel")) {
                 if (!ch.getComponent(CarWheel)) {
                     const front = name.includes("front") || name.includes("fl") || name.includes("fr");
                     // const right = name.includes("right") || name.includes("fr") || name.includes("rr");
                     const wheel = ch.addComponent(CarWheel, {
                         axle: front ? CarAxle.front : CarAxle.rear,
-                        suspensionStiff: 45 + (car.mass * .7),
                     });
+                    wheel.suspensionStiff += car.mass * .7;
                     wheels.push(wheel);
                 }
             }
