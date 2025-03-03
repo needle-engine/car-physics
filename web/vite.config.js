@@ -13,9 +13,10 @@ export default defineConfig(async ({ command }) => {
         server: {
             port: 3000,
             proxy: {},
-            // fs: {
-            //     strict: false,
-            // },
+            fs: {
+                // allow imports from packages in external local folders
+                strict: false,
+            },
         },
         build: {
             emptyOutDir: true,

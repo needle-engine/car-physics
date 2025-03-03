@@ -24,7 +24,8 @@ MonoBehaviour:
     Projects: []
     BuilderScene: 
   - Path: Assets/Scenes/Free Driving.unity
-    Projects: []
+    Projects:
+    - ProjectPath: ../web
     BuilderScene: 
   - Path: Assets/Scenes/Crazy Hills.unity
     Projects: []

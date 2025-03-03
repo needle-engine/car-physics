@@ -1,14 +1,14 @@
 {
   "useRapier": true,
   "developmentBuild": false,
-  "generator": "Unity 2022.3.52f1, Needle Engine Integration @4.3.0-alpha",
+  "generator": "Unity 2022.3.52f1, Needle Engine Integration @4.3.0-alpha.1",
   "gzip": true,
   "allowHotReload": true,
   "license": {
     "team": "jg3twr0f7zgf"
   },
   "needleEditor": null,
-  "sceneName": "Car Physics",
+  "sceneName": "Race Track",
   "meta": null,
   "absolutePath": "https://localhost:3000",
   "deployOnly": false,

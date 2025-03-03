@@ -1,0 +1,144 @@
+fileFormatVersion: 2
+guid: 1da5a6736c0a9304a9922fb10f952a4e
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MYRONSGN57_Body
+    second: {fileID: 2100000, guid: 7b7c9f9ad73261c4e9d677aba6cb8ba6, type: 2}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 804e1ce4c496647cfa3f1a1134187c71, type: 3}
+  _removeEmptyRootObjects: 1
+  _scaleFactor: 0.001
+  _deduplicateResources: 0
+  _maximumLod: 300
+  _readWriteEnabled: 1
+  _generateColliders: 0
+  _swapUvs: 0
+  _generateLightmapUVs: 0
+  _importBlendShapeNames: 1
+  _blendShapeFrameWeight:
+    _option: 0
+    _multiplier: 1
+  _importNormals: 0
+  _importTangents: 0
+  _importCamera: 2
+  _importAnimations: 2
+  _mecanimHumanoidFlip: 0
+  _addAnimatorComponent: 0
+  _animationLoopTime: 1
+  _animationLoopPose: 0
+  _importMaterials: 1
+  _enableGpuInstancing: 0
+  _texturesReadWriteEnabled: 1
+  _generateMipMaps: 1
+  _useSceneNameIdentifier: 1
+  _textureCompression: -50
+  _gltfAsset: '<b>Generator: </b>Sketchfab-16.61.0
+
+    <b>Version: </b>2.0
+
+    
+
+    <b>Extras:
+    </b>
+
+    "author": "Daniel Zhabotinsky (https://sketchfab.com/DanielZhabotinsky)"
+
+    "license":
+    "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+
+    "source": "https://sketchfab.com/3d-models/classic-american-sportcar-57-low-poly-model-a6840c4f4b4b45ca805d0f76e809f042"
+
+    "title":
+    "Classic american sportcar ''57 - Low poly model"
+
+'
+  optimizeGameObjects: 0
+  materials:
+  - {fileID: 4904519165401747007, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 2289756012403240535, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: -6753811134230338538, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 6593748841974624315, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 315204489114089936, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 8996445347322013398, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: -5645446490396686894, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  textures:
+  - {fileID: 6983701643236107813, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 8022499087761476943, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 5230624929818990856, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: -2834534249764746836, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: -409340629399409755, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: -6477806308458343453, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 6960455510609624210, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 150502026991701941, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 2933329333178083999, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: -22660439024615302, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: -809988167731686972, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 5743815331122784290, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: 7193558952320421103, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  - {fileID: -2275718726046256121, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+  hasSceneData: 1
+  hasAnimationData: 0
+  hasMaterialData: 1
+  hasTextureData: 1
+  animations: []
+  _extensions:
+  - name: KHR_materials_clearcoat
+    supported: 1
+    used: 1
+    required: 0
+  - name: KHR_materials_specular
+    supported: 1
+    used: 1
+    required: 0
+  _textures:
+  - texture: {fileID: 6983701643236107813, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 8022499087761476943, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 0
+  - texture: {fileID: 5230624929818990856, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 1
+  - texture: {fileID: -2834534249764746836, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: -409340629399409755, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 0
+  - texture: {fileID: -6477806308458343453, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 1
+  - texture: {fileID: 6960455510609624210, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 150502026991701941, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 2933329333178083999, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 1
+  - texture: {fileID: -22660439024615302, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: -809988167731686972, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 0
+  - texture: {fileID: 5743815331122784290, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 0
+    shouldBeNormalMap: 0
+  - texture: {fileID: 7193558952320421103, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 0
+  - texture: {fileID: -2275718726046256121, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
+    shouldBeLinear: 1
+    shouldBeNormalMap: 1
+  _mainAssetIdentifier: scenes/Sketchfab_Scene
+  _importPlugins: []

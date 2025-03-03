@@ -37,11 +37,12 @@ export class CarWheel extends Behaviour {
     @serializable()
     maxSuspensionTravel: number = -1;
     /**
-     * The suspension’s damping when the wheel is being compressed.
-     * @default 4
+     * The suspension’s damping when the wheel is being compressed.  
+     * Lower values make the suspension more bouncy while higher values make it more stiff.
+     * @default 3
      */
     @serializable()
-    suspensionCompression: number = 4;
+    suspensionCompression: number = 3;
     /**
      * The relaxation of the suspension. Increase this value if the suspension appears to overshoot.
      * @default 1

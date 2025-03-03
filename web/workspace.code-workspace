@@ -2,6 +2,11 @@
   "folders": [
     {
       "path": "."
+    },
+    {
+      "name": "@needle-tools/car-physics",
+      "path": "node_modules/@needle-tools/car-physics",
+      "@needle:managed": true
     }
   ],
   "settings": {

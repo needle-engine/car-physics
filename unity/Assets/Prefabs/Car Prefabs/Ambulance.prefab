@@ -50,7 +50,7 @@ MonoBehaviour:
   carDrive: 1
   mass: 200
   maxSteer: 60
-  steerSmoothingFactor: 0.5
+  steerSmoothingFactor: 0.1
   accelerationForce: 12
   breakForce: 12
   topSpeed: 20

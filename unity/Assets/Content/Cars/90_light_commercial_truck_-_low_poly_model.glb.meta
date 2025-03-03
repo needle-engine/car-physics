@@ -1,9 +1,18 @@
 fileFormatVersion: 2
 guid: a6afd02996085a14086aa2ddc1ef5e7b
-importerOverride: UnityGLTFEditor:UnityGLTF:GLTFImporter
+importerOverride:
+  nativeImporterType: -2
+  scriptedImporterType:
+    serializedVersion: 2
+    Hash: b0f0efd5afe97376296c08894c84a3f1
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: krmlgtbdy85_headlights
+    second: {fileID: 2100000, guid: 31bb7420d2380d74989ddc31868c8daa, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 

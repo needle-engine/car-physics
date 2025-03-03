@@ -61,12 +61,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarPhysics, Needle.Engine-Samples.Runtime
   carDrive: 1
-  mass: 300
+  mass: 3000
   maxSteer: 45
-  steerSmoothingFactor: 0.5
-  accelerationForce: 8
-  breakForce: 10
-  topSpeed: 10
+  steerSmoothingFactor: 0.1
+  accelerationForce: 80
+  breakForce: 50
+  topSpeed: 15
   wheels: []
 --- !u!114 &1512992574072642076
 MonoBehaviour:
@@ -249,13 +249,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarWheel, Needle.Engine-Samples.Runtime
   wheelModel: {fileID: 0}
   axle: 1
-  radius: 0.38
+  radius: -1
   suspensionRestLength: -1
-  maxSuspensionTravel: 0.1
+  maxSuspensionTravel: -1
   suspensionCompression: 0.5
   suspensionRelax: 4
   suspensionStiff: 80
-  maxSuspensionForce: 10000
+  maxSuspensionForce: -1
   sideFrictionStiffness: 0.5
   frictionSlip: {x: 2, y: 50}
   skidParticle: {fileID: 0}
@@ -280,13 +280,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarWheel, Needle.Engine-Samples.Runtime
   wheelModel: {fileID: 0}
   axle: 1
-  radius: 0.38
+  radius: -1
   suspensionRestLength: -1
-  maxSuspensionTravel: 0.1
+  maxSuspensionTravel: -1
   suspensionCompression: 0.5
   suspensionRelax: 4
   suspensionStiff: 80
-  maxSuspensionForce: 10000
+  maxSuspensionForce: -1
   sideFrictionStiffness: 0.5
   frictionSlip: {x: 2, y: 50}
   skidParticle: {fileID: 0}
@@ -311,13 +311,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarWheel, Needle.Engine-Samples.Runtime
   wheelModel: {fileID: 0}
   axle: 0
-  radius: 0.38
+  radius: -1
   suspensionRestLength: -1
-  maxSuspensionTravel: 0.1
+  maxSuspensionTravel: -1
   suspensionCompression: 0.5
   suspensionRelax: 4
   suspensionStiff: 80
-  maxSuspensionForce: 10000
+  maxSuspensionForce: -1
   sideFrictionStiffness: 0.5
   frictionSlip: {x: 2, y: 50}
   skidParticle: {fileID: 0}
@@ -342,13 +342,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarWheel, Needle.Engine-Samples.Runtime
   wheelModel: {fileID: 0}
   axle: 0
-  radius: 0.38
+  radius: -1
   suspensionRestLength: -1
-  maxSuspensionTravel: 0.1
+  maxSuspensionTravel: -1
   suspensionCompression: 0.5
   suspensionRelax: 4
   suspensionStiff: 80
-  maxSuspensionForce: 10000
+  maxSuspensionForce: -1
   sideFrictionStiffness: 0.5
   frictionSlip: {x: 2, y: 50}
   skidParticle: {fileID: 0}

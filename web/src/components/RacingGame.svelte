@@ -22,17 +22,20 @@
         left: 1.2rem;
         top: 2rem;
         backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.3);
         border-radius: 0.5em;
 
         line-height: 1.3em;
 
         display: flex;
         flex-direction: column;
+        padding: .25rem;
         gap: 0.3em;
 
         & .current {
             font-size: 2rem;
-            padding-bottom: 0.3em;
+            line-height: 1em;;
+            padding-bottom: 0.1em;
             font-weight: bold;
         }
     }

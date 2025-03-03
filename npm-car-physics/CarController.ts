@@ -243,7 +243,7 @@ export class CarController extends Behaviour {
             }
         }
 
-        if (Math.abs(steer) > .1) {
+        if (Math.abs(steer) > .02) {
             this._currentSteerAccum += steer * this.context.time.deltaTime / .3;
         }
         else {

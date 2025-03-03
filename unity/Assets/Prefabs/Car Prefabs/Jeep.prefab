@@ -53,7 +53,7 @@ MonoBehaviour:
   suspensionCompression: 1
   suspensionRelax: 2
   suspensionStiff: 50
-  maxSuspensionForce: 1000
+  maxSuspensionForce: 5000
   sideFrictionStiffness: 0.5
   frictionSlip: {x: 2, y: 50}
   skidParticle: {fileID: 6296593488634766581}
@@ -115,7 +115,7 @@ MonoBehaviour:
   carDrive: 0
   mass: 150
   maxSteer: 50
-  steerSmoothingFactor: 0.3
+  steerSmoothingFactor: 0.1
   accelerationForce: 5
   breakForce: 5
   topSpeed: 15
@@ -255,7 +255,7 @@ MonoBehaviour:
   suspensionCompression: 1
   suspensionRelax: 2
   suspensionStiff: 50
-  maxSuspensionForce: 1000
+  maxSuspensionForce: 5000
   sideFrictionStiffness: 0.5
   frictionSlip: {x: 2, y: 50}
   skidParticle: {fileID: 7587152689355044174}
@@ -314,7 +314,7 @@ MonoBehaviour:
   suspensionCompression: 1
   suspensionRelax: 2
   suspensionStiff: 50
-  maxSuspensionForce: 1000
+  maxSuspensionForce: 5000
   sideFrictionStiffness: 0.5
   frictionSlip: {x: 2, y: 50}
   skidParticle: {fileID: 7817614906085748710}
@@ -418,7 +418,7 @@ MonoBehaviour:
   suspensionCompression: 1
   suspensionRelax: 2
   suspensionStiff: 50
-  maxSuspensionForce: 1000
+  maxSuspensionForce: 5000
   sideFrictionStiffness: 0.5
   frictionSlip: {x: 2, y: 50}
   skidParticle: {fileID: 8068851646824875930}

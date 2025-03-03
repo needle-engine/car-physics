@@ -98,9 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarPhysics, Needle.Engine-Samples.Runtime
   carDrive: 0
-  mass: 30
+  mass: 200
   maxSteer: 80
-  steerSmoothingFactor: 0.5
+  steerSmoothingFactor: 0.3
   accelerationForce: 3
   breakForce: 3
   topSpeed: 20

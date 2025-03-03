@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.needle.engine-exporter": {
-      "version": "4.3.0-alpha",
+      "version": "file:C:/git/needle-engine-dev/modules/needle-engine/package",
       "depth": 0,
-      "source": "registry",
+      "source": "local",
       "dependencies": {
         "org.khronos.unitygltf": "2.14.1",
         "com.unity.modules.animation": "1.0.0",
@@ -15,8 +15,7 @@
         "com.unity.test-framework": "1.1.31",
         "com.unity.nuget.newtonsoft-json": "3.0.1",
         "com.unity.sharp-zip-lib": "1.3.2-preview"
-      },
-      "url": "https://packages.needle.tools"
+      }
     },
     "com.unity.burst": {
       "version": "1.8.18",
