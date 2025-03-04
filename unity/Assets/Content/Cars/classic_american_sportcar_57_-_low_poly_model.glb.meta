@@ -6,6 +6,11 @@ ScriptedImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: GENERIC_LIGHT_GLASS
+    second: {fileID: 2100000, guid: b8cf614c7f0fa8e49b5c67dfd2c9be66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: MYRONSGN57_Body
     second: {fileID: 2100000, guid: 7b7c9f9ad73261c4e9d677aba6cb8ba6, type: 2}
   serializedVersion: 2

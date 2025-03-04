@@ -1,24 +1,22 @@
 import { writable } from "svelte/store";
-import { Object3D } from "three";
+import type { Object3D } from "three";
 
-export const laptime = writable(-1);
-export const lastlap = writable(-1);
-export const bestlap = writable(-1);
+export type Gamestate = "loading" | "main-menu" | "track-selection" | "car-selection" | "race-idle" | "race-in-progress" | "race-finished";
 
-declare type SceneInfo = {
-    name: string,
-    index: number,
-    load: () => Promise<any>,
+export const gamestate = writable<Gamestate>("loading");
+gamestate.subscribe(state => {
+    console.debug("[Gamestate]", state);
+})
+
+export type GameOption = {
+    name: string;
+    thumbnail: string | null;
+    select: () => Promise<any>;
 }
+export const gameoptions = writable<GameOption[]>([]);
 
-export const scenes = writable<Array<SceneInfo>>([]);
-export const activeScene = writable<SceneInfo | null>(null);
 
-declare type CarInfo = {
-    name: string,
-    thumbnail: string | null,
-    instance: Object3D,
-}
+export const currentCarInstance = writable<Object3D | null>(null);
 
-export const carOptions = writable<Array<CarInfo>>([]);
-export const selectedCar = writable<CarInfo | null>(null);
+
+export const currentRaceStartCountDown = writable<number>(0);

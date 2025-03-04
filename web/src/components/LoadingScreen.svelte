@@ -1,10 +1,10 @@
 <script lang="ts">
     import Icon from "./Icon.svelte";
+    import { gamestate } from "$lib";
 
-    export let loading: Promise<any> | null = null;
 </script>
 
-{#await loading}
+{#if $gamestate === "loading"}
     <div class="loading_ovelay">
         <div class="content">
             <div class="loading_spinner">
@@ -13,7 +13,7 @@
             <span> Loading...</span>
         </div>
     </div>
-{/await}
+{/if}
 
 <style>
     .loading_ovelay {

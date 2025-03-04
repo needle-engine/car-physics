@@ -1,13 +1,9 @@
 <script lang="ts">
     import "../global.css";
-    import Menubar from "../components/Menubar.svelte";
+    import LoadingScreen from "../components/LoadingScreen.svelte";
     import NeedleEngine from "../components/NeedleEngine.svelte";
     import MainMenu from "../components/MainMenu.svelte";
-    import LoadingScreen from "../components/LoadingScreen.svelte";
-    import CarSelection from "../components/CarSelection.svelte";
-    import RacingGame from "../components/RacingGame.svelte";
 
-    let loading_promise: Promise<any> | null = null;
 </script>
 
 <svelte:head>
@@ -17,34 +13,32 @@
     />
 </svelte:head>
 
-<div class="engine">
-    <NeedleEngine />
-</div>
-<div class="layout">
+<div class="wrapper">
     <div class="top">
-        <MainMenu bind:loading={loading_promise} />
+        <MainMenu />
     </div>
-    <slot></slot>
+    
+    <div class="layout">
+        <slot></slot>
+    </div>
+
     <div class="bottom">
-        <CarSelection />
+        <!-- -->
     </div>
 </div>
 
-<LoadingScreen loading={loading_promise} />
+<LoadingScreen />
 
 <style>
-    .engine {
-        position: absolute;
-
-        --padding: 0rem;
-        left: var(--padding);
-        right: var(--padding);
-        top: calc(var(--padding));
-        bottom: var(--padding);
-
-        flex: 1 1 auto;
-        flex-flow: column;
+    .wrapper {
+        position: relative;
+        background-color: rgb(255, 199, 161);
         display: flex;
+        flex-flow: column;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        color: white;
     }
 
     .layout {

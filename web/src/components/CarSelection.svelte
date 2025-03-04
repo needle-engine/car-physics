@@ -1,14 +1,9 @@
 <script lang="ts">
-    import { carOptions, selectedCar } from "$lib";
+    // import { carOptions, selectedCar } from "$lib";
 </script>
 
-{#if $carOptions.length > 1}
+<!-- {#if $carOptions.length > 1}
     <div class="selection">
-        <!-- <select bind:value={$selectedCar}>
-            {#each $carOptions as car}
-                <option value={car}>{car.name}</option>
-            {/each}
-        </select> -->
         <div class="list">
             {#each $carOptions as car}
                 <button
@@ -26,7 +21,7 @@
             {/each}
         </div>
     </div>
-{/if}
+{/if} -->
 
 <style>
 

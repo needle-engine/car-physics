@@ -7,12 +7,14 @@ namespace Needle.Typescript.GeneratedComponents
 {
 	public partial class RacingGame : UnityEngine.MonoBehaviour
 	{
-		public Needle.Typescript.GeneratedComponents.CarController @car;
+		public UnityEngine.Playables.PlayableDirector @introTimeline;
+		public UnityEngine.GameObject @startPoint;
+		public Needle.Typescript.GeneratedComponents.CarCameraRig @cameraRig;
 		public Needle.Typescript.GeneratedComponents.Checkpoint[] @checkpoints = new Needle.Typescript.GeneratedComponents.Checkpoint[]{ };
 		public void OnEnable(){}
 		public void OnDisable(){}
 		public void lateUpdate(){}
-		public void reset(){}
+		public void resetCar(){}
 	}
 }
 

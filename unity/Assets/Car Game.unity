@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 8ce7d902d07e3204ab71eec9b9470043, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 30c6342524a8ad045bb0cb3c61d1d983, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -176,7 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 344220064}
-  - component: {fileID: 344220063}
+  - component: {fileID: 344220065}
   m_Layer: 0
   m_Name: Scenes
   m_TagString: Untagged
@@ -184,42 +184,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &344220063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 344220062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2938273b1a364736b73df79395a0c934, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoLoadFirstScene: 1
-  createMenuButtons: 0
-  scenes:
-  - asset: {fileID: 102900000, guid: 7bbd813af6aa25441a4ccface8e0cf37, type: 3}
-  - asset: {fileID: 102900000, guid: e2c496531da474b48a70a3716e0ff882, type: 3}
-  - asset: {fileID: 102900000, guid: 18b47ff83d2fd6b4faae23efaa900dd3, type: 3}
-  - asset: {fileID: 102900000, guid: a34509bc72a9b774290863e0bcaeb2e7, type: 3}
-  - asset: {fileID: 102900000, guid: 84f2f4482dee62a4180bf4831aa7dd30, type: 3}
-  loadingScene:
-    asset: {fileID: 0}
-  queryParameterName: 
-  useSceneName: 0
-  clamp: 0
-  useHistory: 0
-  useKeyboard: 0
-  useSwipe: 0
-  useSceneLighting: 1
-  useSceneBackground: 1
-  preloadNext: 10
-  preloadPrevious: 1
-  preloadConcurrent: 1
-  sceneLoaded:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &344220064
 Transform:
   m_ObjectHideFlags: 0
@@ -235,6 +199,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &344220065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344220062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fda89c1059590405bd78c40674572c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cars:
+  - Name: Classic Sportscar
+    Thumbnail:
+      Mode: 0
+      File: {fileID: 0}
+      String: 
+    Asset:
+      asset: {fileID: 8836248534321611577, guid: fadaceeaf06987c43b3bbb7e132c13cd, type: 3}
+  level:
+  - Name: Race Track
+    Thumbnail:
+      Mode: 0
+      File: {fileID: 2800000, guid: e9cd3fcb902fac8498e93307f2bdc821, type: 3}
+      String: 
+    Asset:
+      asset: {fileID: 102900000, guid: e2c496531da474b48a70a3716e0ff882, type: 3}
 --- !u!1 &1177109406
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +298,7 @@ Camera:
   m_GameObject: {fileID: 1177109406}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -330,7 +322,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 125
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

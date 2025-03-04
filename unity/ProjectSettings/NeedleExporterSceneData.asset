@@ -40,6 +40,10 @@ MonoBehaviour:
     Projects:
     - ProjectPath: ../web
     BuilderScene: 
+  - Path: Assets/Car Game.unity
+    Projects:
+    - ProjectPath: ../web
+    BuilderScene: 
   Projects:
   - ProjectPath: Library/Needle/Sample
   - ProjectPath: ../web

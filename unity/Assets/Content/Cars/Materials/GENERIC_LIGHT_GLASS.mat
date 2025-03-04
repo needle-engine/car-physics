@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7301334170811474136
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,13 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material.004
+  m_Name: GENERIC_LIGHT_GLASS
   m_Shader: {fileID: -6465566751694194690, guid: 478ce3626be7a5f4ea58d6b13f05a2e4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _SHEEN_ON
-  - _SPECULAR_ON
   - _VOLUME_TRANSMISSION_OFF
   m_InvalidKeywords:
   - _VERTEX_COLORS_ON
@@ -42,7 +27,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - baseColorTexture:
-        m_Texture: {fileID: -6296427916463063283, guid: 019cc9322ff6aec44bfc8a601a941125, type: 3}
+        m_Texture: {fileID: 150502026991701941, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - clearcoatRoughnessTexture:
@@ -54,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - emissiveTexture:
-        m_Texture: {fileID: -6296427916463063283, guid: 019cc9322ff6aec44bfc8a601a941125, type: 3}
+        m_Texture: {fileID: 150502026991701941, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - iridescenceTexture:
@@ -70,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - normalTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2933329333178083999, guid: 1da5a6736c0a9304a9922fb10f952a4e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - occlusionTexture:
@@ -78,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - sheenColorTexture:
-        m_Texture: {fileID: -6296427916463063283, guid: 019cc9322ff6aec44bfc8a601a941125, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - sheenRoughnessTexture:
@@ -140,8 +125,8 @@ Material:
     - _QueueControl: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SHEEN: 1
-    - _SPECULAR: 1
+    - _SHEEN: 0
+    - _SPECULAR: 0
     - _SrcBlend: 1
     - _Surface: 0
     - _TEXTURE_TRANSFORM: 0
@@ -173,24 +158,24 @@ Material:
     - iridescenceThicknessMinimum: 100
     - iridescenceThicknessTextureRotation: 0
     - iridescenceThicknessTextureTexCoord: 0
-    - metallicFactor: 0
+    - metallicFactor: 0.95923185
     - metallicRoughnessTextureRotation: 0
     - metallicRoughnessTextureTexCoord: 0
-    - normalScale: 1
+    - normalScale: 0.066499434
     - normalTextureRotation: 0
     - normalTextureTexCoord: 0
     - occlusionStrength: 1
     - occlusionTextureRotation: 0
     - occlusionTextureTexCoord: 0
-    - roughnessFactor: 0.72381175
+    - roughnessFactor: 0.15152158
     - sheenColorTextureRotation: 0
     - sheenColorTextureTexCoord: 0
-    - sheenRoughnessFactor: 0.3
+    - sheenRoughnessFactor: 0
     - sheenRoughnessTextureRotation: 0
     - sheenRoughnessTextureTexCoord: 0
     - specularColorTextureRotation: 0
     - specularColorTextureTexCoord: 0
-    - specularFactor: 0.18742914
+    - specularFactor: 1
     - specularTextureRotation: 0
     - specularTextureTexCoord: 0
     - thicknessFactor: 0
@@ -201,12 +186,12 @@ Material:
     - transmissionTextureTexCoord: 0
     m_Colors:
     - attenuationColor: {r: 1, g: 1, b: 1, a: 0}
-    - baseColorFactor: {r: 1, g: 1, b: 1, a: 1}
-    - emissiveFactor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0}
-    - sheenColorFactor: {r: 0.5850154, g: 0.5424528, b: 1, a: 0}
+    - baseColorFactor: {r: 0.6655712, g: 0.6655712, b: 0.6655712, a: 1}
+    - emissiveFactor: {r: 1533.9923, g: 1533.9923, b: 1533.9923, a: 0}
+    - sheenColorFactor: {r: 0, g: 0, b: 0, a: 0}
     - specularColorFactor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &14658261390343758
+--- !u!114 &178104918432016544
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,3 +204,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 0
+--- !u!114 &6043835582717770075
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

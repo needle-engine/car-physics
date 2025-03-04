@@ -1,6 +1,11 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
+    /**
+     * By default we rely on codegen (gen.js) which is produced by Unity and automatically sets the src url to the last root scene that was exported.
+     * This can also be hardcoded by setting the src prop to a local (or remote) glb url that contains your root game scene
+     */
+
     export let src = "";
 
     onMount(async () => {
@@ -13,4 +18,4 @@
     });
 </script>
 
-<needle-engine loading-style="light" {src} {...$$props} />
+<needle-engine {src} {...$$props} />

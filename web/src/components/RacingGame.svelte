@@ -1,8 +1,21 @@
 <script lang="ts">
-    import { bestlap, laptime, lastlap } from "$lib";
+    import { gamestate } from "$lib";
+import { onMount } from "svelte";
+
+    // import { bestlap, laptime, lastlap } from "$lib";
+    onMount(()=> {
+        console.log("HELLO");
+    })
 </script>
 
-{#if $laptime >= 0}
+{#if $gamestate === "race-idle"}
+<button on:click={()=> {
+    gamestate.set("race-in-progress");
+}}>
+    START
+</button>
+{/if}
+<!-- {#if $laptime >= 0}
     <div class="laptime">
         <div class="current">
             {$laptime.toFixed(2)}
@@ -14,7 +27,7 @@
             Best time: {$bestlap > 0 ? $bestlap.toFixed(2) : "-"}
         </div>
     </div>
-{/if}
+{/if} -->
 
 <style>
     .laptime {

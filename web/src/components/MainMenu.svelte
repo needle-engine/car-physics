@@ -1,18 +1,25 @@
 <script lang="ts">
-    import { activeScene, scenes } from "$lib";
+    import { gameoptions, gamestate } from "$lib";
     import { onMount } from "svelte";
     import Icon from "./Icon.svelte";
     import { derived, get } from "svelte/store";
+    import { GameManager } from "../scripts/GameManager";
 
     export let open = true;
-    export let loading: Promise<any> | null = null;
 
     // assumign the first scene is the main menu - we then want to open the menu always
-    const isMenuScene = derived(activeScene, ($activeScene) => $activeScene?.index === 0);
+    const isMenuScene = derived(
+        gamestate,
+        ($gamestate) => $gamestate === "main-menu",
+    );
+    const isInGameScene = derived(
+        gamestate,
+        ($gamestate) => $gamestate !== "main-menu" && $gamestate !== "loading",
+    );
 
-    activeScene.subscribe(() => {
-        open = false;
-    });
+    // activeScene.subscribe(() => {
+    //     open = false;
+    // });
 
     onMount(() => {
         window.addEventListener("keydown", (e) => {
@@ -23,39 +30,56 @@
     });
 </script>
 
-<div class="wrapper">
-    <div class="menu" class:open={open || $isMenuScene}>
-        <button
-            class="toggle_open"
-            class:hidden={$isMenuScene}
-            on:click={(_) => {
-                open = !open;
-            }}
+{#if $gamestate !== "loading"}
+    <div class="wrapper">
+        <div
+            class="menu"
+            class:open={open || $isMenuScene}
+            class:in_race={!$isMenuScene}
         >
-            {#if open}
-                <Icon>close</Icon>
-            {:else}
-                <Icon>menu</Icon>
-            {/if}
-        </button>
+            <button
+                class="toggle_open"
+                class:hidden={$isMenuScene}
+                on:click={(_) => {
+                    open = !open;
+                }}
+            >
+                {#if open}
+                    <Icon>close</Icon>
+                {:else}
+                    <Icon>menu</Icon>
+                {/if}
+            </button>
 
-        {#if open || $isMenuScene}
-            <div class="options">
-                {#each $scenes as scene, index}
-                    <button
-                        disabled={index === $activeScene?.index}
-                        on:click={() => {
-                            open = false;
-                            loading = scene.load();
-                        }}
-                    >
-                        {scene.name}
-                    </button>
-                {/each}
-            </div>
-        {/if}
+            {#if open || $isMenuScene}
+                <div class="options">
+                    {#if $isInGameScene}
+                        <button
+                            on:click={() => {
+                                open = false;
+                                gamestate.set("main-menu");
+                            }}
+                        >
+                            Main Menu
+                        </button>
+                    {:else}
+                        {#each $gameoptions as scene, index}
+                            <button
+                                disabled={false}
+                                on:click={() => {
+                                    open = false;
+                                    scene.select();
+                                }}
+                            >
+                                {scene.name}
+                            </button>
+                        {/each}
+                    {/if}
+                </div>
+            {/if}
+        </div>
     </div>
-</div>
+{/if}
 
 <style>
     .wrapper {
@@ -101,9 +125,11 @@
             align-items: center;
 
             &.open {
-                backdrop-filter: blur(5px);
                 pointer-events: all;
                 background: rgba(20, 0, 50, 0.12);
+            }
+            &.in_race.open {
+                backdrop-filter: blur(5px);
             }
 
             & .options {
@@ -121,7 +147,7 @@
                         background-color: black;
                         color: white;
                     }
-                    
+
                     &:disabled {
                         /* background: grey; */
                         color: grey;

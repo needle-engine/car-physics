@@ -5,9 +5,8 @@
 
 namespace Needle.Typescript.GeneratedComponents
 {
-	public partial class SelectableCar : UnityEngine.MonoBehaviour
+	public partial class Startpoint : UnityEngine.MonoBehaviour
 	{
-		public Needle.Engine.FileReference @thumbnail;
 	}
 }
 

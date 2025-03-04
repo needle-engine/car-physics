@@ -5,9 +5,10 @@
 
 namespace Needle.Typescript.GeneratedComponents
 {
-	public partial class SelectableCar : UnityEngine.MonoBehaviour
+	public partial class CarCameraRig : UnityEngine.MonoBehaviour
 	{
-		public Needle.Engine.FileReference @thumbnail;
+		public UnityEngine.GameObject @cameraRoot;
+		public UnityEngine.GameObject @lookTarget;
 	}
 }
 
