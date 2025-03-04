@@ -1,20 +1,30 @@
 <script lang="ts">
-    import { gamestate } from "$lib";
-import { onMount } from "svelte";
+    import { currentRaceStartCountDown, gamestate } from "$lib";
+    import { onMount } from "svelte";
+    import Countdown from "./Countdown.svelte";
 
     // import { bestlap, laptime, lastlap } from "$lib";
-    onMount(()=> {
+    onMount(() => {
         console.log("HELLO");
-    })
+    });
 </script>
 
 {#if $gamestate === "race-idle"}
-<button on:click={()=> {
-    gamestate.set("race-in-progress");
-}}>
-    START
-</button>
+    <button
+        on:click={() => {
+            gamestate.set("race-in-progress");
+        }}
+    >
+        START
+    </button>
+{:else if $gamestate === "race-in-progress"}
+    {#if $currentRaceStartCountDown >= 0}
+        <div>
+            <Countdown text={$currentRaceStartCountDown} />
+        </div>
+    {/if}
 {/if}
+
 <!-- {#if $laptime >= 0}
     <div class="laptime">
         <div class="current">
@@ -42,12 +52,12 @@ import { onMount } from "svelte";
 
         display: flex;
         flex-direction: column;
-        padding: .25rem;
+        padding: 0.25rem;
         gap: 0.3em;
 
         & .current {
             font-size: 2rem;
-            line-height: 1em;;
+            line-height: 1em;
             padding-bottom: 0.1em;
             font-weight: bold;
         }
