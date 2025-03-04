@@ -9,6 +9,8 @@ namespace Needle.Typescript.GeneratedComponents
 	{
 		public UnityEngine.GameObject @cameraRoot;
 		public UnityEngine.GameObject @lookTarget;
+		public void awake(){}
+		public void resetCamera(){}
 	}
 }
 

@@ -14,7 +14,7 @@ namespace Needle.Typescript.GeneratedComponents
 		public void OnEnable(){}
 		public void OnDisable(){}
 		public void lateUpdate(){}
-		public void resetCar(){}
+		public void resetCar(UnityEngine.GameObject @point){}
 	}
 }
 

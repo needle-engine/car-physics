@@ -1,7 +1,7 @@
 import { currentCarInstance } from "$lib";
-import { Behaviour, serializable, SmoothFollow } from "@needle-tools/engine";
+import { Behaviour, Camera, serializable, SmoothFollow } from "@needle-tools/engine";
 import { get } from "svelte/store";
-import { Object3D } from "three";
+import { Object3D, Vector3 } from "three";
 
 
 export class CarCameraRig extends Behaviour {
@@ -12,6 +12,24 @@ export class CarCameraRig extends Behaviour {
     @serializable(Object3D)
     lookTarget: Object3D | null = null;
 
+    private cameraStartPosition?: Vector3;
+
+    awake(): void {
+        // assuming OrbitControls handles the look direction
+        const camera = this.gameObject.getComponentInChildren(Camera);
+        if (camera) {
+            this.cameraStartPosition = camera.gameObject.position.clone();
+        }
+    }
+
+    resetCamera() {
+        if (this.cameraStartPosition) {
+            const camera = this.gameObject.getComponentInChildren(Camera);
+            if (camera) {
+                camera.gameObject.position.copy(this.cameraStartPosition);
+            }
+        }
+    }
 
 }
 

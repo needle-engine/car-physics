@@ -1,10 +1,12 @@
 <script lang="ts">
-    export let text = 5;
+    export let text : string | number;
 </script>
 
 {#key text}
     <div class="countdown">
-        {text}
+        <span>
+            {text}
+        </span>
     </div>
 {/key}
 
@@ -20,13 +22,22 @@
         }
     }
     .countdown {
+        pointer-events: none;
+
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 5rem;
+
+        font-size: 7rem;
         font-weight: bold;
         color: white;
-        text-shadow: 0 0 10px black;
+        text-shadow: 0 0 1rem black;
+
+        transform: translate(-50%, -50%);
+    }
+
+    span {
+        display: block;
+        animation: fadeinBig 0.5s forwards;
     }
 </style>

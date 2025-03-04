@@ -1,7 +1,7 @@
 // import { bestlap, laptime, lastlap } from "$lib";
 import { currentCarInstance, currentRaceStartCountDown, type Gamestate, gamestate } from "$lib";
 import { CarController, CarPhysics } from "@needle-tools/car-physics";
-import { Behaviour, getTempVector, PlayableDirector, Rigidbody, serializable } from "@needle-tools/engine";
+import { Behaviour, Camera, getTempVector, Gizmos, OrbitControls, PlayableDirector, Rigidbody, serializable } from "@needle-tools/engine";
 import { Object3D, Ray, Vector3 } from "three";
 import { CarCameraRig } from "./CarCamera";
 import { get } from "svelte/store";
@@ -84,6 +84,14 @@ export class RacingGame extends Behaviour {
                     this.cameraRig.gameObject.visible = true;
                 }
                 if (this.introTimeline) this.introTimeline.gameObject.visible = false;
+                if (this.startPoint) {
+                    const car = get(currentCarInstance);
+                    if (car) {
+                        car.worldPosition = this.startPoint.worldPosition;
+                        car.worldQuaternion = this.startPoint.worldQuaternion;
+                        this.cameraRig?.resetCamera();
+                    }
+                }
                 break;
             case "race-finished":
                 if (this.cameraRig) this.cameraRig.gameObject.visible = false;
@@ -101,6 +109,9 @@ export class RacingGame extends Behaviour {
     private onCarChanged = (car: Object3D | null) => {
         this._carPhysics = car?.getComponentInChildren(CarPhysics) || null;
         this._carController = car?.getComponentInChildren(CarController) || null;
+        if (this._carController) {
+            this._carController.manualReset = false;
+        }
     }
 
     private _nextCheckpointIndex: number = 0;
@@ -121,10 +132,6 @@ export class RacingGame extends Behaviour {
         switch (state) {
             case "race-idle":
                 if (this._carController) this._carController.enabled = false;
-                if (this.startPoint) {
-                    car.worldPosition = this.startPoint.worldPosition;
-                    car.worldQuaternion = this.startPoint.worldQuaternion;
-                }
                 break;
             case "race-finished":
                 if (this._carController) this._carController.enabled = false;
@@ -162,23 +169,11 @@ export class RacingGame extends Behaviour {
                     next.setHighlight(false);
 
                     if (this._nextCheckpointIndex === 0) {
-
                         if (this._lapStartTime > 0) {
-                            const currentLaptime = this.context.time.realtimeSinceStartup - this._lapStartTime;
-                            if (currentLaptime < this._bestLapTime || this._bestLapTime === 0) {
-                                this._bestLapTime = currentLaptime;
-                                // bestlap.set(this._bestLapTime);
-                                localStorage.setItem("bestlap", this._bestLapTime.toString());
-                            }
-                            this._lastLapTime = currentLaptime;
-                            // lastlap.set(this._lastLapTime);
+                            this.onFinishedLap();
                         }
-
                         this._lapStartTime = this.context.time.realtimeSinceStartup;
                     }
-
-
-                    this._lastCheckpoint = next;
 
                     // highlight the next checkpoint
                     this._nextCheckpointIndex++;
@@ -186,40 +181,69 @@ export class RacingGame extends Behaviour {
                         this._nextCheckpointIndex = 0;
                     }
                     this.checkpoints[this._nextCheckpointIndex].setHighlight(true);
+
+                    this.onReachedCheckpoint(next);
                 }
 
                 // const currentLaptime = this._lapStartTime ? (this.context.time.realtimeSinceStartup - this._lapStartTime) : 0;
                 // laptime.set(currentLaptime);
                 break;
         }
-
-
     }
 
-    resetCar() {
+    private onReachedCheckpoint(checkpoint: Checkpoint) {
+        this._lastCheckpoint = checkpoint;
+    }
+
+    private onFinishedLap() {
+        const currentLaptime = this.context.time.realtimeSinceStartup - this._lapStartTime;
+        if (currentLaptime < this._bestLapTime || this._bestLapTime === 0) {
+            this._bestLapTime = currentLaptime;
+            // bestlap.set(this._bestLapTime);
+            localStorage.setItem("bestlap", this._bestLapTime.toString());
+        }
+        this._lastLapTime = currentLaptime;
+        gamestate.set("race-finished");
+
+        // After a few seconds reset the car to the start position
+        setTimeout(() => {
+            if (get(gamestate) === "race-finished") {
+                this.resetCar(this.startPoint);
+            }
+        }, 3000)
+    }
+
+    resetCar(point?: Object3D) {
         const car = get(currentCarInstance);
-        if (this._lastCheckpoint && car) {
+        if (car) {
 
-            const wp = this._lastCheckpoint.worldPosition;
-            const wq = this._lastCheckpoint.worldQuaternion;
+            const targetPositon = point || this._lastCheckpoint || this.startPoint;
+            if (targetPositon) {
+                const wp = targetPositon.worldPosition;
+                const wq = targetPositon.worldQuaternion;
+                // const forward = getTempVector(0, 0, 1).applyQuaternion(wq);
 
-            // raycast down to find the street
-            const ray = new Ray(wp, new Vector3(0, -1, 0));
-            const hits = this.context.physics.raycastFromRay(ray);
-            if (hits.length) {
-                wp.copy(hits[0].point);
-                wp.y += .5;
+                // raycast down to find the street
+                const ray = new Ray(wp, new Vector3(0, -1, 0));
+                const hits = this.context.physics.raycastFromRay(ray);
+                if (hits.length) {
+                    wp.copy(hits[0].point);
+                    wp.y += .5;
+                }
+
+                const rigidbody = car.getComponentInChildren(Rigidbody);
+                if (rigidbody) {
+                    rigidbody.teleport(wp, false);
+                    rigidbody.gameObject.worldQuaternion = wq;
+                }
+                else {
+                    car.worldPosition = wp;
+                    car.worldQuaternion = wq;
+                }
             }
 
-            const rigidbody = car.getComponentInChildren(Rigidbody);
-            if (rigidbody) {
-                rigidbody.teleport(wp, false);
-                rigidbody.gameObject.worldQuaternion = wq;
-            }
-            else {
-                car.worldPosition = wp;
-                car.worldQuaternion = wq;
-            }
+            const camera = this.cameraRig?.gameObject?.getComponentInChildren(CarCameraRig);
+            camera?.resetCamera();
         }
     }
 

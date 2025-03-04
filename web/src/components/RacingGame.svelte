@@ -2,25 +2,29 @@
     import { currentRaceStartCountDown, gamestate } from "$lib";
     import { onMount } from "svelte";
     import Countdown from "./Countdown.svelte";
-
-    // import { bestlap, laptime, lastlap } from "$lib";
-    onMount(() => {
-        console.log("HELLO");
-    });
 </script>
 
-{#if $gamestate === "race-idle"}
+{#if $gamestate === "race-idle" || $gamestate === "race-finished"}
     <button
+        class="start-button"
         on:click={() => {
             gamestate.set("race-in-progress");
         }}
     >
-        START
+        {#if $gamestate === "race-finished"}
+            RACE AGAIN
+        {:else}
+            START RACE
+        {/if}
     </button>
 {:else if $gamestate === "race-in-progress"}
     {#if $currentRaceStartCountDown >= 0}
         <div>
-            <Countdown text={$currentRaceStartCountDown} />
+            <Countdown
+                text={$currentRaceStartCountDown > 0
+                    ? $currentRaceStartCountDown
+                    : "GO"}
+            />
         </div>
     {/if}
 {/if}
@@ -40,6 +44,24 @@
 {/if} -->
 
 <style>
+    .start-button {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 1rem 2rem;
+        font-size: 2rem;
+        font-weight: bold;
+        background: rgb(0, 0, 0);
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        &:hover {
+            background: rgb(138, 255, 177);
+        }
+    }
     .laptime {
         position: absolute;
         left: 1.2rem;

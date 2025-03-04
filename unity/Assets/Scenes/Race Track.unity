@@ -1058,7 +1058,6 @@ MonoBehaviour:
   introTimeline: {fileID: 262986884}
   startPoint: {fileID: 2005525813}
   cameraRig: {fileID: 1424533573820877098}
-  car: {fileID: 1506461075}
   checkpoints:
   - {fileID: 1910113934}
   - {fileID: 2781173011642755704}
@@ -6668,17 +6667,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1506461075 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2726500833982876062, guid: fadaceeaf06987c43b3bbb7e132c13cd, type: 3}
-  m_PrefabInstance: {fileID: 7626706118801833587}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf9fba2132396f9d119649126ffe624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &1560717069
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8972,7 +8960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoTarget: 1
   autoFit: 0
-  enableRotate: 0
+  enableRotate: 1
   autoRotate: 0
   autoRotateSpeed: 0.2
   minPolarAngle: 0
