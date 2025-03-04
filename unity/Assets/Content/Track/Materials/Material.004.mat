@@ -42,7 +42,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - baseColorTexture:
-        m_Texture: {fileID: 6983701643236107813, guid: 44eda7cc9f16c834cb20bf179c786c53, type: 3}
+        m_Texture: {fileID: -6296427916463063283, guid: 019cc9322ff6aec44bfc8a601a941125, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - clearcoatRoughnessTexture:
@@ -54,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - emissiveTexture:
-        m_Texture: {fileID: 6983701643236107813, guid: 44eda7cc9f16c834cb20bf179c786c53, type: 3}
+        m_Texture: {fileID: -6296427916463063283, guid: 019cc9322ff6aec44bfc8a601a941125, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - iridescenceTexture:

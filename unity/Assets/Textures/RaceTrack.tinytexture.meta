@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 019cc9322ff6aec44bfc8a601a941125
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 3de859b7032cd0c4594e5bcb31619c19, type: 3}
+  width: 2
+  height: 4
+  colors:
+  - {r: 0.9536591, g: 1, b: 0.60784316, a: 1}
+  - {r: 0.512963, g: 0.5660378, b: 0.22694911, a: 1}
+  - {r: 0.6930612, g: 0.3725525, b: 0.8679245, a: 1}
+  - {r: 0.04104633, g: 0.9164947, b: 0.1073032, a: 1}
+  - {r: 0.15871643, g: 0.87626815, b: 0.9350215, a: 1}
+  - {r: 1, g: 0.9243814, b: 0, a: 1}
+  - {r: 0.16104133, g: 0.010134608, b: 0.9343875, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}

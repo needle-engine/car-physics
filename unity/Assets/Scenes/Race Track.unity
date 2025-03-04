@@ -96,8 +96,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 212e91853ce49064c9e8c3d886bf7a6d, type: 2}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 5e53c246dac512141a7605e1eb135de3, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: d010221d01a062e40a7718fae6813145, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4240,7 +4240,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.1340564, y: -0.8595035, z: 0.40079275, w: 0.28748542}
   m_LocalPosition: {x: 8.98, y: 27.53, z: 8.22}
-  m_LocalScale: {x: 1.0002555, y: 1, z: 1.0001881}
+  m_LocalScale: {x: 1.0002589, y: 1, z: 1.0001906}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -7179,7 +7179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52882cd15871496cba5a3596b2e735c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultTextureFormat: 5
+  DefaultTextureFormat: 1
   TextureMaxSize: 8192
   GenerateTextureLODs: 1
   UseMaxSize: 1
