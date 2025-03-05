@@ -1,11 +1,10 @@
 // import { bestlap, laptime, lastlap } from "$lib";
-import { currentCarInstance, currentRaceStartCountDown, type Gamestate, gamestate } from "$lib";
+import { currentCarInstance, currentCarSpeed, currentRaceStartCountDown, currentRaceTimings, type Gamestate, gamestate } from "$lib";
 import { CarController, CarPhysics } from "@needle-tools/car-physics";
 import { Behaviour, Camera, getTempVector, Gizmos, OrbitControls, PlayableDirector, Rigidbody, serializable } from "@needle-tools/engine";
 import { Object3D, Ray, Vector3 } from "three";
 import { CarCameraRig } from "./CarCamera";
 import { get } from "svelte/store";
-import { GameManager } from "./GameManager";
 
 export class Checkpoint extends Behaviour {
     setHighlight(highlight: boolean) {
@@ -23,44 +22,37 @@ export class RacingGame extends Behaviour {
     @serializable(CarCameraRig)
     cameraRig?: CarCameraRig;
 
+    @serializable()
+    roundtrack: boolean = true;
+
     @serializable(Checkpoint)
     checkpoints: Checkpoint[] = [];
 
-    // setCar(car: Object3D) {
-    //     if (this.car && this.car.gameObject != car) {
-    //         this.car?.gameObject?.removeFromParent();
-    //     }
-    //     if (!car.getComponentInChildren(CarPhysics)) car.addComponent(CarPhysics);
-    //     this.car = car.getComponentInChildren(CarController) || car.addComponent(CarController);
-    //     if (this.startPoint) {
-    //         this.car.worldPosition = this.startPoint.worldPosition;
-    //         this.car.worldQuaternion = this.startPoint.worldQuaternion;
-    //     }
-    // }
 
     private _unsubscribeGamestate: Function | null = null;
     private _unsubscribeCar: Function | null = null;
+
+    start() {
+        if (this.checkpoints.length < 2) {
+            console.warn("Please place at least 2 checkpoints");
+        }
+    }
 
     onEnable(): void {
         this.onGameStateChanged(get(gamestate));
         this._unsubscribeGamestate = gamestate.subscribe(this.onGameStateChanged);
         this._unsubscribeCar = currentCarInstance.subscribe(this.onCarChanged);
 
-        // if (this.car) {
-        //     this.car.manualReset = false;
-        // }
-        this._nextCheckpointIndex = 0;
-        this._lastCheckpoint = null;
-        this._lapStartTime = 0;
-        // laptime.set(0);
-
-        this._bestLapTime = parseFloat(localStorage.getItem("bestlap") || "0");
-        // bestlap.set(this._bestLapTime);
-
         for (const check of this.checkpoints) {
             check?.setHighlight(false);
         }
-        this.checkpoints[0]?.setHighlight(true);
+
+        this._nextCheckpointIndex = 0;
+        this._lastCheckpoint = null;
+        this._lapStartTime = 0;
+
+        this._bestLapTime = parseFloat(localStorage.getItem("bestlap") || "0");
+        this._lastLapTime = parseFloat(localStorage.getItem("lastlap") || "0");
     }
 
     onDisable(): void {
@@ -68,7 +60,7 @@ export class RacingGame extends Behaviour {
         this._unsubscribeCar?.();
     }
 
-    private _startTime: number = 0;
+    private _raceProgressStartTime: number = 0;
 
     private onGameStateChanged = (state: Gamestate) => {
         switch (state) {
@@ -78,9 +70,14 @@ export class RacingGame extends Behaviour {
                     this.introTimeline.gameObject.visible = true;
                     this.introTimeline.time = 0;
                 }
+                for (const check of this.checkpoints) {
+                    check?.setHighlight(false);
+                }
                 break;
             case "race-in-progress":
-                this._startTime = Date.now();
+                this._raceProgressStartTime = Date.now();
+                this._lapStartTime = 0;
+
                 if (this.cameraRig) {
                     this.cameraRig.gameObject.visible = true;
                 }
@@ -91,13 +88,10 @@ export class RacingGame extends Behaviour {
                         this.resetCar(this.startPoint);
                     }
                 }
+                this.checkpoints?.find(c => c)?.setHighlight(true);
                 break;
             case "race-finished":
-                if (this.cameraRig) this.cameraRig.gameObject.visible = false;
-                if (this.introTimeline) {
-                    this.introTimeline.gameObject.visible = true;
-                    this.introTimeline.time = 0;
-                }
+                if (this._carController) this._carController.enabled = false;
                 break;
         }
     }
@@ -114,18 +108,21 @@ export class RacingGame extends Behaviour {
     }
 
     private _nextCheckpointIndex: number = 0;
+    private _lastCheckpointTime: number = 0;
     private _lastCheckpoint: Checkpoint | null = null;
 
-    // timings
     private _lapStartTime: number = 0;
-    private _lastLapTime: number = 0;
     private _bestLapTime: number = 0;
-
+    private _lastLapTime: number = 0;
 
     lateUpdate(): void {
+        
+        currentCarSpeed.set(this._carPhysics?.currentSpeedInKmh || 0);
+        
 
         const car = get(currentCarInstance);
         if (!car) return;
+        
 
         const state = get(gamestate);
         switch (state) {
@@ -138,14 +135,15 @@ export class RacingGame extends Behaviour {
                 break;
             case "race-in-progress":
 
-                const secondsSinceStart = (Date.now() - this._startTime) / 1000;
+                const secondsSinceStart = (Date.now() - this._raceProgressStartTime) / 1000;
                 const waitBeforeStartInSeconds = 3;
                 const countdown = waitBeforeStartInSeconds - Math.floor(secondsSinceStart);
                 currentRaceStartCountDown.set(countdown);
                 if (countdown <= 0) {
-                    if (this._carController) this._carController.enabled = true;
+                    if (this._carController) {
+                        this._carController.enabled = true;
+                    }
                 }
-
 
                 const yButtonIndex = 3;
                 if (this.context.input.isKeyDown("r") || navigator.getGamepads().some(gp => gp?.buttons[yButtonIndex].pressed)) {
@@ -157,7 +155,6 @@ export class RacingGame extends Behaviour {
                     return;
                 }
 
-
                 const wp = car?.worldPosition;
                 const local = next.gameObject.worldToLocal(getTempVector(wp));
                 const ax = Math.abs(local.x);
@@ -168,11 +165,16 @@ export class RacingGame extends Behaviour {
                 if (inCheckpoint) {
                     next.setHighlight(false);
 
-                    if (this._nextCheckpointIndex === 0) {
+                    const currentIndex = this._nextCheckpointIndex;
+
+                    const reachedEnd = currentIndex === (this.checkpoints.length - 1);
+                    if (reachedEnd) {
                         if (this._lapStartTime > 0) {
                             this.onFinishedLap();
                         }
-                        this._lapStartTime = this.context.time.realtimeSinceStartup;
+                    }
+                    else if (currentIndex === 0) {
+                        this._lapStartTime = this.context.time.time;
                     }
 
                     // highlight the next checkpoint
@@ -180,13 +182,22 @@ export class RacingGame extends Behaviour {
                     if (this._nextCheckpointIndex >= this.checkpoints.length) {
                         this._nextCheckpointIndex = 0;
                     }
-                    this.checkpoints[this._nextCheckpointIndex].setHighlight(true);
+                    if (get(gamestate) === "race-in-progress") {
+                        this.checkpoints[this._nextCheckpointIndex].setHighlight(true);
+                    }
 
                     this.onReachedCheckpoint(next);
                 }
 
                 // const currentLaptime = this._lapStartTime ? (this.context.time.realtimeSinceStartup - this._lapStartTime) : 0;
                 // laptime.set(currentLaptime);
+                currentRaceTimings.set({
+                    currentLapTime: this._lapStartTime > 0 ? (this.context.time.time - this._lapStartTime) : 0,
+                    bestLapTime: this._bestLapTime,
+                    lastLapTime: this._lastLapTime,
+                    checkpointTime: this._lastCheckpointTime,
+                    allCheckpointTimes: []
+                })
                 break;
         }
     }
@@ -196,21 +207,28 @@ export class RacingGame extends Behaviour {
     }
 
     private onFinishedLap() {
-        const currentLaptime = this.context.time.realtimeSinceStartup - this._lapStartTime;
+        const currentLaptime = this.context.time.time - this._lapStartTime;
         if (currentLaptime < this._bestLapTime || this._bestLapTime === 0) {
             this._bestLapTime = currentLaptime;
             // bestlap.set(this._bestLapTime);
             localStorage.setItem("bestlap", this._bestLapTime.toString());
         }
         this._lastLapTime = currentLaptime;
+        localStorage.setItem("lastlap", this._lastLapTime.toString());
         gamestate.set("race-finished");
 
         // After a few seconds reset the car to the start position
         setTimeout(() => {
             if (get(gamestate) === "race-finished") {
+                if (this.cameraRig) this.cameraRig.gameObject.visible = false;
+                if (this.introTimeline) {
+                    this.introTimeline.gameObject.visible = true;
+                    this.introTimeline.time = 0;
+                }
                 this.resetCar(this.startPoint);
             }
-        }, 3000)
+
+        }, 3000);
     }
 
     resetCar(point?: Object3D) {

@@ -17,7 +17,7 @@ export type GameOption = {
 /**
  * Level menu options
  */
-export const gameoptions = writable<GameOption[]>([]);
+export const tracks = writable<GameOption[]>([]);
 
 
 /**
@@ -29,3 +29,18 @@ export const currentCarInstance = writable<Object3D | null>(null);
  * Counting down when the race is about to start
  */
 export const currentRaceStartCountDown = writable<number>(0);
+
+/**
+ * The current speed of the car in km/h
+ */
+export const currentCarSpeed = writable<number>(0);
+
+declare type RaceTiming = {
+    currentLapTime: number,
+    bestLapTime: number,
+    lastLapTime: number,
+    checkpointTime: number,
+    allCheckpointTimes: number[],
+}
+
+export const currentRaceTimings = writable<RaceTiming | null>(null);

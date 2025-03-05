@@ -20,8 +20,6 @@
 <div class="ui">
     {#if $inRace}
         <RacingGame />
-    {:else}
-        {$gamestate}
     {/if}
 </div>
 

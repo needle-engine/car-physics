@@ -117,7 +117,7 @@ export class CarPhysics extends Behaviour {
      * Current vehicle speed
      */
     get currentSpeed() {
-        return this._vehicle.currentVehicleSpeed();
+        return this._vehicle?.currentVehicleSpeed() || 0;
     }
 
     /**
@@ -131,7 +131,9 @@ export class CarPhysics extends Behaviour {
      * Current vehicle speed normalized between 0 and 1 where 1 is the top speed
      */
     get currentSpeed01() {
-        return this._vehicle.currentVehicleSpeed() / this.topSpeed;
+        if (this._vehicle)
+            return this._vehicle.currentVehicleSpeed() / this.topSpeed;
+        return 0;
     }
 
     /** 

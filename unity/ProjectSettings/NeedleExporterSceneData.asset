@@ -44,6 +44,10 @@ MonoBehaviour:
     Projects:
     - ProjectPath: ../web
     BuilderScene: 
+  - Path: Assets/Scenes/Race Track 2.unity
+    Projects:
+    - ProjectPath: ../web
+    BuilderScene: 
   Projects:
   - ProjectPath: Library/Needle/Sample
   - ProjectPath: ../web

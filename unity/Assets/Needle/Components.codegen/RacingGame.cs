@@ -10,7 +10,9 @@ namespace Needle.Typescript.GeneratedComponents
 		public UnityEngine.Playables.PlayableDirector @introTimeline;
 		public UnityEngine.GameObject @startPoint;
 		public Needle.Typescript.GeneratedComponents.CarCameraRig @cameraRig;
+		public bool @roundtrack = true;
 		public Needle.Typescript.GeneratedComponents.Checkpoint[] @checkpoints = new Needle.Typescript.GeneratedComponents.Checkpoint[]{ };
+		public void start(){}
 		public void OnEnable(){}
 		public void OnDisable(){}
 		public void lateUpdate(){}

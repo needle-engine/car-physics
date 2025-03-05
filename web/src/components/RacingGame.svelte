@@ -1,22 +1,28 @@
 <script lang="ts">
-    import { currentRaceStartCountDown, gamestate } from "$lib";
-    import { onMount } from "svelte";
+    import {
+        currentCarSpeed,
+        currentRaceStartCountDown,
+        currentRaceTimings,
+        gamestate,
+    } from "$lib";
+    import { derived } from "svelte/store";
     import Countdown from "./Countdown.svelte";
+    import Menu from "./Menu.svelte";
+    import SpeedoMeter from "./SpeedoMeter.svelte";
+    import RaceTimePanel from "./RaceTimePanel.svelte";
+    import { onMount } from "svelte";
+
+    let menu_open = true;
+
+    onMount(() => {
+        menu_open = true;
+    });
+
+    $: raceFinished = $gamestate === "race-finished";
 </script>
 
 {#if $gamestate === "race-idle" || $gamestate === "race-finished"}
-    <button
-        class="start-button"
-        on:click={() => {
-            gamestate.set("race-in-progress");
-        }}
-    >
-        {#if $gamestate === "race-finished"}
-            RACE AGAIN
-        {:else}
-            START RACE
-        {/if}
-    </button>
+    <!-- -->
 {:else if $gamestate === "race-in-progress"}
     {#if $currentRaceStartCountDown >= 0}
         <div>
@@ -27,61 +33,64 @@
             />
         </div>
     {/if}
+    <RaceTimePanel />
+    <SpeedoMeter />
 {/if}
 
-<!-- {#if $laptime >= 0}
-    <div class="laptime">
-        <div class="current">
-            {$laptime.toFixed(2)}
-        </div>
-        <div class="last">
-            Last time: {$lastlap > 0 ? $lastlap.toFixed(2) : "-"}
-        </div>
-        <div class="best">
-            Best time: {$bestlap > 0 ? $bestlap.toFixed(2) : "-"}
-        </div>
+<Menu bind:open={menu_open}>
+    <div class="menu">
+        <button
+            on:click={() => {
+                menu_open = false;
+                if ($gamestate === "race-in-progress") {
+                    $gamestate = "race-idle";
+                    window.requestAnimationFrame(
+                        () => ($gamestate = "race-in-progress"),
+                    );
+                } else gamestate.set("race-in-progress");
+            }}
+            class="start-button"
+            class:restart={raceFinished}
+        >
+            {#if raceFinished}
+                RACE AGAIN
+            {:else}
+                START RACE
+            {/if}
+        </button>
+        {#if $gamestate === "race-in-progress"}
+            <button
+                on:click={() => {
+                    menu_open = false;
+                }}
+            >
+                Close menu
+            </button>
+        {/if}
+        <button
+            on:click={() => {
+                gamestate.set("main-menu");
+            }}
+        >
+            Back to menu
+        </button>
     </div>
-{/if} -->
+</Menu>
 
 <style>
-    .start-button {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        padding: 1rem 2rem;
-        font-size: 2rem;
-        font-weight: bold;
-        background: rgb(0, 0, 0);
-        color: white;
-        border: none;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        transition: background 0.2s;
-        &:hover {
-            background: rgb(138, 255, 177);
-        }
-    }
-    .laptime {
-        position: absolute;
-        left: 1.2rem;
-        top: 2rem;
-        backdrop-filter: blur(10px);
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 0.5em;
-
-        line-height: 1.3em;
-
+    .menu {
         display: flex;
         flex-direction: column;
-        padding: 0.25rem;
-        gap: 0.3em;
+    }
 
-        & .current {
-            font-size: 2rem;
-            line-height: 1em;
-            padding-bottom: 0.1em;
-            font-weight: bold;
-        }
+    .start-button {
+        background: rgba(0, 0, 0, 0.6);
+        box-shadow: inset 0 0 3rem rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        border: none;
+        outline: none;
+        color: white;
+        font-size: 3rem;
+        padding: 1rem 2rem;
     }
 </style>

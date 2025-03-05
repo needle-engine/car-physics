@@ -1118,6 +1118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643b0e2bd50f41f7bc431409a05a61e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thecamera: {fileID: 6966504729258966710}
   introTimeline: {fileID: 262986884}
   startPoint: {fileID: 2005525813}
   cameraRig: {fileID: 1457132249714130529}

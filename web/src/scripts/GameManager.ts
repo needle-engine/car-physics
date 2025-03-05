@@ -1,4 +1,4 @@
-import { currentCarInstance, gameoptions, type Gamestate, gamestate } from "$lib";
+import { currentCarInstance, tracks, type Gamestate, gamestate } from "$lib";
 import { get } from "svelte/store";
 import { AssetReference, Behaviour, Camera, FileReference, serializable } from "@needle-tools/engine";
 import { Object3D } from "three";
@@ -44,7 +44,7 @@ export class GameManager extends Behaviour {
         // initialize state
         GameManager.state = "main-menu";
         this._menuContent.push(...this.gameObject.children);
-        const opts = get(gameoptions);
+        const opts = get(tracks);
         opts.length = 0;
         for (let i = 0; i < this.level.length; i++) {
             const level = this.level[i];
@@ -54,7 +54,7 @@ export class GameManager extends Behaviour {
                 select: () => this.loadLevel(i)
             });
         }
-        gameoptions.set(opts);
+        tracks.set(opts);
     }
 
     private _unsubscribe: (() => void) | null = null;
@@ -88,9 +88,7 @@ export class GameManager extends Behaviour {
             return false;
         }
 
-
-        // this._activeCar = this.currentCar.asset;
-        // this._activeLevel = level.asset;
+        this.unloadPrevious();
 
         GameManager.state = "loading";
         const carInstancePromise = this.currentCar.asset.instantiate();

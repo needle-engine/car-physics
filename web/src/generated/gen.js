@@ -11,13 +11,13 @@ globalThis["needle:dependencies:ready"] = import("./register_types.ts")
 
 export const needle_exported_files = new Array();
 globalThis["needle:codegen_files"] = needle_exported_files;
-needle_exported_files.push("assets/Car Game.glb?v=1741166268409");
+needle_exported_files.push("assets/Car Game.glb?v=1741183782457");
 document.addEventListener("DOMContentLoaded", () =>
 {
 	const needleEngine = document.querySelector("needle-engine");
 	if(needleEngine && needleEngine.getAttribute("src") === null)
 	{
-		needleEngine.setAttribute("hash", "1741166268409");
+		needleEngine.setAttribute("hash", "1741183782457");
 		needleEngine.setAttribute("src", JSON.stringify(needle_exported_files));
 	}
 });
