@@ -16,11 +16,11 @@ export class CarTouchControls extends Behaviour {
     }
 
     private throttleInput() {
-        this.carPhysics?.accelerationInput(Mathf.clamp(this.throttleState + this.breakState, -1, 1));
+        this.carPhysics?.accelerationImpulse(Mathf.clamp(this.throttleState + this.breakState, -1, 1));
     }
 
     private steerInput() {
-        this.carPhysics?.steerInput(Mathf.clamp(this.steerLeftState + this.steerRightState, -1, 1));
+        this.carPhysics?.steerImpulse(Mathf.clamp(this.steerLeftState + this.steerRightState, -1, 1));
     }
 
     // ---

@@ -5,6 +5,7 @@ import { Behaviour, Camera, getTempVector, Gizmos, OrbitControls, PlayableDirect
 import { Object3D, Ray, Vector3 } from "three";
 import { CarCameraRig } from "./CarCamera";
 import { get } from "svelte/store";
+import { GameManager } from "./GameManager";
 
 export class Checkpoint extends Behaviour {
     setHighlight(highlight: boolean) {
@@ -87,9 +88,7 @@ export class RacingGame extends Behaviour {
                 if (this.startPoint) {
                     const car = get(currentCarInstance);
                     if (car) {
-                        car.worldPosition = this.startPoint.worldPosition;
-                        car.worldQuaternion = this.startPoint.worldQuaternion;
-                        this.cameraRig?.resetCamera();
+                        this.resetCar(this.startPoint);
                     }
                 }
                 break;
@@ -110,7 +109,7 @@ export class RacingGame extends Behaviour {
         this._carPhysics = car?.getComponentInChildren(CarPhysics) || null;
         this._carController = car?.getComponentInChildren(CarController) || null;
         if (this._carController) {
-            this._carController.manualReset = false;
+            this._carController.reset = () => this.resetCar();
         }
     }
 
@@ -132,6 +131,7 @@ export class RacingGame extends Behaviour {
         switch (state) {
             case "race-idle":
                 if (this._carController) this._carController.enabled = false;
+                if (this._carPhysics) this._carPhysics.breakImpulse(1)
                 break;
             case "race-finished":
                 if (this._carController) this._carController.enabled = false;

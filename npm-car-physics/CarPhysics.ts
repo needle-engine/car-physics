@@ -72,7 +72,7 @@ export class CarPhysics extends Behaviour {
      * Steer the car. -1 is full left, 1 is full right
      * @param steerAmount -1 to 1
      */
-    steerInput(steerAmount: number) {
+    steerImpulse(steerAmount: number) {
         // steering smoothing
         // const t = Mathf.clamp01(this.context.time.deltaTime / Math.max(.05, this.steerSmoothingFactor));
         this._steerInput += steerAmount;
@@ -83,8 +83,16 @@ export class CarPhysics extends Behaviour {
      * Increase or decrease acceleration
      * @param accelAmount -1 to 1 where -1 is full brake and 1 is full acceleration
      */
-    accelerationInput(accelAmount: number) {
-        this.currAcc = Mathf.clamp(this.currAcc + accelAmount, -1, 1);
+    accelerationImpulse(accelAmount: number) {
+        this._currAcc += accelAmount;
+    }
+
+    /**
+     * This will always apply the break force to the car
+     * @param breakAmount The amount of break force to apply e.g. 1 for full break
+     */
+    breakImpulse(breakAmount: number) {
+        this._currBreak += breakAmount;
     }
 
 
@@ -139,8 +147,9 @@ export class CarPhysics extends Behaviour {
     private _vehicle!: DynamicRayCastVehicleController;
     private _rigidbody!: Rigidbody;
 
-    private currentSteer: number = 0;
-    private currAcc: number = 0;
+    private _currentSteer: number = 0;
+    private _currAcc: number = 0;
+    private _currBreak: number = 0;
 
     private _steerInput: number = 0;
     private _airtime: number = 0;
@@ -261,14 +270,15 @@ export class CarPhysics extends Behaviour {
 
         if (this.steerSmoothingFactor > 0) {
             const t01 = this.context.time.deltaTime / this.steerSmoothingFactor;
-            this.currentSteer = Mathf.lerp(this.currentSteer, this._steerInput, Mathf.clamp01(t01));
+            this._currentSteer = Mathf.lerp(this._currentSteer, this._steerInput, Mathf.clamp01(t01));
         }
         else {
-            this.currentSteer = this._steerInput;
+            this._currentSteer = this._steerInput;
         }
         this.applyPhysics();
         this._steerInput = 0;
-        this.currAcc = 0;
+        this._currAcc = 0;
+        this._currBreak = 0;
 
         // update wheels
         let anyWheelHasGroundContact = false;
@@ -330,8 +340,11 @@ export class CarPhysics extends Behaviour {
     }
 
     private applyPhysics() {
-        let breakForce = this.currAcc === 0 ? .2 : 0;
+        this._currAcc = Mathf.clamp(this._currAcc, -1, 1);
+
+        let breakForce = this._currAcc === 0 ? .2 : 0;
         let accelForce = 0;
+
 
         const velDir = this._rigidbody.getVelocity();
         const vel = this._vehicle.currentVehicleSpeed();
@@ -342,20 +355,22 @@ export class CarPhysics extends Behaviour {
 
         // breaking
         // apply break if we're receiving negative input and are moving forward
-        const isBreaking = this.currAcc < 0 && vel > 0.05 && velDir.dot(this.gameObject.worldForward) > 0;
+        const isBreaking = this._currAcc < 0 && vel > 0.05 && velDir.dot(this.gameObject.worldForward) > 0;
         if (isBreaking) {
-            breakForce = this.breakForce * -this.currAcc;
+            breakForce = this.breakForce * -this._currAcc;
         }
 
         // acceleration
-        const isAccelerating = this.currAcc != 0 && !reachedTopSpeed;
+        const isAccelerating = this._currAcc != 0 && !reachedTopSpeed;
         if (isAccelerating) {
-            accelForce = (this.accelerationForce / this.context.time.deltaTime) * this.currAcc;
+            accelForce = (this.accelerationForce / this.context.time.deltaTime) * this._currAcc;
         }
 
         // steer
         const maxAngle = Mathf.lerp(this.maxSteer, this.maxSteer * .5, this.currentSpeed01);
-        const steer = this.currentSteer * maxAngle * Mathf.Deg2Rad;
+        const steer = this._currentSteer * maxAngle * Mathf.Deg2Rad;
+
+        breakForce += Math.max(0, this._currBreak) * this.breakForce;
 
         // updateWheels
         this.wheels.forEach((wheel) => {

@@ -85,7 +85,7 @@
     .wrapper {
         position: fixed;
         margin: auto;
-        z-index: 1000;
+        z-index: 9999;
         left: 0;
         top: 0;
         right: 0;

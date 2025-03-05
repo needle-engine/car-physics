@@ -11,3 +11,4 @@ unity/Logs
 node_modules
 .DS_Store
 playwright-report.
+**/Assets/**/ReflectionProbe-*.exr*

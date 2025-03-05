@@ -1,4 +1,4 @@
-import { Behaviour, getTempQuaternion, getTempVector, Mathf, OrbitControls, serializable } from "@needle-tools/engine";
+import { Behaviour, EventList, getTempQuaternion, getTempVector, Mathf, OrbitControls, serializable } from "@needle-tools/engine";
 import { CarPhysics } from "./CarPhysics";
 import { Vector3, Quaternion } from "three";
 
@@ -13,6 +13,9 @@ export class CarController extends Behaviour {
     @serializable()
     manualReset: boolean = true;
 
+    @serializable(EventList)
+    onReset: EventList<void> = new EventList<void>();
+
     /**
      * Resets the car to the starting position and orientation
      */
@@ -21,6 +24,7 @@ export class CarController extends Behaviour {
         // reset orbit control start pos
         const orbt = this.context.mainCamera.getComponent(OrbitControls);
         orbt?.setCameraTargetPosition(this.camStartPos!, true);
+        this.onReset?.invoke();
     }
 
 
@@ -251,8 +255,8 @@ export class CarController extends Behaviour {
         }
 
         this._currentSteer = Mathf.lerp(this._currentSteer, this._currentSteerAccum, this.context.time.deltaTime / .1);
-        this.carPhysics.steerInput(this._currentSteer);
-        this.carPhysics.accelerationInput(accel);
+        this.carPhysics.steerImpulse(this._currentSteer);
+        this.carPhysics.accelerationImpulse(accel);
 
     }
 

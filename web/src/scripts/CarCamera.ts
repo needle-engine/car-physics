@@ -6,12 +6,6 @@ import { Object3D, Vector3 } from "three";
 
 export class CarCameraRig extends Behaviour {
 
-    @serializable(Object3D)
-    cameraRoot?: Object3D;
-
-    @serializable(Object3D)
-    lookTarget: Object3D | null = null;
-
     private cameraStartPosition?: Vector3;
 
     awake(): void {
@@ -49,13 +43,19 @@ export class CarFollow extends Behaviour {
     private carChanged = (car: Object3D | null) => {
         if (!car) return;
         if (!this.gameObject) {
-            console.warn("No gameobject - there seems to be a bug", this.name, this.destroyed);
+            console.error("LIFE No gameobject - there seems to be a bug", this.name, this.destroyed);
             if (this.destroyed) {
                 this._unsubscribe?.();
             }
             return;
         }
-        const follow = this.gameObject.getComponentInChildren(SmoothFollow) || this.gameObject.addComponent(SmoothFollow);
+        let follow = this.gameObject.getComponentInChildren(SmoothFollow);
+        if (!follow) {
+            follow = this.gameObject.addComponent(SmoothFollow, {
+                followFactor: 10,
+                rotateFactor: 0,
+            });
+        }
         if (follow) {
             follow.target = car;
         }

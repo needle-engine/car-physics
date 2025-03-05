@@ -37,11 +37,13 @@ export class GameManager extends Behaviour {
         return this.cars[0];
     }
 
+    private readonly _menuContent: Array<Object3D> = [];
     private readonly _instances: Array<Object3D | null> = [];
 
     awake() {
         // initialize state
         GameManager.state = "main-menu";
+        this._menuContent.push(...this.gameObject.children);
         const opts = get(gameoptions);
         opts.length = 0;
         for (let i = 0; i < this.level.length; i++) {
@@ -69,6 +71,9 @@ export class GameManager extends Behaviour {
     returnToMainMenu() {
         this.unloadPrevious();
         GameManager.state = "main-menu";
+        for (const menu of this._menuContent) {
+            menu.visible = true;
+        }
     }
 
     async loadLevel(index: number) {
@@ -97,6 +102,10 @@ export class GameManager extends Behaviour {
         if (!carInstance || !levelInstance) {
             GameManager.state = "main-menu";
             return false;
+        }
+
+        for(const menu of this._menuContent) {
+            menu.visible = false;
         }
 
         GameManager.state = "race-idle";
