@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material.004
+  m_Name: Racetrack Mat 2
   m_Shader: {fileID: -6465566751694194690, guid: 478ce3626be7a5f4ea58d6b13f05a2e4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,7 +42,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - baseColorTexture:
-        m_Texture: {fileID: -6296427916463063283, guid: 019cc9322ff6aec44bfc8a601a941125, type: 3}
+        m_Texture: {fileID: -6296427916463063283, guid: 30c4e0b3bd4b05d40a1dd9c7e4ab91be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - clearcoatRoughnessTexture:
@@ -54,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - emissiveTexture:
-        m_Texture: {fileID: -6296427916463063283, guid: 019cc9322ff6aec44bfc8a601a941125, type: 3}
+        m_Texture: {fileID: -6296427916463063283, guid: 30c4e0b3bd4b05d40a1dd9c7e4ab91be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - iridescenceTexture:
@@ -78,7 +78,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - sheenColorTexture:
-        m_Texture: {fileID: -6296427916463063283, guid: 019cc9322ff6aec44bfc8a601a941125, type: 3}
+        m_Texture: {fileID: -6296427916463063283, guid: 30c4e0b3bd4b05d40a1dd9c7e4ab91be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - sheenRoughnessTexture:

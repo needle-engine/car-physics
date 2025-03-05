@@ -5,6 +5,7 @@ import { Behaviour, Camera, getTempVector, Gizmos, OrbitControls, PlayableDirect
 import { Object3D, Ray, Vector3 } from "three";
 import { CarCameraRig } from "./CarCamera";
 import { get } from "svelte/store";
+import { GameManager } from "./GameManager";
 
 export class Checkpoint extends Behaviour {
     setHighlight(highlight: boolean) {
@@ -35,6 +36,9 @@ export class RacingGame extends Behaviour {
     start() {
         if (this.checkpoints.length < 2) {
             console.warn("Please place at least 2 checkpoints");
+        }
+        if (!GameManager.instance) {
+            gamestate.set("race-idle");
         }
     }
 
@@ -116,13 +120,13 @@ export class RacingGame extends Behaviour {
     private _lastLapTime: number = 0;
 
     lateUpdate(): void {
-        
+
         currentCarSpeed.set(this._carPhysics?.currentSpeedInKmh || 0);
-        
+
 
         const car = get(currentCarInstance);
         if (!car) return;
-        
+
 
         const state = get(gamestate);
         switch (state) {
