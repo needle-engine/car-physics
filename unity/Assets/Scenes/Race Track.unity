@@ -6232,7 +6232,7 @@ MonoBehaviour:
   aoRadius: 3
   screenspaceRadius: 0
   color: {r: 0, g: 0, b: 0, a: 1}
-  quality: 2
+  quality: 1
 --- !u!114 &1315531093
 MonoBehaviour:
   m_ObjectHideFlags: 0

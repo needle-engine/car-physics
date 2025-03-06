@@ -186,7 +186,7 @@ Material:
     - roughnessFactor: 0.52
     - sheenColorTextureRotation: 0
     - sheenColorTextureTexCoord: 0
-    - sheenRoughnessFactor: 0.1
+    - sheenRoughnessFactor: 0.2
     - sheenRoughnessTextureRotation: 0
     - sheenRoughnessTextureTexCoord: 0
     - specularColorTextureRotation: 0
@@ -202,9 +202,9 @@ Material:
     - transmissionTextureTexCoord: 0
     m_Colors:
     - attenuationColor: {r: 1, g: 1, b: 1, a: 0}
-    - baseColorFactor: {r: 0.42300758, g: 0.03760237, b: 0.6132076, a: 1}
+    - baseColorFactor: {r: 0.6817889, g: 0.7921569, b: 0.12941176, a: 1}
     - emissiveFactor: {r: 0, g: 0, b: 0, a: 0}
-    - sheenColorFactor: {r: 0.69803923, g: 0.62293434, b: 0.16862746, a: 0}
+    - sheenColorFactor: {r: 0.9433962, g: 0.28543457, b: 0.10234961, a: 0}
     - specularColorFactor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2407616031358200550
