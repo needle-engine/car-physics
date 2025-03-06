@@ -7,7 +7,7 @@ namespace Needle.Typescript.GeneratedComponents
 {
 	public partial class CarFollow : UnityEngine.MonoBehaviour
 	{
-		public float @speed = 5f;
+		public float @speed = 3f;
 		public void OnEnable(){}
 		public void onBeforeRender(){}
 	}

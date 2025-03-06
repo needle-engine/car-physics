@@ -71,6 +71,7 @@ export class GameManager extends Behaviour {
     returnToMainMenu() {
         this.unloadPrevious();
         GameManager.state = "main-menu";
+        this.context.time.timeScale = 1;
         for (const menu of this._menuContent) {
             menu.visible = true;
         }
@@ -102,25 +103,16 @@ export class GameManager extends Behaviour {
             return false;
         }
 
+        // Hide menu objects
         for(const menu of this._menuContent) {
             menu.visible = false;
         }
-
-        GameManager.state = "race-idle";
+        // Add the loaded objects to the scene
         currentCarInstance.set(carInstance);
-
         this.context.scene.add(levelInstance);
         this.context.scene.add(carInstance);
-
-        // setTimeout(() => {
-        //     console.log("STATE???");
-        //     GameManager.state = "race-in-progress";
-        //     setTimeout(()=> {
-        //         GameManager.state = "race-finished";
-        //     }, 5000)
-        // }, 3000);
-
-
+        // Update state
+        GameManager.state = "race-idle";
         return true;
 
     }

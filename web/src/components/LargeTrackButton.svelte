@@ -18,22 +18,31 @@
 
         display: flex;
         pointer-events: all;
+        white-space: nowrap;
 
         color: white;
         font-size: 4rem;
 
         padding: 0.8rem;
-        padding-right: 10rem;
+        padding-left: 5rem;
 
         transition: all 1s;
 
-        box-shadow: -10rem 0 5rem rgba(0, 0, 0, 0.8);
+        
 
-        background: linear-gradient(
+        /* box-shadow: -10rem 0 5rem rgba(0, 0, 0, 0.8); */
+
+        width: 100%;
+        background-color: var(--button-bg);
+        backdrop-filter: blur(10px);
+        padding: .5rem 5rem;
+
+        /* padding-right: 10rem; */
+        /* background: linear-gradient(
             120deg,
             rgba(0, 10, 20, 1) 10%,
             rgba(0, 0, 0, 0) 90%
-        ) !important;
+        ) !important; */
 
         &:hover {
             & > * {

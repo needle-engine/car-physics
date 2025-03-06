@@ -5,11 +5,6 @@
 
     let open = true;
 
-    // assumign the first scene is the main menu - we then want to open the menu always
-    const isMenuScene = derived(
-        gamestate,
-        ($gamestate) => $gamestate === "main-menu",
-    );
     const isInGameScene = derived(
         gamestate,
         ($gamestate) => $gamestate !== "main-menu" && $gamestate !== "loading",
@@ -18,15 +13,20 @@
 
 {#if $gamestate !== "loading"}
     <div class="track_options" class:hidden={$isInGameScene}>
-        {#each $tracks as scene}
-            <LargeTrackButton
-                onClick={() => {
-                    open = false;
-                    scene.select();
-                }}
+        {#each $tracks as scene, index}
+            <div
+                class="slide_in"
+                style="--delay: {index * 0.1}s; --index: {index}"
             >
-                {scene.name}
-            </LargeTrackButton>
+                <LargeTrackButton
+                    onClick={() => {
+                        open = false;
+                        scene.select();
+                    }}
+                >
+                    {scene.name}
+                </LargeTrackButton>
+            </div>
         {/each}
     </div>
 {/if}
@@ -45,14 +45,47 @@
 
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
+        gap: 0.2rem;
+
+        pointer-events: none;
+        user-select: none;
+
+        padding-left: 30vw;
+        padding-bottom: 5vh;
+
+        width: 100%;
         height: 100%;
-        gap: 1rem;
-        padding-bottom: 25vh;
+        overflow: hidden;
+        /* outline: 1px solid red; */
 
-        pointer-events: all;
+        & button {
+            pointer-events: all;
+        }
+        /* background: linear-gradient(
+            90deg,
+            rgba(0, 10, 20, 1) 0%,
+            rgba(0, 0, 0, 0) 100%
+        ) !important; */
 
+        /* backdrop-filter: blur(10px); */
         /* outline: 1px solid red; */
     }
 
+    @keyframes slide_in {
+        from {
+            transform: translateX(-100%);
+        }
+        .5% {
+            transform: translateX(calc(var(--index) * 1rem));
+        }
+        to {
+            transform: translateX(calc(var(--index) * 10vw));
+        }
+    }
+
+    .slide_in {
+        transform: translateX(-100%);
+        animation: slide_in 200s ease-in-out forwards var(--delay);
+    }
 </style>

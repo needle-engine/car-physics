@@ -1,13 +1,15 @@
 import { writable } from "svelte/store";
 import type { Object3D } from "three";
 
-export type Gamestate = "loading" | "main-menu" | "track-selection" | "car-selection" | "race-idle" | "race-in-progress" | "race-finished";
+export type Gamestate = "loading" | "main-menu" | "track-selection" | "car-selection" | "race-idle" | "race-in-progress" | "race-finished" | "race-menu";
 
 /**
  * The state of the game
  */
 export const gamestate = writable<Gamestate>("loading");
 gamestate.subscribe(state => console.debug("[Gamestate]", state));
+
+export const menuOpen = writable<boolean>(false);
 
 export type GameOption = {
     name: string;

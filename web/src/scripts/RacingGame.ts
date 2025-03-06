@@ -1,7 +1,7 @@
 // import { bestlap, laptime, lastlap } from "$lib";
-import { currentCarInstance, currentCarSpeed, currentRaceStartCountDown, currentRaceTimings, type Gamestate, gamestate } from "$lib";
+import { currentCarInstance, currentCarSpeed, currentRaceStartCountDown, currentRaceTimings, type Gamestate, gamestate, menuOpen } from "$lib";
 import { CarController, CarPhysics } from "@needle-tools/car-physics";
-import { Behaviour, Camera, getTempVector, Gizmos, OrbitControls, PlayableDirector, Rigidbody, serializable } from "@needle-tools/engine";
+import { Behaviour, getTempVector, PlayableDirector, Rigidbody, serializable } from "@needle-tools/engine";
 import { Object3D, Ray, Vector3 } from "three";
 import { CarCameraRig } from "./CarCamera";
 import { get } from "svelte/store";
@@ -30,8 +30,9 @@ export class RacingGame extends Behaviour {
     checkpoints: Checkpoint[] = [];
 
 
-    private _unsubscribeGamestate: Function | null = null;
-    private _unsubscribeCar: Function | null = null;
+    private _unsubscribeGamestate?: Function;
+    private _unsubscribeCar?: Function;
+    private _unsubscribeMenuOpen?: Function;
 
     start() {
         if (this.checkpoints.length < 2) {
@@ -46,6 +47,7 @@ export class RacingGame extends Behaviour {
         this.onGameStateChanged(get(gamestate));
         this._unsubscribeGamestate = gamestate.subscribe(this.onGameStateChanged);
         this._unsubscribeCar = currentCarInstance.subscribe(this.onCarChanged);
+        this._unsubscribeMenuOpen = menuOpen.subscribe(this.onMenuOpenChanged);
 
         for (const check of this.checkpoints) {
             check?.setHighlight(false);
@@ -53,7 +55,7 @@ export class RacingGame extends Behaviour {
 
         this._nextCheckpointIndex = 0;
         this._lastCheckpoint = null;
-        this._lapStartTime = 0;
+        this._lapTime = 0;
 
         this._bestLapTime = parseFloat(localStorage.getItem("bestlap") || "0");
         this._lastLapTime = parseFloat(localStorage.getItem("lastlap") || "0");
@@ -62,6 +64,14 @@ export class RacingGame extends Behaviour {
     onDisable(): void {
         this._unsubscribeGamestate?.();
         this._unsubscribeCar?.();
+    }
+
+    private onMenuOpenChanged = (open: boolean) => {
+        if (get(gamestate) === "race-in-progress")
+            this.context.time.timeScale = open ? 0.05 : 1;
+        else {
+            this.context.time.timeScale = 1;
+        }
     }
 
     private _raceProgressStartTime: number = 0;
@@ -73,6 +83,7 @@ export class RacingGame extends Behaviour {
                 if (this.introTimeline) {
                     this.introTimeline.gameObject.visible = true;
                     this.introTimeline.time = 0;
+                    this.introTimeline.play();
                 }
                 for (const check of this.checkpoints) {
                     check?.setHighlight(false);
@@ -80,7 +91,7 @@ export class RacingGame extends Behaviour {
                 break;
             case "race-in-progress":
                 this._raceProgressStartTime = Date.now();
-                this._lapStartTime = 0;
+                this._lapTime = 0;
 
                 if (this.cameraRig) {
                     this.cameraRig.gameObject.visible = true;
@@ -115,7 +126,7 @@ export class RacingGame extends Behaviour {
     private _lastCheckpointTime: number = 0;
     private _lastCheckpoint: Checkpoint | null = null;
 
-    private _lapStartTime: number = 0;
+    private _lapTime: number = 0;
     private _bestLapTime: number = 0;
     private _lastLapTime: number = 0;
 
@@ -138,7 +149,6 @@ export class RacingGame extends Behaviour {
                 if (this._carController) this._carController.enabled = false;
                 break;
             case "race-in-progress":
-
                 const secondsSinceStart = (Date.now() - this._raceProgressStartTime) / 1000;
                 const waitBeforeStartInSeconds = 3;
                 const countdown = waitBeforeStartInSeconds - Math.floor(secondsSinceStart);
@@ -173,12 +183,9 @@ export class RacingGame extends Behaviour {
 
                     const reachedEnd = currentIndex === (this.checkpoints.length - 1);
                     if (reachedEnd) {
-                        if (this._lapStartTime > 0) {
+                        if (this._lapTime > 0) {
                             this.onFinishedLap();
                         }
-                    }
-                    else if (currentIndex === 0) {
-                        this._lapStartTime = this.context.time.time;
                     }
 
                     // highlight the next checkpoint
@@ -193,10 +200,13 @@ export class RacingGame extends Behaviour {
                     this.onReachedCheckpoint(next);
                 }
 
+                if (this._carController?.enabled)
+                    this._lapTime += this.context.time.deltaTime;
+
                 // const currentLaptime = this._lapStartTime ? (this.context.time.realtimeSinceStartup - this._lapStartTime) : 0;
                 // laptime.set(currentLaptime);
                 currentRaceTimings.set({
-                    currentLapTime: this._lapStartTime > 0 ? (this.context.time.time - this._lapStartTime) : 0,
+                    currentLapTime: this._lapTime > 0 ? this._lapTime : 0,
                     bestLapTime: this._bestLapTime,
                     lastLapTime: this._lastLapTime,
                     checkpointTime: this._lastCheckpointTime,
@@ -211,7 +221,7 @@ export class RacingGame extends Behaviour {
     }
 
     private onFinishedLap() {
-        const currentLaptime = this.context.time.time - this._lapStartTime;
+        const currentLaptime = this._lapTime;
         if (currentLaptime < this._bestLapTime || this._bestLapTime === 0) {
             this._bestLapTime = currentLaptime;
             // bestlap.set(this._bestLapTime);
@@ -228,6 +238,7 @@ export class RacingGame extends Behaviour {
                 if (this.introTimeline) {
                     this.introTimeline.gameObject.visible = true;
                     this.introTimeline.time = 0;
+                    this.introTimeline.play();
                 }
                 this.resetCar(this.startPoint);
             }

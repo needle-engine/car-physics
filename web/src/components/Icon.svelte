@@ -1,5 +1,9 @@
+<script lang="ts">
+    export let name;
+</script>
+
 <span class="material-symbols-outlined">
-    <slot></slot>
+    {name}
 </span>
 
 <style>

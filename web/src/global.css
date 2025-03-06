@@ -1,9 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;400;600&display=block');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;400;600&display=swap');
+
+/** Variables **/
+:root { 
+
+    --button-bg: rgba(0, 0, 0, .6);
+    --button-text: white;
+
+}
 
 body {
     font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue",
         "Helvetica", "Arial", sans-serif;
     font-family: 'Libre Franklin', sans-serif;
+
     background-color: #fafafa;
     font-size: 14px;
     font-weight: 400;
@@ -73,10 +82,12 @@ h3 {
 
 
 button {
+    background: var(--button-bg);
+    color: var(--button-text);
     font-size: inherit;
     padding: 5px 10px;
     margin: 5px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
     background-color: #fff;
     cursor: pointer;

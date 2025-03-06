@@ -26,6 +26,7 @@
 <style>
     .engine {
         position: absolute;
+        pointer-events: all;
 
         --padding: 0rem;
         left: var(--padding);
@@ -40,8 +41,5 @@
 
     .ui {
         z-index: 1000;
-        & > * {
-            pointer-events: all;
-        }
     }
 </style>
