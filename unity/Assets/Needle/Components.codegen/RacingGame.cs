@@ -12,6 +12,7 @@ namespace Needle.Typescript.GeneratedComponents
 		public Needle.Typescript.GeneratedComponents.CarCameraRig @cameraRig;
 		public bool @roundtrack = true;
 		public Needle.Typescript.GeneratedComponents.Checkpoint[] @checkpoints = new Needle.Typescript.GeneratedComponents.Checkpoint[]{ };
+		public UnityEngine.Transform @testcar;
 		public void start(){}
 		public void OnEnable(){}
 		public void OnDisable(){}

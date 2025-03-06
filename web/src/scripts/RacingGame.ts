@@ -1,7 +1,7 @@
 // import { bestlap, laptime, lastlap } from "$lib";
 import { currentCarInstance, currentCarSpeed, currentRaceStartCountDown, currentRaceTimings, type Gamestate, gamestate, menuOpen } from "$lib";
 import { CarController, CarPhysics } from "@needle-tools/car-physics";
-import { Behaviour, getTempVector, PlayableDirector, Rigidbody, serializable } from "@needle-tools/engine";
+import { AssetReference, Behaviour, getTempVector, PlayableDirector, Rigidbody, serializable } from "@needle-tools/engine";
 import { Object3D, Ray, Vector3 } from "three";
 import { CarCameraRig } from "./CarCamera";
 import { get } from "svelte/store";
@@ -29,6 +29,9 @@ export class RacingGame extends Behaviour {
     @serializable(Checkpoint)
     checkpoints: Checkpoint[] = [];
 
+    @serializable(AssetReference)
+    testcar: AssetReference | null = null;
+
 
     private _unsubscribeGamestate?: Function;
     private _unsubscribeCar?: Function;
@@ -40,6 +43,9 @@ export class RacingGame extends Behaviour {
         }
         if (!GameManager.instance) {
             gamestate.set("race-idle");
+            this.testcar?.instantiate(this.context.scene).then(res => {
+                currentCarInstance.set(res);
+            });
         }
     }
 
@@ -60,6 +66,7 @@ export class RacingGame extends Behaviour {
     onDisable(): void {
         this._unsubscribeGamestate?.();
         this._unsubscribeCar?.();
+        this._unsubscribeMenuOpen?.();
     }
 
     private onMenuOpenChanged = (open: boolean) => {
