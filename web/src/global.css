@@ -1,17 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;400;600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;400;600&display=swap');
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 /** Variables **/
 :root { 
 
-    --button-bg: rgba(0, 0, 0, .6);
+    --button-bg: rgba(255, 255, 255, .2);
     --button-text: white;
 
 }
 
 body {
-    font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue",
+    /* font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue",
         "Helvetica", "Arial", sans-serif;
-    font-family: 'Libre Franklin', sans-serif;
+    font-family: 'Libre Franklin', sans-serif; */
+
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
 
     background-color: #fafafa;
     font-size: 14px;
@@ -24,6 +32,10 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
+}
+
+.hidden {
+    display: none;
 }
 
 /* include border and padding in element width and height */
@@ -82,19 +94,23 @@ h3 {
 
 
 button {
+    font-family: inherit;
+    font-size: inherit;
+
     background: var(--button-bg);
     color: var(--button-text);
-    font-size: inherit;
+
     padding: 5px 10px;
     margin: 5px;
     border: none;
     border-radius: 5px;
-    background-color: #fff;
     cursor: pointer;
 }
 
 select {
+    font-family: inherit;
     font-size: inherit;
+
     padding: 5px;
     margin: 5px;
     border: 1px solid #ccc;

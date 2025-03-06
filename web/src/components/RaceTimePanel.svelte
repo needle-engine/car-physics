@@ -17,17 +17,17 @@
 {#if $currentRaceTimings}
     {@const timings = $currentRaceTimings}
 
-    <div class="current_time">
+    <div class="overlay_element current_time">
         {formatLapTime($currentRaceTimings.currentLapTime * 1000)}
     </div>
 
-    <div class="timings">
-        <span class="best"> Best lap </span>
+    <div class="overlay_element timings">
+        <span class="best"> Best Lap </span>
         <span class="best">
             {timings.bestLapTime > 0 ? timings.bestLapTime.toFixed(2) : "-"}
         </span>
 
-        <span> Last lap </span>
+        <span> Last Lap </span>
         <span>
             {timings.lastLapTime > 0 ? timings.lastLapTime.toFixed(2) : "-"}
         </span>
@@ -35,6 +35,12 @@
 {/if}
 
 <style>
+    .overlay_element {
+        /* background: var(--button-bg); */
+        backdrop-filter: blur(10px);
+        border-radius: 0.4em;
+    }
+
     .current_time {
         position: absolute;
         left: 50%;
@@ -43,8 +49,6 @@
         font-size: 2rem;
         font-weight: bold;
         color: white;
-        background: var(--button-bg);
-        backdrop-filter: blur(10px);
 
         min-width: 5ch;
         border-radius: 0.4rem;
@@ -62,9 +66,6 @@
         left: 1.2rem;
         top: 1rem;
 
-        background: var(--button-bg);
-        backdrop-filter: blur(10px);
-        border-radius: 0.4em;
 
         display: grid;
         grid-template-columns: auto auto;

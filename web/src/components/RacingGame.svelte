@@ -6,6 +6,7 @@
     import RaceTimePanel from "./RaceTimePanel.svelte";
     import { onMount } from "svelte";
     import Icon from "./Icon.svelte";
+    import MainMenu from "./MainMenu.svelte";
 
     onMount(() => {
         menuOpen.set(true);
@@ -26,17 +27,8 @@
                     menuOpen.set(false);
                 }}
             >
+                <Icon name="pause" />
                 Continue Race
-            </button>
-        {/if}
-
-        {#if $gamestate != "race-idle"}
-            <button
-                on:click={() => {
-                    gamestate.set("main-menu");
-                }}
-            >
-                Back to Main Menu
             </button>
         {/if}
 
@@ -55,11 +47,23 @@
             {#if $gamestate === "race-finished"}
                 race again
             {:else if $gamestate === "race-in-progress"}
+                <Icon name="start" />
                 restart race
             {:else}
                 start race
             {/if}
         </button>
+
+        {#if $gamestate != "race-idle"}
+            <button
+                on:click={() => {
+                    gamestate.set("main-menu");
+                }}
+            >
+                <Icon name="home" />
+                Back to Main Menu
+            </button>
+        {/if}
     </div>
 </Menu>
 
@@ -87,10 +91,9 @@
 
         & button {
             background: var(--button-bg);
-            backdrop-filter: blur(10px);
-            box-shadow:
+            /* box-shadow:
                 inset 0 0 3rem rgba(0, 0, 0, 0.5),
-                0 0 5rem rgba(150, 150, 150, 0.2);
+                0 0 5rem rgba(150, 150, 150, 0.2); */
 
             display: flex;
             align-items: center;
@@ -101,10 +104,6 @@
             padding: 1rem;
 
             transition: all 0.2s;
-
-            &:hover {
-                background: rgba(20, 20, 20, 0.8);
-            }
         }
     }
 

@@ -15,7 +15,6 @@
 
 <div class="wrapper">
     <div class="top">
-        <MainMenu />
     </div>
     
     <div class="layout">

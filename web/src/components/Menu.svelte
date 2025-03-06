@@ -3,7 +3,6 @@
     import Icon from "./Icon.svelte";
 
     export let open = true;
-    export let allow_blur = false;
 
     onMount(() => {
         window.addEventListener("keydown", (e) => {
@@ -18,14 +17,17 @@
     <div class="menu">
         <button
             class="toggle_open"
+            class:hidden={false}
             on:click={(_) => {
                 open = !open;
             }}
         >
             {#if open}
-                <Icon name="close" />
+                <Icon name="menu" />
+                <span> Menu </span>
             {:else}
                 <Icon name="menu" />
+                <span> Menu </span>
             {/if}
         </button>
 
@@ -63,20 +65,32 @@
             z-index: 100;
             top: 1rem;
             right: 1rem;
-            border-radius: 3rem;
-            padding: 0.5rem;
+            /* border-radius: 3rem; */
+            padding: 0.4rem 0.7rem;
             margin: 0;
-            font-size: 1.5rem;
-            line-height: 0rem;
+            /* font-size: 1.5rem; */
+            /* line-height: 0rem; */
 
-            background: var(--button-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+
+            font-size: 1rem;
+            /* background: var(--button-bg); */
+            background: transparent;
             backdrop-filter: blur(5px);
         }
-        
+
         & .menu {
-            gap: 1px;
+            gap: 2px;
+
             & button {
                 pointer-events: all;
+
+                &:hover {
+                    background: rgba(250, 250, 250, 0.5);
+                }
             }
         }
     }
@@ -95,12 +109,15 @@
         &.open {
             background: rgba(20, 0, 50, 0.12);
         }
-        
+
         & .menu_options {
             display: flex;
             flex-direction: column;
             font-size: 1.5rem;
             width: min(90vw, 30ch);
+            height: fit-content;
+            overflow: hidden;
+            backdrop-filter: blur(50px);
         }
 
         & .menu_options button {

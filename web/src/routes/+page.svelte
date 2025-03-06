@@ -3,6 +3,7 @@
     import { derived } from "svelte/store";
     import RacingGame from "../components/RacingGame.svelte";
     import NeedleEngine from "../components/NeedleEngine.svelte";
+    import MainMenu from "../components/MainMenu.svelte";
 
     const inRace = derived(
         gamestate,
@@ -18,7 +19,9 @@
 </div>
 
 <div class="ui">
-    {#if $inRace}
+    {#if $gamestate === "main-menu"}
+        <MainMenu />
+    {:else if $inRace}
         <RacingGame />
     {/if}
 </div>

@@ -12,30 +12,85 @@
 </script>
 
 {#if $gamestate !== "loading"}
-    <div class="track_options" class:hidden={$isInGameScene}>
-        {#each $tracks as scene, index}
-            <div
-                class="slide_in"
-                style="--delay: {index * 0.1}s; --index: {index}"
-            >
-                <LargeTrackButton
-                    onClick={() => {
-                        open = false;
-                        scene.select();
-                    }}
+    <div class="main_menu" class:hidden={$isInGameScene}>
+        <div class="title_container">
+            <h1 class="title">Needle Racing</h1>
+        </div>
+
+        <div class="track_options">
+            {#each $tracks as scene, index}
+                <div
+                    class="slide_in"
+                    style="--delay: {index * 0.1}s; --index: {index}"
                 >
-                    {scene.name}
-                </LargeTrackButton>
-            </div>
-        {/each}
+                    <LargeTrackButton
+                        t01={index / ($tracks.length - 1)}
+                        onClick={() => {
+                            open = false;
+                            scene.select();
+                        }}
+                    >
+                        {scene.name}
+                    </LargeTrackButton>
+                </div>
+            {/each}
+        </div>
     </div>
 {/if}
 
 <style>
+    .main_menu {
+        position: fixed;
+        z-index: 100;
+    }
+
     .hidden {
         display: none !important;
     }
 
+    @keyframes title_intro {
+        from {
+            transform: translateX(40ch);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .title_container {
+        position: absolute;
+        padding: 2rem;
+        padding-left: calc(20vw - 10ch);
+        overflow: hidden;
+        white-space: nowrap;
+
+        animation: title_intro 3s forwards 0.5s;
+        opacity: 0;
+
+        & .title {
+            font-size: 10rem;
+            line-height: 0.8em;
+        }
+    }
+
+    @keyframes slide_in {
+        from {
+            transform: translateX(-100%);
+        }
+        20% {
+            transform: translateX(calc(var(--index) * 2rem + 1rem));
+        }
+        to {
+            transform: translateX(calc(var(--index) * 3rem + 1rem));
+        }
+    }
+
+    .slide_in {
+        transform: translateX(-100%);
+        animation: slide_in 6s forwards var(--delay);
+    }
     .track_options {
         position: fixed;
         left: 0;
@@ -46,13 +101,13 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        gap: 0.2rem;
+        gap: 1px;
 
         pointer-events: none;
         user-select: none;
 
         padding-left: 30vw;
-        padding-bottom: 5vh;
+        padding-bottom: 8vh;
 
         width: 100%;
         height: 100%;
@@ -72,20 +127,15 @@
         /* outline: 1px solid red; */
     }
 
-    @keyframes slide_in {
-        from {
-            transform: translateX(-100%);
-        }
-        .5% {
-            transform: translateX(calc(var(--index) * 1rem));
-        }
-        to {
-            transform: translateX(calc(var(--index) * 10vw));
-        }
-    }
 
-    .slide_in {
-        transform: translateX(-100%);
-        animation: slide_in 200s ease-in-out forwards var(--delay);
+    @media (width <= 1200px) {
+        .title {
+            white-space: initial;
+            font-size: 8rem !important;
+        }
+        
+        /* padding-bottom: 5vh; {
+
+        } */
     }
 </style>

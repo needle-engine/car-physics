@@ -53,10 +53,6 @@ export class RacingGame extends Behaviour {
             check?.setHighlight(false);
         }
 
-        this._nextCheckpointIndex = 0;
-        this._lastCheckpoint = null;
-        this._lapTime = 0;
-
         this._bestLapTime = parseFloat(localStorage.getItem("bestlap") || "0");
         this._lastLapTime = parseFloat(localStorage.getItem("lastlap") || "0");
     }
@@ -90,8 +86,10 @@ export class RacingGame extends Behaviour {
                 }
                 break;
             case "race-in-progress":
-                this._raceProgressStartTime = Date.now();
+                this._lastCheckpoint = null;
+                this._nextCheckpointIndex = 0;
                 this._lapTime = 0;
+                this._raceProgressStartTime = Date.now();
 
                 if (this.cameraRig) {
                     this.cameraRig.gameObject.visible = true;

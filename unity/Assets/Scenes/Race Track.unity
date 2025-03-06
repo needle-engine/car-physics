@@ -9343,7 +9343,7 @@ MonoBehaviour:
   maxPolarAngle: 3.1415927
   minAzimuthAngle: -6.2831845
   maxAzimuthAngle: 6.2831855
-  enableZoom: 1
+  enableZoom: 0
   minZoom: 0.1
   maxZoom: 500
   zoomSpeed: 1

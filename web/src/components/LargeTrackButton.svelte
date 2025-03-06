@@ -1,8 +1,9 @@
 <script lang="ts">
     export let onClick: (evt: Event) => void;
+    export let t01;
 </script>
 
-<button class="largebutton" on:click={onClick}>
+<button class="largebutton" on:click={onClick} style="--t01: {t01}">
     <span class="text">
         <slot></slot>
     </span>
@@ -13,7 +14,6 @@
         border: none;
         outline: none;
         box-shadow: none;
-        border-radius: 0;
         margin: 0;
 
         display: flex;
@@ -21,21 +21,23 @@
         white-space: nowrap;
 
         color: white;
-        font-size: 4rem;
+        font-size: 3rem;
 
         padding: 0.8rem;
-        padding-left: 5rem;
 
-        transition: all 1s;
+        transition: all .5s ease-in-out;
 
-        
-
-        /* box-shadow: -10rem 0 5rem rgba(0, 0, 0, 0.8); */
+        /* box-shadow: 0rem 1rem 5rem rgba(0, 0, 0, 0.3); */
 
         width: 100%;
-        background-color: var(--button-bg);
-        backdrop-filter: blur(10px);
-        padding: .5rem 5rem;
+        background-color: rgba(10, 10, 10, calc((.3 - var(--t01) * 0.2)));
+        backdrop-filter: blur(20px);
+        outline: 1px solid rgba(200, 200, 200, .1);
+
+        padding: .7rem 1rem;
+        padding-bottom: 1rem;
+        border-radius: 0.3rem;
+
 
         /* padding-right: 10rem; */
         /* background: linear-gradient(
@@ -45,14 +47,13 @@
         ) !important; */
 
         &:hover {
-            & > * {
-                transform: translateX(0.5rem);
-            }
+            transition: all 0.2s ease-in-out;
+            transform: translateX(-1rem);
         }
     }
     .text {
         margin-left: 1rem;
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        text-shadow: 0 0 5px rgba(200, 200, 200, 0.5);
         transition: all 0.2s;
         text-transform: capitalize;
     }
