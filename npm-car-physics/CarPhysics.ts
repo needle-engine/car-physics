@@ -126,6 +126,12 @@ export class CarPhysics extends Behaviour {
     get currentSpeedInKmh() {
         return this.currentSpeed * 3.6;
     }
+    /**
+     * The maximum speed of the car in km/h
+     */
+    get maxSpeedInKmh() {
+        return this.topSpeed * 3.6;
+    }
 
     /**
      * Current vehicle speed normalized between 0 and 1 where 1 is the top speed
@@ -263,8 +269,6 @@ export class CarPhysics extends Behaviour {
             this.stopCoroutine(this._physicsRoutine);
         }
     }
-    onDestroy(): void {
-    }
 
     /** @internal */
     onBeforeRender() {
@@ -352,7 +356,7 @@ export class CarPhysics extends Behaviour {
         const vel = this._vehicle.currentVehicleSpeed();
         const reachedTopSpeed = vel > this.topSpeed;
 
-        const pullForce = this.context.time.deltaTime * this.mass * this.currentSpeed01 * 9.81 * Mathf.clamp01(1 - Math.pow(this._airtime, 2));
+        const pullForce = this.context.time.deltaTime * this.mass * this.currentSpeed01 * 20;// * Mathf.clamp01(1 - Math.pow(this._airtime, 2));
         this._rigidbody.applyImpulse(getTempVector(0, -pullForce, 0))
 
         // breaking

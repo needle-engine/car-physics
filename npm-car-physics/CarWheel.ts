@@ -39,16 +39,16 @@ export class CarWheel extends Behaviour {
     /**
      * The suspension’s damping when the wheel is being compressed.  
      * Lower values make the suspension more bouncy while higher values make it more stiff.
-     * @default 3
+     * @default 4
      */
     @serializable()
-    suspensionCompression: number = 3;
+    suspensionCompression: number = 4;
     /**
      * The relaxation of the suspension. Increase this value if the suspension appears to overshoot.
-     * @default 1
+     * @default 2
      */
     @serializable()
-    suspensionRelax: number = 1;
+    suspensionRelax: number = 2;
     /** 
      * The stiffness of the suspension. Increase this value if the suspension appears to not push the vehicle strong enough.
      * @default -1
@@ -71,8 +71,9 @@ export class CarWheel extends Behaviour {
 
     /**
      * The friction of the wheel based on the grip amount.  
-     * X: min friction used when the calculated wheel grip is low. Y: max friction used when the calculated wheel grip is high.  
-     * Lower values generally make the car more slippery while higher values make it more grippy. This is particular noticeable when steering.
+     * Value Range: Lower values generally make the car more slippery while higher values make it more grippy. This is particular noticeable when steering.  
+     * X: This is the min friction used when the calculated wheel grip is low.   
+     * Y: The max friction used when the calculated wheel grip is high.   
      * @default { x: 4, y: 20 }
      */
     @serializable(Vector2)
@@ -175,12 +176,12 @@ export class CarWheel extends Behaviour {
 
         let suspensionStiff = this.suspensionStiff;
         if (!suspensionStiff || suspensionStiff <= 0) {
-            suspensionStiff = 45;
+            suspensionStiff = 55;
         }
 
         let maxSupsensionForce = this.maxSuspensionForce;
         if (!maxSupsensionForce || maxSupsensionForce <= 0) {
-            maxSupsensionForce = car.mass * 9.81 * 10;
+            maxSupsensionForce = car.mass * 9.81 * 20;
         }
 
 
@@ -222,12 +223,9 @@ export class CarWheel extends Behaviour {
         }
 
         // slip
-        const velocity = this.car.velocity;
+        const velocity = getTempVector(this.car.velocity).clampLength(0, 1);
         let gripAmount = velocity.dot(this.car.gameObject.worldRight);
-        gripAmount = Mathf.clamp(gripAmount, 0, 1);
-        if (velocity.length() < 1) {
-            gripAmount = 1;
-        }
+        gripAmount = 1 - Math.abs(gripAmount);
         const friction = Mathf.lerp(this.frictionSlip.x, this.frictionSlip.y, gripAmount);
         this.vehicle.setWheelFrictionSlip(this._wheelIndex, friction);
 
