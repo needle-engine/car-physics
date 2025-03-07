@@ -1,7 +1,8 @@
-import { currentCarInstance, tracks, type Gamestate, gamestate } from "$lib";
+import { currentCarInstance, tracks, type Gamestate, gamestate, settings } from "$lib";
 import { get } from "svelte/store";
-import { AssetReference, Behaviour, Camera, FileReference, serializable } from "@needle-tools/engine";
+import { AssetReference, AudioSource, Behaviour, Camera, FileReference, findObjectOfType, findObjectsOfType, PostProcessingManager, serializable } from "@needle-tools/engine";
 import { Object3D } from "three";
+import { NEEDLE_ENGINE_MODULES } from "@needle-tools/engine";
 
 class GameOption {
     @serializable()
@@ -55,17 +56,21 @@ export class GameManager extends Behaviour {
             });
         }
         tracks.set(opts);
+        NEEDLE_ENGINE_MODULES.POSTPROCESSING.ready().then(this.applySettings);
     }
 
-    private _unsubscribe: (() => void) | null = null;
+    private _unsubscribeStateChanged?: (() => void);
+    private _unsubscribeSettings?: (() => void);
 
     onEnable(): void {
         GameManager._instance = this;
-        this._unsubscribe = gamestate.subscribe(this.onGameStateChanged);
+        this._unsubscribeStateChanged = gamestate.subscribe(this.onGameStateChanged);
+        this._unsubscribeSettings = settings.subscribe(this.applySettings);
     }
     onDisable(): void {
         GameManager._instance = undefined;
-        this._unsubscribe?.();
+        this._unsubscribeStateChanged?.();
+        this._unsubscribeSettings?.();
     }
 
     returnToMainMenu() {
@@ -75,6 +80,7 @@ export class GameManager extends Behaviour {
         for (const menu of this._menuContent) {
             menu.visible = true;
         }
+        this.applySettings();
     }
 
     async loadLevel(index: number) {
@@ -104,7 +110,7 @@ export class GameManager extends Behaviour {
         }
 
         // Hide menu objects
-        for(const menu of this._menuContent) {
+        for (const menu of this._menuContent) {
             menu.visible = false;
         }
         // Add the loaded objects to the scene
@@ -113,6 +119,7 @@ export class GameManager extends Behaviour {
         this.context.scene.add(carInstance);
         // Update state
         GameManager.state = "race-idle";
+        this.applySettings();
         return true;
 
     }
@@ -130,6 +137,26 @@ export class GameManager extends Behaviour {
             case "main-menu":
                 this.returnToMainMenu();
                 break;
+        }
+    }
+
+    private applySettings = () => {
+        console.debug("[GameManager] Applying settings");
+
+        const value = get(settings);
+
+        const postprocessing = findObjectsOfType(PostProcessingManager);
+        if (postprocessing?.length) {
+            for (const post of postprocessing) {
+                post.enabled = value.postprocessing;
+            }
+        }
+
+        const audioSources = findObjectsOfType(AudioSource);
+        if (audioSources?.length) {
+            for (const audio of audioSources) {
+                audio.volume = value.musicVolume;
+            }
         }
     }
 }

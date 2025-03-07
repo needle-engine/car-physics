@@ -1,7 +1,7 @@
 // import { bestlap, laptime, lastlap } from "$lib";
 import { currentCarInstance, currentCarSpeed, currentRaceStartCountDown, currentRaceTimings, type Gamestate, gamestate, menuOpen } from "$lib";
 import { CarController, CarPhysics } from "@needle-tools/car-physics";
-import { AssetReference, Behaviour, getTempVector, PlayableDirector, Rigidbody, serializable } from "@needle-tools/engine";
+import { AssetReference, Behaviour, getTempVector, Mathf, PlayableDirector, Rigidbody, serializable } from "@needle-tools/engine";
 import { Object3D, Ray, Vector3 } from "three";
 import { CarCameraRig } from "./CarCamera";
 import { get } from "svelte/store";
@@ -32,6 +32,7 @@ export class RacingGame extends Behaviour {
     @serializable(AssetReference)
     testcar: AssetReference | null = null;
 
+    private _targetTimescale = 1;
 
     private _unsubscribeGamestate?: Function;
     private _unsubscribeCar?: Function;
@@ -75,6 +76,7 @@ export class RacingGame extends Behaviour {
         else {
             this.context.time.timeScale = 1;
         }
+        this._targetTimescale = this.context.time.timeScale;
     }
 
     private _raceProgressStartTime: number = 0;
@@ -143,6 +145,7 @@ export class RacingGame extends Behaviour {
         const car = get(currentCarInstance);
         if (!car) return;
 
+        this.context.time.timeScale = Mathf.lerp(this.context.time.timeScale, this._targetTimescale, this.context.time.deltaTime / .3);
 
         const state = get(gamestate);
         switch (state) {
@@ -236,6 +239,8 @@ export class RacingGame extends Behaviour {
         localStorage.setItem("lastlap", this._lastLapTime.toString());
         gamestate.set("race-finished");
 
+        this._targetTimescale = 0.05;
+
         // After a few seconds reset the car to the start position
         setTimeout(() => {
             if (get(gamestate) === "race-finished") {
@@ -245,6 +250,7 @@ export class RacingGame extends Behaviour {
                     this.introTimeline.time = 0;
                     this.introTimeline.play();
                 }
+                this._targetTimescale = 1;
                 this.resetCar(this.startPoint);
             }
 

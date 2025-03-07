@@ -350,21 +350,21 @@ MonoBehaviour:
     Asset:
       asset: {fileID: 8836248534321611577, guid: fadaceeaf06987c43b3bbb7e132c13cd, type: 3}
   level:
-  - Name: Race Track
+  - Name: Main Event
     Thumbnail:
       Mode: 0
       File: {fileID: 2800000, guid: e9cd3fcb902fac8498e93307f2bdc821, type: 3}
       String: 
     Asset:
       asset: {fileID: 102900000, guid: e2c496531da474b48a70a3716e0ff882, type: 3}
-  - Name: Race Track 2
+  - Name: Jumping
     Thumbnail:
       Mode: 0
       File: {fileID: 2800000, guid: 462cc0301badb0e489f9158f751654c5, type: 3}
       String: 
     Asset:
       asset: {fileID: 102900000, guid: 585f0ac4f88765b4ea9f4c53cdff461f, type: 3}
-  - Name: Free Driving
+  - Name: Test - Free Driving
     Thumbnail:
       Mode: 0
       File: {fileID: 2800000, guid: 462cc0301badb0e489f9158f751654c5, type: 3}

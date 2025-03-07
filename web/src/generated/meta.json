@@ -3,14 +3,14 @@
   "developmentBuild": false,
   "generator": "Unity 2022.3.52f1, Needle Engine Integration @4.3.0-alpha.3",
   "gzip": true,
-  "allowHotReload": true,
+  "allowHotReload": false,
   "license": {
     "team": "jg3twr0f7zgf"
   },
   "needleEditor": null,
-  "sceneName": "Car Game",
+  "sceneName": "Race Track",
   "meta": null,
-  "absolutePath": null,
+  "absolutePath": "https://localhost:3000",
   "deployOnly": false,
   "facebookInstantGames": null
 }

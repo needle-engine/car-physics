@@ -1,9 +1,12 @@
 <script>
-    import { gamestate } from "$lib";
-    import { derived } from "svelte/store";
+    import { gamestate, settings, updateSettings } from "$lib";
+    import { derived, get } from "svelte/store";
     import RacingGame from "../components/RacingGame.svelte";
     import NeedleEngine from "../components/NeedleEngine.svelte";
     import MainMenu from "../components/MainMenu.svelte";
+    import Menu from "../components/Menu.svelte";
+    import Icon from "../components/Icon.svelte";
+    import SettingsOptions from "../components/SettingsOptions.svelte";
 
     const inRace = derived(
         gamestate,
@@ -21,6 +24,9 @@
 <div class="ui">
     {#if $gamestate === "main-menu"}
         <MainMenu />
+        <Menu contrast>
+            <SettingsOptions />
+        </Menu>
     {:else if $inRace}
         <RacingGame />
     {/if}

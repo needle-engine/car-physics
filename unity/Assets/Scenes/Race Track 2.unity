@@ -877,6 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  rotateInPause: 1
 --- !u!4 &131896502
 Transform:
   m_ObjectHideFlags: 0
@@ -964,6 +965,7 @@ MonoBehaviour:
   - {fileID: 1480305018}
   - {fileID: 2071401897}
   - {fileID: 2096435803}
+  testcar: {fileID: 7983322407693862498, guid: fadaceeaf06987c43b3bbb7e132c13cd, type: 3}
 --- !u!4 &170007778
 Transform:
   m_ObjectHideFlags: 0
@@ -1279,6 +1281,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358230111}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &499861962
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053456377535134895, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946053710234468132, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
+      propertyPath: m_Name
+      value: Car Follow Effects
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b1f413857065b0d4dba296c32df37bfd, type: 3}
 --- !u!1 &560928895
 GameObject:
   m_ObjectHideFlags: 0
@@ -6867,6 +6926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  rotateInPause: 1
 --- !u!1 &2500651184525107912
 GameObject:
   m_ObjectHideFlags: 0
@@ -8048,6 +8108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  rotateInPause: 1
 --- !u!1 &6066055411324107025
 GameObject:
   m_ObjectHideFlags: 0
@@ -8709,3 +8770,4 @@ SceneRoots:
   - {fileID: 8897093224559956369}
   - {fileID: 170007778}
   - {fileID: 1633583599}
+  - {fileID: 499861962}

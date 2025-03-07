@@ -2,7 +2,8 @@
     import { onMount } from "svelte";
     import Icon from "./Icon.svelte";
 
-    export let open = true;
+    export let open = false;
+    export let contrast = false;
 
     onMount(() => {
         window.addEventListener("keydown", (e) => {
@@ -13,7 +14,7 @@
     });
 </script>
 
-<div class="menu-wrapper" class:is_open={open}>
+<div class="menu-wrapper" class:is_open={open} class:contrast>
     <div class="menu">
         <button
             class="toggle_open"
@@ -56,8 +57,10 @@
 
         &.is_open {
             pointer-events: all;
-            /* background-color: rgba(0, 0, 0, 0.3); */
-            /* backdrop-filter: blur(5px); */
+            &.contrast {
+                background-color: rgba(0, 0, 0, 0.6);
+                /* backdrop-filter: blur(5px); */
+            }
         }
 
         & .toggle_open {
@@ -118,14 +121,26 @@
             height: fit-content;
             overflow: hidden;
             backdrop-filter: blur(50px);
-        }
+            gap: 2px;
+            
+            & button {
+                margin: 0;
+                padding: 0.75rem 0.5rem;
+                backdrop-filter: none;
+                border-radius: 0.1rem;
 
-        & .menu_options button {
-            margin: 0;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                align-items: center;
+                gap: 1rem;
+                text-align: start;
+                padding-left: 26%;
+                /* padding-right: 20%; */
 
-            &:disabled {
-                cursor: not-allowed;
-                pointer-events: none !important;
+                &:disabled {
+                    cursor: not-allowed;
+                    pointer-events: none !important;
+                }
             }
         }
     }

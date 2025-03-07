@@ -10,7 +10,7 @@
     .material-symbols-outlined {
         font-size: inherit;
         font-variation-settings:
-            "FILL" 0,
+            "FILL" 1,
             "wght" 400,
             "GRAD" 0,
             "opsz" 24;

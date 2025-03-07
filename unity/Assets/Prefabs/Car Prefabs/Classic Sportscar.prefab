@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carDrive: 1
   mass: 1300
-  maxSteer: 30
+  maxSteer: 20
   steerSmoothingFactor: 0
   accelerationForce: 100
   breakForce: 20

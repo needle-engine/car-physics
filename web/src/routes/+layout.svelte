@@ -1,22 +1,18 @@
 <script lang="ts">
     import "../global.css";
     import LoadingScreen from "../components/LoadingScreen.svelte";
-    import NeedleEngine from "../components/NeedleEngine.svelte";
-    import MainMenu from "../components/MainMenu.svelte";
-
 </script>
 
 <svelte:head>
     <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
 </svelte:head>
 
 <div class="wrapper">
-    <div class="top">
-    </div>
-    
+    <div class="top"></div>
+
     <div class="layout">
         <slot></slot>
     </div>

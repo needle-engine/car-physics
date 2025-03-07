@@ -18,4 +18,4 @@ MonoBehaviour:
   generateReport: 0
   allowRunningProjectFixes: 1
   npmSearchPathDirectories: []
-  useHotReload: 1
+  useHotReload: 0
