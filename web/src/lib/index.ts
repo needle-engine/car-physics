@@ -8,9 +8,9 @@ let screenshotFn: typeof screenshot2 | undefined = undefined;
 
 export async function screenshot(): Promise<any> {
     return await screenshotFn?.({
-        width: 1024,
-        height: 960,
-        download_filename: "screenshot.png",
+        // width: 1024,
+        // height: 960,
+        download_filename: "needle-racing.png",
     });
 }
 
