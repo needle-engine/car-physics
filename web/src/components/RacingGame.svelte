@@ -62,15 +62,6 @@
 
         <button
             on:click={() => {
-                gamestate.set("main-menu");
-            }}
-        >
-            <Icon name="home" />
-            Back to Main Menu
-        </button>
-
-        <button
-            on:click={() => {
                 menuOpen.set(false);
                 screenshot().then(res => {
                     menuOpen.set(true);
@@ -79,6 +70,15 @@
         >
             <Icon name="camera" />
             Take Screenshot
+        </button>
+
+        <button
+            on:click={() => {
+                gamestate.set("main-menu");
+            }}
+        >
+            <Icon name="home" />
+            Back to Main Menu
         </button>
     </Menu>
 
