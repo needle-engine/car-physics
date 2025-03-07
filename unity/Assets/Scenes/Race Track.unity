@@ -6257,7 +6257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Needle.Engine.Components.PostProcessing.ScreenSpaceAmbientOcclusionN8,
     Needle.Engine
-  gammaCorrection: 1
+  gammaCorrection: 0
   intensity: 5
   falloff: 1
   aoRadius: 3
@@ -6291,7 +6291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 5
   falloff: 3
-  samples: 11
+  samples: 20
   color: {r: 0, g: 0, b: 0, a: 1}
   luminanceInfluence: 0.7
 --- !u!64 &1325055940
