@@ -47,6 +47,10 @@ MonoBehaviour:
     Projects:
     - ProjectPath: ../web
     BuilderScene: 
+  - Path: Assets/Scenes/Tests/Free Driving.unity
+    Projects:
+    - ProjectPath: ../web
+    BuilderScene: 
   Projects:
   - ProjectPath: Library/Needle/Sample
   - ProjectPath: ../web

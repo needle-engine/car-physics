@@ -79,6 +79,9 @@ export class CarPhysics extends Behaviour {
         this._steerInput = Mathf.clamp(this._steerInput, -1, 1);
     }
 
+    get currentSteer() { return this._currentSteer; }
+    set currentSteer(val: number) { this._currentSteer = val; }
+
     /**
      * Increase or decrease acceleration
      * @param accelAmount -1 to 1 where -1 is full brake and 1 is full acceleration
@@ -338,7 +341,6 @@ export class CarPhysics extends Behaviour {
         while (true) {
             if (this._vehicle) {
                 const dt = this.context.time.deltaTime;
-                // this._rigidbody.wakeUp();
                 this._vehicle?.updateVehicle(dt);
             }
             yield null;
@@ -365,6 +367,7 @@ export class CarPhysics extends Behaviour {
         if (isBreaking) {
             breakForce = this.breakForce * -this._currAcc;
         }
+        breakForce += Math.max(0, this._currBreak) * this.breakForce;
 
         // acceleration
         const isAccelerating = this._currAcc != 0 && !reachedTopSpeed;
@@ -375,8 +378,6 @@ export class CarPhysics extends Behaviour {
         // steer
         const maxAngle = Mathf.lerp(this.maxSteer, this.maxSteer * .5, this.currentSpeed01);
         const steer = this._currentSteer * maxAngle * Mathf.Deg2Rad;
-
-        breakForce += Math.max(0, this._currBreak) * this.breakForce;
 
         // updateWheels
         this.wheels.forEach((wheel) => {

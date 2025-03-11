@@ -113,12 +113,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarPhysics, Needle.Engine-Samples.Runtime
   carDrive: 0
-  mass: 150
+  mass: 500
   maxSteer: 50
   steerSmoothingFactor: 0.1
-  accelerationForce: 5
-  breakForce: 5
-  topSpeed: 15
+  accelerationForce: 15
+  breakForce: 15
+  topSpeed: 25
   wheels: []
 --- !u!114 &4129935638532701152
 MonoBehaviour:
@@ -133,6 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Needle.Typescript.GeneratedComponents.CarController, Needle.Engine-Samples.Runtime
   carPhysics: {fileID: 0}
+  autoReset: 1
+  manualReset: 1
 --- !u!114 &824349755871433756
 MonoBehaviour:
   m_ObjectHideFlags: 0

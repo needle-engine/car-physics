@@ -39,10 +39,10 @@ export class CarWheel extends Behaviour {
     /**
      * The suspension’s damping when the wheel is being compressed.  
      * Lower values make the suspension more bouncy while higher values make it more stiff.
-     * @default 5
+     * @default 3
      */
     @serializable()
-    suspensionCompression: number = 5;
+    suspensionCompression: number = 3;
     /**
      * The relaxation of the suspension. Increase this value if the suspension appears to overshoot.
      * @default 5
@@ -72,12 +72,12 @@ export class CarWheel extends Behaviour {
     /**
      * The friction of the wheel based on the grip amount.  
      * Value Range: Lower values generally make the car more slippery while higher values make it more grippy. This is particular noticeable when steering.  
-     * X: This is the min friction used when the calculated wheel grip is low.   
-     * Y: The max friction used when the calculated wheel grip is high.   
-     * @default { x: 4, y: 20 }
+     * X: Friction used when the calculated wheel grip is low.   
+     * Y: Friction used when the calculated wheel grip is high.   
+     * @default { x: 1, y: 20 }
      */
     @serializable(Vector2)
-    frictionSlip: Vector2 = new Vector2(4, 20);
+    frictionSlip: Vector2 = new Vector2(1, 20);
 
     // --- Visuals ---
     @serializable(ParticleSystem)

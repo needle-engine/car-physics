@@ -132,6 +132,7 @@ export class CarController extends Behaviour {
 
         let steer = 0;
         let accel = 0;
+        let breakVal = 0;
 
         if (this.context.xr) {
             accel += this.context.xr.rightController?.getButton("a-button")?.value || 0;
@@ -157,6 +158,9 @@ export class CarController extends Behaviour {
             }
             if (this.context.input.isKeyPressed("w") || this.context.input.isKeyPressed("ArrowUp")) {
                 accel += 1;
+            }
+            if(this.context.input.isKeyPressed(" ")) {
+                breakVal += 1;
             }
         }
 
@@ -247,16 +251,18 @@ export class CarController extends Behaviour {
             }
         }
 
-        if (Math.abs(steer) > .02) {
-            this._currentSteerAccum += steer * this.context.time.deltaTime / .1;
-        }
-        else {
-            this._currentSteerAccum = Mathf.lerp(this._currentSteerAccum, 0, this.context.time.deltaTime / .1);
-        }
+        // if (Math.abs(steer) > .02) {
+        //     this._currentSteerAccum += steer * this.context.time.deltaTime / .1;
+        // }
+        // else {
+        //     this._currentSteerAccum = Mathf.lerp(this._currentSteerAccum, 0, this.context.time.deltaTime / .1);
+        // }
 
-        this._currentSteerAccum = Mathf.clamp(this._currentSteerAccum, -1, 1);
-        this._currentSteer = Mathf.lerp(this._currentSteer, this._currentSteerAccum, this.context.time.deltaTime / .1);
+        // this._currentSteerAccum = Mathf.clamp(this._currentSteerAccum, -1, 1);
+        steer *= Math.max(.2, Math.min(1, 2 * Math.abs(this.carPhysics.currentSteer)));
+        this._currentSteer = Mathf.lerp(this._currentSteer, steer, this.context.time.deltaTime / .12);
         this.carPhysics.steerImpulse(this._currentSteer);
+        this.carPhysics.breakImpulse(breakVal);
         this.carPhysics.accelerationImpulse(accel);
 
     }

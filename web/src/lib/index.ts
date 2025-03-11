@@ -1,5 +1,6 @@
-import { updateSettings } from "./stores.js";
-import type { Context, screenshot2 } from "@needle-tools/engine";
+import { GameManager } from "../scripts/GameManager.js";
+import { gamestate, updateSettings } from "./stores.js";
+import { findObjectOfType, type Context, type screenshot2 } from "@needle-tools/engine";
 
 export * from "./stores.js";
 
@@ -35,6 +36,10 @@ if (typeof window !== "undefined") {
         ne.onStart(async context => {
             context = context;
             context.menu.setVisible(false);
+            const game = findObjectOfType(GameManager);
+            if(!game) {
+                gamestate.set("main-menu");
+            }
         });
     });
 }

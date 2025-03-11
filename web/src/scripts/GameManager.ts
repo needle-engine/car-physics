@@ -1,6 +1,6 @@
 import { currentCarInstance, tracks, type Gamestate, gamestate, settings } from "$lib";
 import { get } from "svelte/store";
-import { AssetReference, AudioSource, Behaviour, BloomEffect, Camera, FileReference, findObjectOfType, findObjectsOfType, PostProcessingManager, ScreenSpaceAmbientOcclusion, ScreenSpaceAmbientOcclusionN8, serializable } from "@needle-tools/engine";
+import { AssetReference, AudioSource, Behaviour, BloomEffect, FileReference, findObjectsOfType, PostProcessingManager, ScreenSpaceAmbientOcclusion, ScreenSpaceAmbientOcclusionN8, serializable } from "@needle-tools/engine";
 import { Object3D } from "three";
 import { NEEDLE_ENGINE_MODULES } from "@needle-tools/engine";
 
