@@ -39,16 +39,16 @@ export class CarWheel extends Behaviour {
     /**
      * The suspension’s damping when the wheel is being compressed.  
      * Lower values make the suspension more bouncy while higher values make it more stiff.
-     * @default 4
+     * @default 5
      */
     @serializable()
-    suspensionCompression: number = 4;
+    suspensionCompression: number = 5;
     /**
      * The relaxation of the suspension. Increase this value if the suspension appears to overshoot.
-     * @default 2
+     * @default 5
      */
     @serializable()
-    suspensionRelax: number = 2;
+    suspensionRelax: number = 5;
     /** 
      * The stiffness of the suspension. Increase this value if the suspension appears to not push the vehicle strong enough.
      * @default -1
@@ -166,31 +166,37 @@ export class CarWheel extends Behaviour {
 
         let restLength = this.suspensionRestLength;
         if (!restLength || restLength <= 0) {
-            restLength = radius * .5;
+            restLength = this._activeRadius * .5;
         }
 
         let maxSuspensionTravel = this.maxSuspensionTravel;
         if (!maxSuspensionTravel || maxSuspensionTravel <= 0) {
-            maxSuspensionTravel = radius * .5;
+            maxSuspensionTravel = this._activeRadius * .5;
         }
 
         let suspensionStiff = this.suspensionStiff;
         if (!suspensionStiff || suspensionStiff <= 0) {
-            suspensionStiff = 55;
+            suspensionStiff = 50;
         }
 
         let maxSupsensionForce = this.maxSuspensionForce;
         if (!maxSupsensionForce || maxSupsensionForce <= 0) {
-            maxSupsensionForce = car.mass * 9.81 * 20;
+            maxSupsensionForce = 100_000_000;
         }
 
 
-        if (debugWheel) console.debug(this.name, { suspensionTravel: maxSuspensionTravel, restLength, radius: this._activeRadius }, this);
+        if (debugWheel) console.debug(this.name, {
+            restLength,
+            suspensionTravel: maxSuspensionTravel,
+            suspensionStiff,
+            maxSupsensionForce,
+            radius: this._activeRadius
+        }, this);
 
         this.vehicle.addWheel(lPos, suspensionDirection, axleDirection, restLength, this._activeRadius);
         this.vehicle.setWheelMaxSuspensionTravel(i, maxSuspensionTravel);
-        this.vehicle.setWheelSuspensionStiffness(i, suspensionStiff);
         this.vehicle.setWheelMaxSuspensionForce(i, maxSupsensionForce);
+        this.vehicle.setWheelSuspensionStiffness(i, suspensionStiff);
         this.vehicle.setWheelSuspensionCompression(i, this.suspensionCompression);
         this.vehicle.setWheelSuspensionRelaxation(i, this.suspensionRelax);
         this.vehicle.setWheelSideFrictionStiffness(i, this.sideFrictionStiffness);
