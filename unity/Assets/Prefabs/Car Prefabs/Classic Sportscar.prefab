@@ -49,7 +49,7 @@ MonoBehaviour:
   carDrive: 1
   mass: 1300
   maxSteer: 20
-  steerSmoothingFactor: 0
+  steerSmoothingFactor: 0.1
   accelerationForce: 100
   breakForce: 20
   topSpeed: 100
@@ -67,6 +67,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carPhysics: {fileID: 0}
+  autoReset: 1
+  manualReset: 1
 --- !u!1001 &6962397337491416911
 PrefabInstance:
   m_ObjectHideFlags: 0

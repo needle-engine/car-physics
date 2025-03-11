@@ -12,11 +12,11 @@ namespace Needle.Typescript.GeneratedComponents
 		public float @radius;
 		public float @suspensionRestLength;
 		public float @maxSuspensionTravel;
-		public float @suspensionCompression = 2f;
-		public float @suspensionRelax = 3f;
-		public float @suspensionStiff = 50f;
-		public float @maxSuspensionForce = 1000f;
-		public float @sideFrictionStiffness = 0.5f;
+		public float @suspensionCompression = -1f;
+		public float @suspensionRelax = -1f;
+		public float @suspensionStiff = -1f;
+		public float @maxSuspensionForce = -1f;
+		public float @sideFrictionStiffness = 0.7f;
 		public UnityEngine.Vector2 @frictionSlip = new UnityEngine.Vector2(2f, 50f);
 		public UnityEngine.ParticleSystem @skidParticle;
 		public float @skidVisualSideThreshold = 5f;

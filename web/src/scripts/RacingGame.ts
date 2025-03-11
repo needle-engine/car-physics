@@ -12,6 +12,14 @@ export class Checkpoint extends Behaviour {
         this.gameObject.visible = highlight;
     }
 }
+
+function writeLocalState(key: string, value: string) {
+    localStorage.setItem(GameManager.activeLevelName?.toLowerCase() + key, value);
+}
+function getLocalState(key:string) {
+    return localStorage.getItem(GameManager.activeLevelName?.toLowerCase() + key);
+}
+
 export class RacingGame extends Behaviour {
 
     @serializable(PlayableDirector)
@@ -60,8 +68,8 @@ export class RacingGame extends Behaviour {
             check?.setHighlight(false);
         }
 
-        this._bestLapTime = parseFloat(localStorage.getItem("bestlap") || "0");
-        this._lastLapTime = parseFloat(localStorage.getItem("lastlap") || "0");
+        this._bestLapTime = parseFloat(getLocalState("bestlap") || "0");
+        this._lastLapTime = parseFloat(getLocalState("lastlap") || "0");
     }
 
     onDisable(): void {
@@ -233,10 +241,10 @@ export class RacingGame extends Behaviour {
         if (currentLaptime < this._bestLapTime || this._bestLapTime === 0) {
             this._bestLapTime = currentLaptime;
             // bestlap.set(this._bestLapTime);
-            localStorage.setItem("bestlap", this._bestLapTime.toString());
+            writeLocalState("bestlap", this._bestLapTime.toString());
         }
         this._lastLapTime = currentLaptime;
-        localStorage.setItem("lastlap", this._lastLapTime.toString());
+        writeLocalState("lastlap", this._lastLapTime.toString());
         gamestate.set("race-finished");
 
         this._targetTimescale = 0.05;

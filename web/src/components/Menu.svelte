@@ -113,7 +113,6 @@
             & button,
             input {
                 pointer-events: all;
-
             }
         }
     }

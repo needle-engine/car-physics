@@ -840,7 +840,6 @@ GameObject:
   m_Component:
   - component: {fileID: 131896502}
   - component: {fileID: 131896501}
-  - component: {fileID: 131896500}
   m_Layer: 0
   m_Name: Lights Root
   m_TagString: Untagged
@@ -848,22 +847,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &131896500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131896499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91e887f1c3ee463881c1913204ca9388, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  followFactor: 20
-  rotateFactor: 0
-  positionAxes: -1
 --- !u!114 &131896501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,8 +859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62682fc5bf8f36f7ea78a009dc10b92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  rotateInPause: 1
+  speed: 20
+  rotateInPause: 0
 --- !u!4 &131896502
 Transform:
   m_ObjectHideFlags: 0
@@ -6825,22 +6808,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5472133085100170193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1987972333309333999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4748779181857273781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91e887f1c3ee463881c1913204ca9388, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Needle.Engine.Components.SmoothFollow, Needle.Engine
-  target: {fileID: 1788320523647435325}
-  followFactor: 55
-  rotateFactor: 0
-  positionAxes: -1
 --- !u!1 &1995815212937538343
 GameObject:
   m_ObjectHideFlags: 0
@@ -7227,22 +7194,6 @@ Transform:
   - {fileID: 3615389453691033720}
   m_Father: {fileID: 8897093224559956369}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3745597565977300277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6066055411324107025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91e887f1c3ee463881c1913204ca9388, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Needle.Engine.Components.SmoothFollow, Needle.Engine
-  target: {fileID: 1788320523647435325}
-  followFactor: 55
-  rotateFactor: 0
-  positionAxes: -1
 --- !u!4 &3827541229129832633
 Transform:
   m_ObjectHideFlags: 0
@@ -7537,7 +7488,6 @@ GameObject:
   - component: {fileID: 4220276344327854731}
   - component: {fileID: 2973688800195872548}
   - component: {fileID: 2666027568974320567}
-  - component: {fileID: 1987972333309333999}
   - component: {fileID: 4760207379354042538}
   m_Layer: 0
   m_Name: Directional Light (1)
@@ -8121,7 +8071,6 @@ GameObject:
   - component: {fileID: 4312601647086949585}
   - component: {fileID: 816110879078820276}
   - component: {fileID: 4750075230568791714}
-  - component: {fileID: 3745597565977300277}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged

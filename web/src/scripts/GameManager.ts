@@ -27,6 +27,10 @@ export class GameManager extends Behaviour {
         gamestate.set(value);
     }
 
+    static get activeLevelName() {
+        return this._instance?._activeLevelName || null;
+    }
+
     /**
      * Available cars to load
      */
@@ -43,6 +47,7 @@ export class GameManager extends Behaviour {
         return this.cars[0];
     }
 
+    private _activeLevelName: string | null = null;
     private readonly _menuContent: Array<Object3D> = [];
     private readonly _instances: Array<Object3D | null> = [];
 
@@ -80,6 +85,7 @@ export class GameManager extends Behaviour {
 
     returnToMainMenu() {
         this.unloadPrevious();
+        this._activeLevelName = null;
         GameManager.state = "main-menu";
         this.context.time.timeScale = 1;
         for (const menu of this._menuContent) {
@@ -103,6 +109,7 @@ export class GameManager extends Behaviour {
         this.unloadPrevious();
 
         GameManager.state = "loading";
+        this._activeLevelName = level.name;
         const carInstancePromise = this.currentCar.asset.instantiate();
         const levelPromise = level.asset.instantiate();
 

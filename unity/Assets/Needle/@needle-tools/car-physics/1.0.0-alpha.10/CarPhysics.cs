@@ -15,13 +15,13 @@ namespace Needle.Typescript.GeneratedComponents
 	public partial class CarPhysics : UnityEngine.MonoBehaviour
 	{
 		public Needle.Typescript.GeneratedComponents.CarDrive @carDrive;
-		public float @mass = 150f;
+		public float @mass = 500f;
 		[UnityEngine.Tooltip("The maximum steering angle in degrees")]
-		public float @maxSteer = 50f;
-		public float @steerSmoothingFactor = 0.3f;
-		public float @accelerationForce = 5f;
-		public float @breakForce = 5f;
-		public float @topSpeed = 15f;
+		public float @maxSteer = 40f;
+		public float @steerSmoothingFactor = 0.1f;
+		public float @accelerationForce = 12f;
+		public float @breakForce = 12f;
+		public float @topSpeed = 20f;
 		public Needle.Typescript.GeneratedComponents.CarWheel[] @wheels = new Needle.Typescript.GeneratedComponents.CarWheel[]{ };
 		public void steerInput(float @steerAmount){}
 		public void accelerationInput(float @accelAmount){}
