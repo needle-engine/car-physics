@@ -14,15 +14,15 @@ export class CarPhysics extends Behaviour {
     carDrive: CarDrive = CarDrive.all;
 
     @serializable()
-    mass: number = 150;
+    mass: number = 500;
 
     // @tooltip The maximum steering angle in degrees
     /**
      * The maximum steering angle in degrees
-     * @default 50
+     * @default 40
      */
     @serializable()
-    maxSteer: number = 50;
+    maxSteer: number = 40;
 
     /**
      * The steering smoothing factor. The higher the value, the slower the steering response (the more smoothing will be applied)
@@ -36,14 +36,14 @@ export class CarPhysics extends Behaviour {
      * @default 5
      */
     @serializable()
-    accelerationForce: number = 5;
+    accelerationForce: number = 12;
 
     /**
      * The breaking force in Newtons
      * @default 7
      */
     @serializable()
-    breakForce: number = 7;
+    breakForce: number = 12;
 
     /**
      * The top speed of the car in m/s
@@ -406,7 +406,7 @@ function trySetupWheelsAutomatically(car: CarPhysics): CarWheel[] {
 
         const size = bounds.getSize(new Vector3());
         const wheelRadius = (size.length()) * .1;
-        const wheelY = bounds.min.y + wheelRadius;
+        const wheelY = bounds.min.y;// + wheelRadius * .5;
         let insetFactorHorizontal = (bounds.max.x - bounds.min.x) * .1;
         let insetFactorVertical = (bounds.max.z - bounds.min.z) * .1;
 

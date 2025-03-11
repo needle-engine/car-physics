@@ -248,12 +248,13 @@ export class CarController extends Behaviour {
         }
 
         if (Math.abs(steer) > .02) {
-            this._currentSteerAccum += steer * this.context.time.deltaTime / .3;
+            this._currentSteerAccum += steer * this.context.time.deltaTime / .1;
         }
         else {
             this._currentSteerAccum = Mathf.lerp(this._currentSteerAccum, 0, this.context.time.deltaTime / .1);
         }
 
+        this._currentSteerAccum = Mathf.clamp(this._currentSteerAccum, -1, 1);
         this._currentSteer = Mathf.lerp(this._currentSteer, this._currentSteerAccum, this.context.time.deltaTime / .1);
         this.carPhysics.steerImpulse(this._currentSteer);
         this.carPhysics.accelerationImpulse(accel);
