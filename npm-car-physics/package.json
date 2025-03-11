@@ -1,6 +1,6 @@
 {
 	"name": "@needle-tools/car-physics",
-	"version": "1.0.0-alpha.10",
+	"version": "1.0.0-alpha.11",
 	"main": "index.ts",
 	"peerDependencies": {
 	  "@dimforge/rapier3d-compat": ">= 0.12.0",
