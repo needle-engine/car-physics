@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+
+/** Variables **/
+:root {
+    --font-family: "Outfit", sans-serif;
+    --button-bg: rgba(255, 255, 255, .2);
+    --button-text: white;
+    --slider_thumb_width: 2px;
+}

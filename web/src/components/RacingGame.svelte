@@ -11,77 +11,30 @@
     import RaceTimePanel from "./RaceTimePanel.svelte";
     import { onMount } from "svelte";
     import Icon from "./Icon.svelte";
+    import RacingOptions from "./Options/RacingOptions.svelte";
+    import SettingsOptions from "./Options/SettingsOptions.svelte";
+    import OptionSeparator from "./Options/OptionSeparator.svelte";
 
     onMount(() => {
         menuOpen.set(false);
         // Open the menu when the race finishes
-        return gamestate.subscribe((newstate) => {
+        const unsub = gamestate.subscribe((newstate) => {
             if (newstate === "race-finished") {
                 menuOpen.set(true);
             }
         });
+        return () => {
+            unsub();
+        };
     });
 </script>
 
 {#if $gamestate !== "race-idle"}
     <Menu bind:open={$menuOpen}>
-        {#if $gamestate === "race-in-progress"}
-            <button
-                on:click={() => {
-                    menuOpen.set(false);
-                }}
-            >
-                <Icon name="pause" />
-                Continue Race
-            </button>
-        {/if}
-
-        <button
-            on:click={() => {
-                menuOpen.set(false);
-                if ($gamestate === "race-in-progress") {
-                    $gamestate = "race-idle";
-                    window.requestAnimationFrame(
-                        () => ($gamestate = "race-in-progress"),
-                    );
-                } else gamestate.set("race-in-progress");
-            }}
-            class="start-button"
-        >
-            {#if $gamestate === "race-finished"}
-                <Icon name="flag" />
-                race again
-            {:else if $gamestate === "race-in-progress"}
-                <Icon name="flag" />
-                restart race
-            {:else}
-                <Icon name="flag" />
-                start race
-            {/if}
-        </button>
-
-        <button
-            on:click={() => {
-                menuOpen.set(false);
-                screenshot().then(res => {
-                    menuOpen.set(true);
-                })
-            }}
-        >
-            <Icon name="camera" />
-            Take Screenshot
-        </button>
-
-        <button
-            on:click={() => {
-                gamestate.set("main-menu");
-            }}
-        >
-            <Icon name="home" />
-            Back to Main Menu
-        </button>
+        <RacingOptions />
+        <OptionSeparator />
+        <SettingsOptions />
     </Menu>
-
 {/if}
 
 {#if $gamestate === "race-idle"}
@@ -105,19 +58,6 @@
 {/if}
 
 <style>
-    .menu {
-        display: flex;
-        flex-direction: column;
-        pointer-events: none;
-
-        /* & button {
-            background: var(--button-bg);
-            border-radius: 0.2rem;
-            padding: 1rem;
-            transition: all 0.2s;
-        } */
-    }
-
     .before_race {
         position: absolute;
         left: 0;
@@ -133,6 +73,7 @@
     .before_race button {
         pointer-events: all;
         font-size: 10rem;
+        line-height: .85em;
         background: none !important;
         transition: all 0.5s;
         opacity: 0.8;
@@ -147,12 +88,5 @@
             font-weight: bold;
             text-shadow: 0 0 3rem rgba(255, 255, 255, 0.5);
         }
-    }
-
-    button.start-button {
-        /* font-size: 4rem;
-        padding: 2rem;
-        font-weight: bold; */
-        text-transform: capitalize;
     }
 </style>

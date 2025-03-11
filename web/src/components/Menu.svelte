@@ -1,6 +1,9 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import Icon from "./Icon.svelte";
+    import { type MenuOption, menuOptions } from "$lib";
+    import { derived, get } from "svelte/store";
+    import SettingsOptions from "./Options/SettingsOptions.svelte";
 
     export let open = false;
     export let contrast = false;
@@ -12,6 +15,25 @@
             }
         });
     });
+
+    // const menuOptionBlocks = derived(menuOptions, ($menuOptions) => {
+    //     // we create nested arrays for each menu option category
+    //     const options = get(menuOptions);
+    //     const res = new Array<{
+    //         category?: string;
+    //         entries: Array<MenuOption>;
+    //     }>();
+    //     for (const opt of options) {
+    //         const category = opt.category || "default";
+    //         const cat = res.find((c) => c.category === category);
+    //         if (cat) {
+    //             cat.entries.push(opt);
+    //         } else {
+    //             res.push({ category, entries: [opt] });
+    //         }
+    //     }
+    //     return res;
+    // });
 </script>
 
 <div class="menu-wrapper" class:is_open={open} class:contrast>
@@ -24,7 +46,7 @@
             }}
         >
             {#if open}
-                <Icon name="menu" />
+                <Icon name="close" />
                 <span> Menu </span>
             {:else}
                 <Icon name="menu" />
@@ -88,12 +110,10 @@
         & .menu {
             gap: 2px;
 
-            & button {
+            & button,
+            input {
                 pointer-events: all;
 
-                &:hover {
-                    background: rgba(250, 250, 250, 0.5);
-                }
             }
         }
     }
@@ -122,8 +142,13 @@
             overflow: hidden;
             backdrop-filter: blur(50px);
             gap: 2px;
-            
-            & button {
+
+            /* & .form-control input[type="checkbox"] {
+                display: none;
+            } */
+
+            & button,
+            .form-control {
                 margin: 0;
                 padding: 0.75rem 0.5rem;
                 backdrop-filter: none;
@@ -132,14 +157,15 @@
                 display: grid;
                 grid-template-columns: auto 1fr;
                 align-items: center;
-                gap: 1rem;
                 text-align: start;
+                gap: 1rem;
                 padding-left: 26%;
                 /* padding-right: 20%; */
 
-                &:disabled {
-                    cursor: not-allowed;
-                    pointer-events: none !important;
+                & > * {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
                 }
             }
         }

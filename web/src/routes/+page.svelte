@@ -6,7 +6,7 @@
     import MainMenu from "../components/MainMenu.svelte";
     import Menu from "../components/Menu.svelte";
     import Icon from "../components/Icon.svelte";
-    import SettingsOptions from "../components/SettingsOptions.svelte";
+    import SettingsOptions from "../components/Options/SettingsOptions.svelte";
 
     const inRace = derived(
         gamestate,

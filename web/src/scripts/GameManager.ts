@@ -1,6 +1,6 @@
 import { currentCarInstance, tracks, type Gamestate, gamestate, settings } from "$lib";
 import { get } from "svelte/store";
-import { AssetReference, AudioSource, Behaviour, Camera, FileReference, findObjectOfType, findObjectsOfType, PostProcessingManager, serializable } from "@needle-tools/engine";
+import { AssetReference, AudioSource, Behaviour, BloomEffect, Camera, FileReference, findObjectOfType, findObjectsOfType, PostProcessingManager, ScreenSpaceAmbientOcclusion, ScreenSpaceAmbientOcclusionN8, serializable } from "@needle-tools/engine";
 import { Object3D } from "three";
 import { NEEDLE_ENGINE_MODULES } from "@needle-tools/engine";
 
@@ -27,12 +27,17 @@ export class GameManager extends Behaviour {
         gamestate.set(value);
     }
 
+    /**
+     * Available cars to load
+     */
     @serializable(GameOption)
     cars: GameOption[] = [];
 
+    /**
+     * Available levels to load
+     */
     @serializable(GameOption)
     level: GameOption[] = [];
-
 
     get currentCar() {
         return this.cars[0];
@@ -145,11 +150,20 @@ export class GameManager extends Behaviour {
 
         const value = get(settings);
 
+
         const postprocessing = findObjectsOfType(PostProcessingManager);
-        if (postprocessing?.length) {
-            for (const post of postprocessing) {
-                post.enabled = value.postprocessing;
-            }
+        for (const post of postprocessing) {
+            post.enabled = value.postprocessing;
+        }
+
+        const bloomEffects = findObjectsOfType(BloomEffect);
+        for (const effect of bloomEffects) {
+            effect.enabled = value.bloom;
+        }
+
+        const aoEffects = [...findObjectsOfType(ScreenSpaceAmbientOcclusion), ...findObjectsOfType(ScreenSpaceAmbientOcclusionN8)];
+        for (const effect of aoEffects) {
+            effect.enabled = value.ao;
         }
 
         const audioSources = findObjectsOfType(AudioSource);

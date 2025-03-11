@@ -1,15 +1,18 @@
 import { updateSettings } from "./stores.js";
-import type { screenshot2 } from "@needle-tools/engine";
+import type { Context, screenshot2 } from "@needle-tools/engine";
 
 export * from "./stores.js";
 
 
 let screenshotFn: typeof screenshot2 | undefined = undefined;
+let context: Context | undefined = undefined;
 
 export async function screenshot(): Promise<any> {
+    // const width = context?.domWidth || window.innerWidth;
+    // const height = context?.domHeight || window.innerHeight;
     return await screenshotFn?.({
-        // width: 1024,
-        // height: 960,
+        // width: width,
+        // height: height,
         download_filename: "needle-racing.png",
     });
 }
@@ -30,6 +33,7 @@ if (typeof window !== "undefined") {
 
         // listen to the needle engine start
         ne.onStart(async context => {
+            context = context;
             context.menu.setVisible(false);
         });
     });

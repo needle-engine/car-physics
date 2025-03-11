@@ -37,8 +37,7 @@ MonoBehaviour:
     Projects: []
     BuilderScene: 
   - Path: Assets/Scenes/Race Track.unity
-    Projects:
-    - ProjectPath: ../web
+    Projects: []
     BuilderScene: 
   - Path: Assets/Car Game.unity
     Projects:

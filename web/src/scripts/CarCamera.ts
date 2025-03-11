@@ -36,10 +36,10 @@ export class CarFollow extends Behaviour {
     @serializable()
     rotateInPause: boolean = true;
 
-    private _value = 0;
+    private _lerpSpeed = 0;
 
     onEnable(): void {
-        this._value = 0;
+        this._lerpSpeed = 0;
     }
 
     onBeforeRender(): void {
@@ -47,18 +47,21 @@ export class CarFollow extends Behaviour {
 
         if (car) {
             let speed = this.speed;
-            const raceFinished = get(gamestate) === "race-finished";
+            const state = get(gamestate);
+            const raceFinished = state === "race-finished";
             if (raceFinished) {
-                // Dont follow the car anymore when the race has finished
-                this._value *= 1 + this.context.time.deltaTime / .3;
+                // Follow the car increasingly slow when the race has finished
+                this._lerpSpeed *= 1 + this.context.time.deltaTime / .3;
             }
             else {
-                this._value = Mathf.lerp(this._value, 1 / speed, this.context.time.deltaTime / 2);
+                // Otherwise interpolate to the desired speed
+                this._lerpSpeed = Mathf.lerp(this._lerpSpeed, 1 / speed, this.context.time.deltaTime / 2);
             }
 
-            this._value = Math.max(.01, this._value);
+            this._lerpSpeed = Math.max(.01, this._lerpSpeed);
             const carWp = car.worldPosition;
-            const newPos = this.gameObject.worldPosition.lerp(carWp, this.context.time.deltaTime / this._value);
+            const t = this.context.time.deltaTime / this._lerpSpeed;
+            const newPos = this.gameObject.worldPosition.lerp(carWp, t);
             this.gameObject.worldPosition = newPos;
 
             // dont copy rotation when the race has finished
@@ -72,7 +75,7 @@ export class CarFollow extends Behaviour {
                 }
                 // otherwise we simply want to follow the car
                 else {
-                    this.gameObject.worldQuaternion = this.gameObject.worldQuaternion.slerp(car.worldQuaternion, this.context.time.deltaTime / this._value * .8);
+                    this.gameObject.worldQuaternion = this.gameObject.worldQuaternion.slerp(car.worldQuaternion, t * .8);
                 }
             }
 

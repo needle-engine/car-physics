@@ -14,12 +14,14 @@ export const menuOpen = writable<boolean>(false);
 
 
 export type Settings = {
-    postprocessing: boolean,
     musicVolume: number,
+    postprocessing: boolean,
+    bloom: boolean,
+    ao: boolean,
 }
 
 let _settingsready = false;
-export const settings = writable<Settings>({ postprocessing: true, musicVolume: 1 });
+export const settings = writable<Settings>({ musicVolume: 1, postprocessing: true, bloom: true, ao: true });
 settings.subscribe(new_settings => {
     if (_settingsready && typeof window !== "undefined") {
         console.debug("Saving settings", new_settings);
@@ -65,13 +67,31 @@ export type MenuOption = {
     category?: string,
     label: string,
     icon_name?: string,
+    type: "button" | "slider",
+    // visible: typeof writable<boolean>,
+} & ({
+    type: "button",
     onclick: () => void,
-    visible: typeof writable<boolean>,
-}
+} | {
+    type: "slider",
+    value: number,
+    min: number,
+    max: number,
+    step: number,
+    onchange: (value: number) => void,
+})
 export const menuOptions = writable<MenuOption[]>([]);
-export function addMenuOption(option: MenuOption) {
+export function addMenuOptions(...options: MenuOption[]) {
     const current = get(menuOptions);
-    menuOptions.set([...current, option]);
+    const newArr = [...current, ...options];
+    menuOptions.set(newArr);
+    console.log(newArr)
+    return options;
+}
+export function removeMenuOptions(options: MenuOption[]) {
+    const current = get(menuOptions);
+    menuOptions.set(current.filter(opt => options.includes(opt)));
+    return options;
 }
 
 
