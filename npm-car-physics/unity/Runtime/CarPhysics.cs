@@ -19,7 +19,7 @@ namespace Needle.Typescript.GeneratedComponents
 		[UnityEngine.Tooltip("The maximum steering angle in degrees")]
 		public float @maxSteer = 40f;
 		public float @steerSmoothingFactor = 0.1f;
-		public float @accelerationForce = 12f;
+		public float @accelerationForce = 12f; 
 		public float @breakForce = 12f;
 		public float @topSpeed = 20f;
 		public Needle.Typescript.GeneratedComponents.CarWheel[] @wheels = new Needle.Typescript.GeneratedComponents.CarWheel[]{ };

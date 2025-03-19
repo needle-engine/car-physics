@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1030254448353188801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 71476115261653337}
+  - component: {fileID: 228775034504860569}
+  - component: {fileID: 7406311835704673942}
+  - component: {fileID: 3140815795383098019}
+  - component: {fileID: 6815320905258193138}
+  - component: {fileID: -1495693607899706438}
+  m_Layer: 0
+  m_Name: Race Postprocessing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &71476115261653337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030254448353188801}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &228775034504860569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030254448353188801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.Rendering.Volume, Unity.RenderPipelines.Core.Runtime
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 3b8b0eff2ce15984d8f2ffff0d0bc409, type: 2}
+--- !u!114 &7406311835704673942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030254448353188801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9127a53c17b76459b565a76115e1a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Needle.Engine.Components.PostProcessing.ToneMappingEffect,
+    Needle.Engine
+  mode: 3
+  exposure: 1
+--- !u!114 &3140815795383098019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030254448353188801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0955e75fbedced44b54eb802a49deeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Needle.Engine.Components.PostProcessing.ScreenSpaceAmbientOcclusionN8,
+    Needle.Engine
+  gammaCorrection: 0
+  intensity: 5
+  falloff: 1
+  aoRadius: 3
+  screenspaceRadius: 0
+  color: {r: 0, g: 0, b: 0, a: 1}
+  quality: 1
+--- !u!114 &6815320905258193138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030254448353188801}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff83fca07d14be8b6c861ebbd41ce85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 5
+  falloff: 3
+  samples: 20
+  color: {r: 0, g: 0, b: 0, a: 1}
+  luminanceInfluence: 0.7
+--- !u!114 &-1495693607899706438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030254448353188801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9487576c6b460eaabae432e8a4a99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Preset: 2

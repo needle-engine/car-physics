@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.needle.car-physics": {
+      "version": "file:../../web/node_modules/@needle-tools/car-physics/unity",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.needle.engine-exporter": {
       "version": "file:C:/git/needle-engine-dev/modules/needle-engine/package",
       "depth": 0,
