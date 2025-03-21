@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.needle.car-physics": "file:../../web/node_modules/@needle-tools/car-physics/unity",
+    "com.needle.car-physics": "file:../../npm-car-physics/unity",
     "com.needle.engine-exporter": "file:C:/git/needle-engine-dev/modules/needle-engine/package",
     "com.unity.ide.rider": "3.0.34",
     "com.unity.render-pipelines.universal": "14.0.11",
