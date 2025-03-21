@@ -1,6 +1,6 @@
 {
     "name": "com.needle.car-physics",
-    "version": "1.0.0-alpha.16",
+    "version": "1.0.0-alpha.19",
     "displayName": "Needle Engine Car Physics",
-    "description": "Car Physics for Needle Engine"
+    "description": "Car physics for Needle Engine: Create physical cars with ease"
 }

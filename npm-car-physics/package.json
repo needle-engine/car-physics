@@ -1,7 +1,32 @@
 {
 	"name": "@needle-tools/car-physics",
-	"version": "1.0.0-alpha.17",
+	"version": "1.0.0-alpha.19",
+	"description": "Car physics for Needle Engine: Create physical cars with ease",
 	"main": "index.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/needle-engine/car-physics"
+	},
+	"homepage": "https://needle.tools",
+	"author": {
+		"name": "Needle",
+		"email": "hi@needle.tools",
+		"url": "https://needle.tools/"
+	},
+	"keywords": [
+		"threejs",
+		"needle engine",
+		"webgl",
+		"webxr",
+		"webdev",
+		"physics",
+		"rapier",
+		"rapierjs",
+		"car",
+		"vehicle",
+		"car physics",
+		"gamedev"
+	],
 	"peerDependencies": {
 		"@dimforge/rapier3d-compat": ">= 0.12.0",
 		"@needle-tools/engine": "^4.4.0-alpha",
