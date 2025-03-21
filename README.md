@@ -1,6 +1,8 @@
 # Needle Engine Car Physics
 
-This repository contains the Needle Engine car physics package as published to NPM as well as an example Unity project.
+This repository contains the Needle Engine car physics package as published to NPM as well as an example project with Unity and sveltekit.
+
+⚠️ Note: This project uses Needle Engine 4.4 alpha and might change in future updates.
 
 # Features
 - **Physical Car Model** for Needle Engine (three.js)
