@@ -1,0 +1,7 @@
+{
+    "type": 2,
+    "packageName": "@needle-tools/car-physics",
+    "packageVersion": "1.0.0-alpha.15",
+    "localPath": null,
+    "allowCodegen": true
+}

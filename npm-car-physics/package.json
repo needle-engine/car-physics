@@ -1,19 +1,22 @@
 {
 	"name": "@needle-tools/car-physics",
-	"version": "1.0.0-alpha.13",
+	"version": "1.0.0-alpha.15",
 	"main": "index.ts",
 	"peerDependencies": {
-	  "@dimforge/rapier3d-compat": ">= 0.12.0",
-	  "@needle-tools/engine": "^4.3.2-beta.4",
-	  "three": "npm:@needle-tools/three@^0.169.5"
+		"@dimforge/rapier3d-compat": ">= 0.12.0",
+		"@needle-tools/engine": "^4.3.2-beta.4",
+		"three": "npm:@needle-tools/three@^0.169.5"
 	},
 	"devDependencies": {
-	  "@needle-tools/engine": "^4.3.2-beta.4",
-	  "@types/three": "0.169.0",
-	  "three": "npm:@needle-tools/three@^0.169.5"
+		"@needle-tools/engine": "^4.3.2-beta.4",
+		"@types/three": "0.169.0",
+		"three": "npm:@needle-tools/three@^0.169.5"
 	},
 	"publishConfig": {
 		"access": "public",
 		"registry": "https://registry.npmjs.org/"
+	},
+	"scripts": {
+		"prepublishOnly": "npx --yes needle-tools/npm-publish-helper"
 	}
 }
