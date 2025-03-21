@@ -2,15 +2,15 @@
 import { TypeStore } from "@needle-tools/engine"
 
 // Import types
-import { CarController } from "../CarController.js";
-import { CarDropHelper } from "../CarDropHelper.js";
-import { CarPhysics } from "../CarPhysics.js";
-import { CarRadio } from "../CarRadio.js";
-import { CarSelection } from "../CarSelection.js";
-import { CarTouchControls } from "../CarTouchControls.js";
-import { CarWheel } from "../CarWheel.js";
-import { SkidTrailBehaviour } from "../CarWheel.js";
-import { CarUIButton } from "../CarUIButton.js";
+import { CarController } from "../src/CarController.js";
+import { CarDropHelper } from "../src/CarDropHelper.js";
+import { CarPhysics } from "../src/CarPhysics.js";
+import { CarRadio } from "../src/CarRadio.js";
+import { CarSelection } from "../src/CarSelection.js";
+import { CarTouchControls } from "../src/CarTouchControls.js";
+import { CarWheel } from "../src/CarWheel.js";
+import { SkidTrailBehaviour } from "../src/CarWheel.js";
+import { CarUIButton } from "../src/CarUIButton.js";
 
 // Register types
 TypeStore.add("CarController", CarController);
