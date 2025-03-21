@@ -1,15 +1,15 @@
 {
   "dependencies": {
     "com.needle.car-physics": {
-      "version": "file:../../npm-car-physics/unity",
+      "version": "file:com.needle.car-physics-1.0.0-alpha.16.tgz",
       "depth": 0,
-      "source": "local",
+      "source": "local-tarball",
       "dependencies": {}
     },
     "com.needle.engine-exporter": {
-      "version": "file:C:/git/needle-engine-dev/modules/needle-engine/package",
+      "version": "4.4.0-alpha.1",
       "depth": 0,
-      "source": "local",
+      "source": "registry",
       "dependencies": {
         "org.khronos.unitygltf": "2.14.1",
         "com.unity.modules.animation": "1.0.0",
@@ -21,7 +21,8 @@
         "com.unity.test-framework": "1.1.31",
         "com.unity.nuget.newtonsoft-json": "3.0.1",
         "com.unity.sharp-zip-lib": "1.3.2-preview"
-      }
+      },
+      "url": "https://packages.needle.tools"
     },
     "com.unity.burst": {
       "version": "1.8.18",

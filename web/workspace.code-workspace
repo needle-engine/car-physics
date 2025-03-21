@@ -4,11 +4,6 @@
       "path": "."
     },
     {
-      "name": "@needle-tools/car-physics",
-      "path": "node_modules/@needle-tools/car-physics",
-      "@needle:managed": true
-    },
-    {
       "name": "🌵 Needle Engine",
       "path": "node_modules/@needle-tools/engine",
       "@needle:managed": true
@@ -16,7 +11,7 @@
   ],
   "settings": {
     "window.title": "web",
-    "compile-hero.disable-compile-files-on-did-save-code": true,
+    "js/ts.implicitProjectConfig.checkJs": true,
     "files.exclude": {
       "**/.git": true,
       "**/.DS_Store": true,
